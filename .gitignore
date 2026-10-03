@@ -1,0 +1,16 @@
+﻿node_modules/
+www/
+android/
+tools/raw/
+tools/review/
+tools/.pollinations_key
+tools/.hf_token
+tools/__pycache__/
+**/__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+tools/sprites_full/
+tools/raw/
+*.log
+.github/

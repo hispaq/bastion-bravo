@@ -1,0 +1,200 @@
+/* Bastión Bravo · mapa de progresión (pantalla 'map'). Usa las variables y clases base de css/ui.css
+   (bb-btn, bb-panel, ribbon, cur, ui-topbar) y añade lo propio con el prefijo .bbm */
+#ui .bbm, .bbm {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #20140a;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.bbm .bbm-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+.bbm .bbm-canvas:active { cursor: grabbing; }
+
+/* barra superior (encima del lienzo) */
+.bbm .bbm-top {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  padding: var(--safe-t, 6px) var(--safe-r, 10px) 0 var(--safe-l, 10px);
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(180deg, rgba(20, 10, 2, 0.55), rgba(20, 10, 2, 0));
+  padding-bottom: 0.6em;
+}
+.bbm .bbm-top .ui-topbar { pointer-events: none; }
+.bbm .bbm-top .ui-topbar > * { pointer-events: auto; }
+.bbm .bbm-top .tb-spacer { pointer-events: none !important; }
+.bbm .bbm-top .tb-title { min-width: 8em; text-align: center; }
+.bbm .bbm-top .cur-stars { min-width: 6.6em; }
+
+/* abajo: puntos de zona + botones grandes */
+.bbm .bbm-bottom {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.6em;
+  padding: 0 var(--safe-r, 10px) var(--safe-b, 6px) var(--safe-l, 10px);
+  pointer-events: none;
+  z-index: 3;
+}
+.bbm .bbm-actions { display: flex; gap: 0.6em; pointer-events: auto; }
+#ui .bbm .bbm-actions .bb-btn, .bbm .bbm-actions .bb-btn { font-size: 1.25em; }
+.bbm .bbm-dots {
+  display: flex;
+  gap: 0.28em;
+  padding: 0.3em 0.45em;
+  border-radius: 1.4em;
+  background: rgba(25, 12, 4, 0.72);
+  border: 0.12em solid rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 0.1em 0 rgba(255, 255, 255, 0.12);
+  pointer-events: auto;
+}
+.bbm .bbm-dot {
+  width: 2.05em; height: 2.05em;
+  min-width: 26px; min-height: 26px;
+  border-radius: 50%;
+  border: 0.12em solid #1d0c02;
+  background: linear-gradient(180deg, #ffe680, #e7a516);
+  color: #5a2d00;
+  font-family: var(--font-title, sans-serif);
+  font-size: 0.85em;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 0.12em 0 rgba(0, 0, 0, 0.45);
+  transition: transform 0.15s;
+}
+.bbm .bbm-dot.is-locked { background: linear-gradient(180deg, #b9b2a7, #847d73); color: #3e3a35; }
+.bbm .bbm-dot.is-done { background: linear-gradient(180deg, #9ee86e, #4aa635); color: #123d0b; }
+.bbm .bbm-dot.is-on { transform: scale(1.22); box-shadow: 0 0 0 0.16em #fff, 0 0.12em 0 rgba(0, 0, 0, 0.45); }
+
+/* botón "volver al nivel actual" */
+.bbm .bbm-goto {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  padding: 0.45em 0.9em;
+  min-height: var(--touch, 40px);
+  border-radius: 1.4em;
+  border: 0.14em solid var(--outline, #2b1708);
+  background: linear-gradient(180deg, #8fe6ff, #2f9fe0);
+  color: #fff;
+  font-family: var(--font-title, sans-serif);
+  font-size: 1.05em;
+  text-shadow: 0 0.08em 0 rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0.22em 0 #164e89, 0 0.35em 0.4em rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  animation: bbm-nudge 1.4s ease-in-out infinite;
+}
+.bbm .bbm-goto.is-left { left: var(--safe-l, 10px); }
+.bbm .bbm-goto.is-right { right: var(--safe-r, 10px); }
+.bbm .bbm-goto[hidden] { display: none; }
+@keyframes bbm-nudge { 50% { transform: translateY(-50%) scale(1.07); } }
+
+/* panel del nivel */
+.bbm .bbm-panel-back {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--safe-t, 6px) + 1.2em) var(--safe-r, 10px) var(--safe-b, 6px) var(--safe-l, 10px);
+  background: rgba(10, 5, 0, 0.55);
+  animation: bbm-fade 0.2s ease-out both;
+}
+.bbm .bbm-panel-back[hidden] { display: none; }
+@keyframes bbm-fade { from { opacity: 0; } to { opacity: 1; } }
+.bbm .bbm-panel {
+  width: min(48em, 96vw);
+  max-height: 100%;
+  padding: 1.5em 1.1em 0.9em;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink, #3a2412);
+  animation: bbm-pop 0.35s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+@keyframes bbm-pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+.bbm .bbm-panel.is-boss { border-color: #5c140f; }
+.bbm .bbm-panel .panel-head .ribbon { font-size: 1.45em; }
+#ui .bbm .bbm-x, .bbm .bbm-x { position: absolute; top: -0.9em; right: -0.9em; z-index: 3; --touch: max(2.6em, 36px); }
+.bbm .bbm-panel-body { display: flex; gap: 1em; min-height: 0; flex: 1 1 auto; }
+.bbm .bbm-col { display: flex; flex-direction: column; gap: 0.45em; min-width: 0; }
+.bbm .bbm-left { flex: 1 1 52%; }
+.bbm .bbm-right { flex: 1 1 48%; }
+.bbm .bbm-zone { display: flex; align-items: center; gap: 0.5em; flex-wrap: wrap; }
+.bbm .bbm-zone-name { font-family: var(--font-title, sans-serif); font-size: 1.05em; color: var(--ink-soft, #6e4b2a); }
+.bbm .bbm-tag { font-size: 0.78em; font-weight: 900; color: #fff; padding: 0.08em 0.6em 0.1em; border-radius: 0.8em; text-transform: uppercase; letter-spacing: 0.03em; background: #8c8579; }
+.bbm .bbm-tag.is-boss { background: linear-gradient(180deg, #e15a45, #a52a20); }
+.bbm .bbm-tag.is-new { background: linear-gradient(180deg, #b678ff, #7d39cc); }
+.bbm .bbm-tag.is-rest { background: linear-gradient(180deg, #74d44b, #3d9b2b); }
+.bbm .bbm-tag.is-hard { background: linear-gradient(180deg, #ffae3d, #d9770f); }
+.bbm .bbm-stars { display: flex; gap: 0.25em; align-items: flex-end; }
+.bbm .bbm-star .ico { width: 2.2em; height: 2.2em; filter: grayscale(1) brightness(0.55) opacity(0.55); }
+.bbm .bbm-star:nth-child(2) .ico { width: 2.6em; height: 2.6em; }
+.bbm .bbm-star.is-on .ico { filter: drop-shadow(0 0.1em 0 rgba(0, 0, 0, 0.35)); }
+.bbm .bbm-sec { font-family: var(--font-title, sans-serif); font-size: 0.95em; color: var(--wood-d, #5b3418); margin-top: 0.15em; }
+.bbm .bbm-boss {
+  display: flex; align-items: center; gap: 0.6em;
+  padding: 0.35em 0.6em;
+  border-radius: 0.8em;
+  background: linear-gradient(180deg, #5a1a14, #34100c);
+  border: 0.14em solid #1d0503;
+  color: #fff;
+}
+.bbm .bbm-boss-art { width: 4.4em; height: 4.4em; flex: 0 0 auto; display: flex; align-items: flex-end; justify-content: center; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 35%, #ffb98a, #a8301f); border: 0.14em solid #1d0503; }
+.bbm .bbm-boss-art .spr, .bbm .bbm-boss-art .spr-ph, .bbm .bbm-boss-art .bbm-ph { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.bbm .bbm-boss-name { font-family: var(--font-title, sans-serif); font-size: 1.35em; line-height: 1; color: #ffd23f; text-shadow: 0 0.08em 0 #000; }
+.bbm .bbm-boss-title { font-size: 0.85em; color: #ffe2b0; }
+.bbm .bbm-enemies { display: grid; grid-template-columns: repeat(auto-fill, minmax(4.6em, 1fr)); gap: 0.35em; overflow-y: auto; min-height: 0; max-height: 13em; padding: 0.1em; }
+.bbm .bbm-enemy { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.1em; padding: 0.25em 0.15em 0.2em; border-radius: 0.6em; background: rgba(255, 255, 255, 0.55); border: 0.12em solid rgba(120, 80, 30, 0.3); }
+.bbm .bbm-enemy.is-new { border-color: #8c42d8; background: rgba(230, 210, 255, 0.75); }
+.bbm .bbm-enemy-art { width: 3em; height: 3em; display: flex; align-items: flex-end; justify-content: center; }
+.bbm .bbm-enemy-art .spr, .bbm .bbm-enemy-art .spr-ph, .bbm .bbm-enemy-art .bbm-ph { width: 100%; height: 100%; object-fit: contain; }
+.bbm .bbm-enemy-name { font-size: 0.68em; font-weight: 900; line-height: 1.05; text-align: center; color: var(--ink, #3a2412); }
+.bbm .bbm-new { position: absolute; top: -0.5em; right: -0.3em; font-size: 0.62em; font-weight: 900; color: #fff; padding: 0.05em 0.4em; border-radius: 0.6em; background: #8c42d8; border: 0.1em solid #fff; transform: rotate(8deg); }
+.bbm .bbm-ph svg { width: 100%; height: 100%; }
+.bbm .bbm-facts { display: flex; flex-wrap: wrap; gap: 0.35em; }
+.bbm .bbm-fact { padding: 0.15em 0.6em; border-radius: 0.8em; background: rgba(255, 255, 255, 0.6); border: 0.12em solid rgba(120, 80, 30, 0.3); font-size: 0.9em; white-space: nowrap; }
+.bbm .bbm-fact b { font-family: var(--font-title, sans-serif); font-weight: 400; font-size: 1.1em; }
+.bbm .bbm-fact.is-elite { background: linear-gradient(180deg, #ffe08a, #f3b532); border-color: #9c6406; }
+.bbm .bbm-power { display: flex; flex-direction: column; gap: 0.12em; padding: 0.4em 0.6em; border-radius: 0.7em; background: rgba(255, 255, 255, 0.5); border: 0.12em solid rgba(120, 80, 30, 0.25); font-size: 0.92em; }
+.bbm .bbm-power b { font-family: var(--font-title, sans-serif); font-weight: 400; font-size: 1.1em; }
+.bbm .bbm-mine.is-good { color: #2f8a1f; }
+.bbm .bbm-mine.is-warn { color: #b06a00; }
+.bbm .bbm-mine.is-bad { color: #c22a20; }
+.bbm .bbm-verdict { font-weight: 900; font-size: 0.9em; }
+.bbm .bbm-rewards { display: flex; flex-direction: column; gap: 0.15em; }
+.bbm .bbm-rew { display: flex; align-items: center; gap: 0.3em; font-size: 0.9em; }
+.bbm .bbm-rew .ico { width: 1.5em; height: 1.5em; }
+.bbm .bbm-rew b { font-family: var(--font-title, sans-serif); font-weight: 400; font-size: 1.2em; }
+.bbm .bbm-panel-btns { display: flex; gap: 0.6em; align-items: center; justify-content: flex-end; flex-wrap: wrap; margin-top: auto; padding-top: 0.4em; }
+.bbm .bbm-play { flex: 1 1 auto; }
+.bbm .bbm-replay-note { flex: 1 1 100%; text-align: right; font-size: 0.75em; color: var(--ink-soft, #6e4b2a); }
+
+#ui.ui-noanim .bbm *, #ui.ui-noanim .bbm { animation: none !important; transition: none !important; }
+
+/* pantallas bajas (móvil en horizontal) */
+@media (max-height: 430px) {
+  .bbm .bbm-panel { padding: 1.25em 0.9em 0.7em; }
+  .bbm .bbm-enemies { max-height: 8.6em; }
+  .bbm .bbm-boss-art { width: 3.4em; height: 3.4em; }
+  .bbm .bbm-star .ico { width: 1.8em; height: 1.8em; }
+  .bbm .bbm-star:nth-child(2) .ico { width: 2.1em; height: 2.1em; }
+  #ui .bbm .bbm-actions .bb-btn, .bbm .bbm-actions .bb-btn { font-size: 1.1em; }
+}
+@media (max-width: 600px) {
+  .bbm .bbm-panel-body { flex-direction: column; overflow-y: auto; }
+}

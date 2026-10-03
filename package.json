@@ -1,0 +1,20 @@
+{
+  "name": "bastion-bravo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bastión Bravo: tower defense para móvil (HTML5) empaquetable como APK con Capacitor.",
+  "scripts": {
+    "web": "node build/copy-web.js",
+    "android:add": "npx cap add android",
+    "android:sync": "node build/copy-web.js && npx cap sync android",
+    "android:open": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/status-bar": "^7.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.0"
+  }
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><title>core</title>
+<style>html,body{margin:0;background:#000;overflow:hidden}#c{position:absolute;inset:0;width:100%;height:100%}</style></head>
+<body>
+<canvas id="c"></canvas>
+<script src="../sprites/manifest.js"></script>
+<script src="../js/core/util.js"></script>
+<script src="../js/core/assets.js"></script>
+<script src="../js/data/balance.js"></script>
+<script src="../js/core/save.js"></script>
+<script src="../js/core/fx.js"></script>
+<script src="../js/core/battle.js"></script>
+<script src="../js/core/render.js"></script>
+<script>
+// Prueba del núcleo con datos mínimos propios (no usa los módulos de los agentes)
+(function () {
+  const BB = window.BB;
+  for (const k in BB.SPRITES) BB.SPRITES[k].src = '../' + BB.SPRITES[k].src;
+  BB.data = {
+    zones: [{ id: 'bosque', name: 'Bosque Esmeralda', bg: 'bg_bosque', decor: 'grass', palette: { sky: '#7ec8ff', skyLow: '#d6f0ff', groundTop: '#6fbf3a', ground: '#9a7448', groundDark: '#5a3f24', fog: 'rgba(255,255,255,0.05)' } }],
+    enemies: {
+      goblin_veloz: { id: 'goblin_veloz', name: 'Goblin', hp: 26, speed: 95, damage: 4, atkInterval: 1, size: 60, radius: 16, gold: 2, anim: 'walk' },
+      orco_escudo: { id: 'orco_escudo', name: 'Orco', hp: 70, speed: 55, damage: 8, atkInterval: 1.2, size: 88, radius: 22, gold: 4, anim: 'heavy' },
+      goblin_planeador: { id: 'goblin_planeador', name: 'Planeador', hp: 30, speed: 70, damage: 5, air: true, size: 64, gold: 3, anim: 'fly' },
+      goblin_arquero: { id: 'goblin_arquero', name: 'Arquero', hp: 22, speed: 70, damage: 5, range: 380, size: 60, gold: 3 },
+    },
+    bosses: {
+      rey_goblin: { id: 'rey_goblin', name: 'Rey Grikko', hp: 700, speed: 30, damage: 30, atkInterval: 2, size: 220, radius: 60, gold: 80, color: '#ffcf3d',
+        phases: [{ at: 1, name: 'Fase 1' }, { at: 0.5, name: '¡Furia!', onEnter(B, b) { b.speed *= 1.6; } }],
+        attacks: [{ id: 'bombas', every: [4, 6], cast(B, b) { B.spawnProjectile({ kind: 'bomb', from: B.bodyPoint(b), to: { x: BB.WORLD.WALL_X + 20, y: BB.WORLD.GROUND - 60 }, arc: 160, speed: 420, team: 'enemy', onHit: { damage: b.damage } }); } },
+                  { id: 'guardia', every: [7, 9], cast(B, b) { for (let i = 0; i < 3; i++) B.spawnEnemy('goblin_veloz', { x: b.x - 40 - i * 20, minion: true }); } }] },
+    },
+    heroes: {
+      arquera: { id: 'arquera', name: 'Lira', size: 76, attack: { damage: 9, interval: 0.8, range: 950, projectile: 'arrow', speed: 1100, air: true },
+        ability: { name: 'Lluvia', cooldown: 10, cast(B, h) { const p = B.densestPoint(1200, 140) || { x: 600, y: 540 }; B.every(0.12, () => B.damageArea(p.x + (B.rng() - 0.5) * 160, BB.WORLD.GROUND - 20, 60, 8, { source: h }), 12); B.fx.ring(p.x, BB.WORLD.GROUND, 150, { color: '#ffe58a' }); } } },
+      mago_fuego: { id: 'mago_fuego', name: 'Ignazio', size: 76, attack: { damage: 14, interval: 1.4, range: 760, type: 'fire', projectile: 'fireball', speed: 700, radius: 60, status: [{ kind: 'burn', dps: 4, duration: 2 }] },
+        ability: { name: 'Meteoro', cooldown: 14, cast(B, h) { const p = B.densestPoint(1200, 140); if (!p) return; B.spawnProjectile({ kind: 'fireball', from: { x: p.x - 200, y: -40 }, to: { x: p.x, y: BB.WORLD.GROUND - 20 }, speed: 900, size: 26, onHit: { damage: 60, type: 'fire', radius: 140, air: 'ground' } }); } } },
+      maga_hielo: { id: 'maga_hielo', name: 'Nívea', size: 76, attack: { damage: 7, interval: 1.0, range: 820, type: 'ice', projectile: 'ice', speed: 900, air: true, status: [{ kind: 'slow', power: 0.35, duration: 2 }] },
+        ability: { name: 'Ventisca', cooldown: 15, cast(B, h) { for (const e of B.enemiesInRange(1300, 900)) B.applyStatus(e, 'freeze', { duration: 2.5 }); B.fx.flash('rgba(200,240,255,0.5)', 0.3); } } },
+    },
+    towers: {
+      catapulta: { id: 'catapulta', kind: 'tower', size: 110, attack: { damage: 20, interval: 2.5, range: 900, projectile: 'rock', arc: 180, speed: 600, radius: 80, ground: true } },
+      pinchos: { id: 'pinchos', kind: 'trap', size: 40, trap: { width: 90, onEnemy(B, t, e, dt) { B.damage(e, 12 * dt, { source: 'trap', noNumber: true }); } } },
+      barricada: { id: 'barricada', kind: 'block', size: 80, block: { hp: 250 } },
+    },
+  };
+  BB.levelDef = function (n) {
+    const spawns = [];
+    for (let i = 0; i < 12; i++) spawns.push({ t: 1 + i * 1.2, type: 'goblin_veloz' });
+    for (let i = 0; i < 5; i++) spawns.push({ t: 6 + i * 2.5, type: 'orco_escudo', elite: i === 4 });
+    for (let i = 0; i < 4; i++) spawns.push({ t: 8 + i * 3, type: 'goblin_planeador' });
+    for (let i = 0; i < 3; i++) spawns.push({ t: 10 + i * 3, type: 'goblin_arquero' });
+    return { n, zone: 'bosque', boss: n % 10 === 0 ? 'rey_goblin' : null, spawns, waves: [0, 6, 12] };
+  };
+  const out = [];
+  try {
+    const r1 = BB.test.simulate(3, { heroes: ['arquera', 'mago_fuego', 'maga_hielo'], heroLevel: 3, traps: ['catapulta', 'pinchos', 'barricada', null] });
+    out.push('SIM3 ' + JSON.stringify(r1));
+    const r2 = BB.test.simulate(10, { heroes: ['arquera', 'mago_fuego', 'maga_hielo'], heroLevel: 6 });
+    out.push('SIM10 ' + JSON.stringify(r2));
+    const r3 = BB.test.simulate(30, { heroes: ['arquera'], heroLevel: 1, seconds: 200 });
+    out.push('SIMLOSE ' + JSON.stringify(r3));
+  } catch (e) { out.push('ERR ' + e.stack); }
+  // Render de una batalla en curso
+  try {
+    const save = BB.test.makeSave({ heroes: ['arquera', 'mago_fuego', 'maga_hielo'], heroLevel: 4, traps: ['catapulta', 'pinchos', 'barricada', null], autoSkills: true });
+    BB.save.data = save;
+    const B = new BB.Battle({ level: 10, save });
+    const q = new URLSearchParams(location.search);
+    const secs = +(q.get('t') || 14);
+    for (let i = 0; i < secs * 60; i++) B.step(1 / 60);
+    BB.render.init(document.getElementById('c'));
+    BB.render.draw(B, 0.016);
+    out.push('RENDER ok enemies=' + B.enemies.length + ' proj=' + B.projectiles.length + ' parts=' + B.fx.parts.length + ' boss=' + (B.boss ? B.boss.hp.toFixed(0) : 'none'));
+  } catch (e) { out.push('RENDER ERR ' + e.stack); }
+  document.title = out.join(' || ');
+})();
+</script>
+</body>
+</html>

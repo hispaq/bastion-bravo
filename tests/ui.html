@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Prueba de interfaz</title>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/ui.css">
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #222; }
+  #game { position: fixed; inset: 0; }
+  #battle { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  #errs { position: fixed; left: 0; bottom: 0; z-index: 99; color: #fff; background: #b00; font: 12px monospace; max-width: 60%; }
+</style>
+</head>
+<body>
+<div id="game"><canvas id="battle"></canvas><div id="ui"></div></div>
+<div id="errs"></div>
+<script>
+  /* Recoge errores de JS para leerlos con --dump-dom (document.title) */
+  window.__errs = [];
+  window.addEventListener('error', e => { __errs.push(String(e.message)); });
+  const _ce = console.error;
+  console.error = function () { __errs.push(Array.from(arguments).map(String).join(' ')); _ce.apply(console, arguments); };
+</script>
+<script src="../sprites/manifest.js"></script>
+<script src="../js/core/util.js"></script>
+<script src="../js/core/assets.js"></script>
+<script src="../js/data/balance.js"></script>
+<script src="../js/core/save.js"></script>
+<script src="../js/audio.js"></script>
+<script>
+  /* Carga opcional de los módulos de otros agentes (si aún no existen, se usan sustitutos) */
+  (function () {
+    const files = ['zones', 'enemies', 'bosses', 'heroes', 'upgrades', 'levels', 'rewards'].map(f => '../js/data/' + f + '.js')
+      .concat(['../js/core/fx.js', '../js/core/battle.js', '../js/core/render.js', '../js/ui/ui.js', '../js/ui/screens.js', '../js/ui/hud.js'])
+      .concat(/[?&]map=1/.test(location.search) ? ['../js/ui/map.js'] : []);
+    window.__optional = files;
+  })();
+</script>
+<script>
+  function loadSeq(list, done) {
+    if (!list.length) return done();
+    const s = document.createElement('script');
+    s.src = list[0];
+    s.onload = s.onerror = () => loadSeq(list.slice(1), done);
+    document.head.appendChild(s);
+  }
+  function stubs() {
+    const BB = window.BB;
+    BB.data = BB.data || {};
+    const D = BB.data;
+    if (!D.heroes) {
+      const mk = (id, name, role, rarity, ab, unlock, atk) => ({ id, name, role, rarity, desc: 'Héroe de prueba: ' + role + '.', sprite: 'hero_' + id, size: 76, unlock,
+        attack: Object.assign({ damage: 10, interval: 0.9, range: 900, type: 'physical', projectile: 'arrow', air: true, ground: true }, atk || {}),
+        ability: { name: ab, desc: 'Descripción de ' + ab + ': daño en área a los enemigos cercanos.', cooldown: 14, cast() {} } });
+      D.heroes = {
+        arquera: mk('arquera', 'Lira, la Arquera', 'Disparo rápido, tierra y aire', 'comun', 'Lluvia de Flechas', { gold: 0 }),
+        mago_fuego: mk('mago_fuego', 'Ignazio, Mago de Fuego', 'Bola de fuego en área', 'rara', 'Meteoro', { gold: 0 }, { damage: 18, interval: 1.6, projectile: 'fireball' }),
+        maga_hielo: mk('maga_hielo', 'Nívea, Maga de Hielo', 'Ralentiza', 'rara', 'Ventisca', { gold: 0 }),
+        ballestero: mk('ballestero', 'Brock, el Ballestero', 'Largo alcance', 'comun', 'Virote Perforante', { gold: 400 }),
+        sacerdote: mk('sacerdote', 'Fray Ámbar, Sacerdote', 'Cura el castillo', 'epica', 'Bendición', { gems: 60 }),
+        ingeniero: mk('ingeniero', 'Tuerca, Ingeniero de Cañones', 'Cañón en parábola', 'epica', 'Andanada', { gold: 5000, level: 15 }),
+        hechicera_rayo: mk('hechicera_rayo', 'Volta, Hechicera del Rayo', 'Rayo en cadena', 'legendaria', 'Tormenta', { gems: 200, level: 25 }),
+        druida: mk('druida', 'Robledo, el Druida', 'Espinas venenosas', 'rara', 'Raíces', { gold: 1500 }),
+      };
+    }
+    if (!D.talents) {
+      D.talents = {};
+      for (const id in D.heroes) D.talents[id] = [
+        { id: 'a1', name: 'Puntería', desc: '+10 % de daño por rango.', max: 3, row: 0, col: 0, req: [] },
+        { id: 'b1', name: 'Rapidez', desc: '+8 % de velocidad de ataque.', max: 3, row: 0, col: 1, req: [] },
+        { id: 'c1', name: 'Recarga', desc: '-6 % de recarga de la habilidad.', max: 3, row: 0, col: 2, req: [] },
+        { id: 'a2', name: 'Perforar', desc: 'Atraviesa a 1 enemigo más.', max: 2, row: 1, col: 0, req: ['a1'] },
+        { id: 'b2', name: 'Doble tiro', desc: '15 % de disparar dos veces.', max: 2, row: 1, col: 1, req: ['b1'] },
+        { id: 'c2', name: 'Poder', desc: '+15 % de poder de habilidad.', max: 2, row: 1, col: 2, req: ['c1'] },
+        { id: 'a3', name: 'Crítico', desc: '+5 % de crítico.', max: 2, row: 2, col: 0, req: ['a2'] },
+        { id: 'b3', name: 'Furia', desc: 'Más rápida con poca vida del castillo.', max: 2, row: 2, col: 1, req: ['b2'] },
+        { id: 'c3', name: 'Eco', desc: 'La habilidad se repite al 30 %.', max: 2, row: 2, col: 2, req: ['c2'] },
+        { id: 'f', name: 'Leyenda', desc: 'Nodo final: +25 % a todo.', max: 1, row: 3, col: 1, req: ['a3', 'b3', 'c3'] },
+      ];
+    }
+    if (!D.towers) {
+      D.towers = {
+        pinchos: { id: 'pinchos', name: 'Trampa de Pinchos', kind: 'trap', desc: 'Daña a los terrestres que pasan.', sprite: 'tower_pinchos', unlock: { gold: 300 } },
+        catapulta: { id: 'catapulta', name: 'Catapulta', kind: 'tower', desc: 'Piedras en parábola.', sprite: 'tower_catapulta', unlock: { gold: 1200, level: 8 }, attack: { damage: 40, interval: 3 } },
+        rayos: { id: 'rayos', name: 'Torre de Rayos', kind: 'tower', desc: 'Rayo en cadena.', sprite: 'tower_rayos', unlock: { gold: 3000, level: 20 }, attack: { damage: 25, interval: 2 } },
+        flechas: { id: 'flechas', name: 'Torre de Flechas', kind: 'tower', desc: 'Disparo rápido.', sprite: 'tower_flechas', unlock: { gold: 600 }, attack: { damage: 8, interval: 0.6 } },
+        brea: { id: 'brea', name: 'Pozo de Brea', kind: 'trap', desc: 'Ralentiza; arde con fuego.', sprite: 'tower_brea', unlock: { gold: 900, level: 12 } },
+        barricada: { id: 'barricada', name: 'Barricada', kind: 'block', desc: 'Frena a los terrestres.', sprite: 'tower_barricada', unlock: { gold: 500 }, block: { hp: 300 } },
+      };
+    }
+    if (!D.castleUpgrades) {
+      const cu = (id, name, desc, max) => ({ id, name, desc, max, cost: l => ({ gold: BB.balance.castleCost(id, l) }), value: l => l });
+      D.castleUpgrades = [cu('torreon', 'Torreón', 'Más vida para el castillo.', 30), cu('muralla', 'Muralla', 'Vida y armadura de la muralla.', 30),
+        cu('huecos', 'Huecos', 'Más huecos para héroes.', 7), cu('ballesta', 'Ballesta', 'Más daño al tocar.', 30),
+        cu('tesoro', 'Tesoro', 'Más oro por batalla.', 20), cu('reparacion', 'Reparación', 'Regenera el castillo.', 20)];
+    }
+    if (!BB.castleStats) BB.castleStats = s => { const c = s.castle; return { maxHp: 600 + c.torreon * 120, wallHp: 400 + c.muralla * 90, wallArmor: 0.1 + c.muralla * 0.01, slots: 3 + c.huecos, tapDamage: 12 + c.ballesta * 4, tapCooldown: 0.25, goldBonus: c.tesoro * 0.05, regen: c.reparacion * 0.8, tier: 1 + Math.min(4, Math.floor((c.torreon + c.muralla) / 6)), wallTier: 1 }; };
+    if (!D.achievements) {
+      D.achievements = [
+        { id: 'kills100', name: 'Cazador', desc: 'Derrota a 100 enemigos.', icon: 'skull', target: 100, progress: s => s.stats.kills, reward: { gems: 5 } },
+        { id: 'lvl10', name: 'Primer rey', desc: 'Supera el nivel 10.', icon: 'crown', target: 10, progress: s => s.maxLevel - 1, reward: { gems: 10, gold: 500 } },
+        { id: 'stars30', name: 'Estrellado', desc: 'Consigue 30 estrellas.', icon: 'star', target: 30, progress: s => BB.ui.starsTotal(s), reward: { gems: 8 } },
+        { id: 'heroes5', name: 'Reclutador', desc: 'Ten 5 héroes.', icon: 'users', target: 5, progress: s => Object.values(s.heroes).filter(h => h.owned).length, reward: { gold: 1000 } },
+        { id: 'boss3', name: 'Matajefes', desc: 'Derrota a 3 jefes.', icon: 'crown', target: 3, progress: s => s.stats.bossesKilled, reward: { gems: 25 } },
+      ];
+    }
+    if (!BB.daily) {
+      const R = [{ gold: 200 }, { gold: 400 }, { gems: 5 }, { gold: 800 }, { gold: 1200 }, { gems: 10 }, { gems: 25, gold: 2000 }];
+      BB.daily = { rewards: R, status: s => ({ canClaim: s.daily.last !== 'hoy', day: (s.daily.streak % 7) + 1, reward: R[s.daily.streak % 7] }),
+        claim: s => { const r = R[s.daily.streak % 7]; s.daily.last = 'hoy'; s.daily.streak++; BB.econ.add(r); return r; } };
+    }
+    if (!BB.app) BB.app = { goMap: () => BB.ui.show('map'), goMenu: () => BB.ui.show('menu'), startLevel: n => BB.ui.toast('startLevel ' + n), pause: () => {} };
+    if (!BB.ui.has('map')) BB.ui.register({ id: 'map', el: BB.util.el('div', { class: 'scr bg-sky' }, BB.ui.topBar({ title: 'Mapa (sustituto)', back: true })) });
+  }
+  function fakeSave() {
+    const s = BB.save.defaults();
+    s.gold = 12850; s.gems = 145; s.maxLevel = 23;
+    for (let i = 1; i < 23; i++) s.levels[i] = { stars: i % 4 === 0 ? 2 : 3, clears: 1, best: 0.9 };
+    Object.assign(s.heroes, {
+      arquera: { owned: true, level: 14, talents: { a1: 3, a2: 1, b1: 1 }, points: 2 },
+      mago_fuego: { owned: true, level: 11, talents: {}, points: 5 },
+      maga_hielo: { owned: true, level: 9, talents: { c1: 2 }, points: 1 },
+      ballestero: { owned: true, level: 6, talents: {}, points: 3 },
+      druida: { owned: true, level: 4, talents: {}, points: 2 },
+    });
+    s.lineup = ['arquera', 'mago_fuego', 'maga_hielo', 'ballestero', 'druida', null, null, null, null, null];
+    s.castle = { torreon: 6, muralla: 4, huecos: 2, ballesta: 3, tesoro: 2, reparacion: 1 };
+    s.towers = { pinchos: { owned: true, level: 4 }, flechas: { owned: true, level: 2 }, barricada: { owned: true, level: 1 } };
+    s.traps = ['barricada', 'flechas', 'pinchos', null];
+    s.stats.kills = 1340; s.stats.bossesKilled = 2;
+    s.achievements = { kills100: { claimed: true } };
+    return s;
+  }
+  function q(k, d) { const m = new RegExp('[?&]' + k + '=([^&]*)').exec(location.search); return m ? decodeURIComponent(m[1]) : d; }
+  function report() {
+    const errs = window.__errs.filter(e => !/Failed to load resource/.test(e));
+    document.title = errs.length ? 'ERR ' + errs.length + ': ' + errs.slice(0, 3).join(' | ') : 'OK ' + (BB.ui.current || '-');
+    document.getElementById('errs').textContent = errs.join('\n');
+  }
+  function fakeBattle() {
+    const save = BB.save.data;
+    let b;
+    if (BB.Battle && BB.levelDef) {
+      b = new BB.Battle({ level: +q('level', 20), save });
+      for (let i = 0; i < 60 * (+q('secs', 12)); i++) b.step(1 / 60);
+    } else {
+      b = { t: 0, gold: 0, speed: 1, heroes: [], castle: {}, stats: { kills: 0 }, waveTimes: [0, 20, 40, 60, 80], waveIdx: 0, totalSpawns: 40, on() { return () => {}; }, setSpeed(n) { this.speed = n; }, castAbility() { return true; } };
+      save.lineup.forEach((id, i) => { if (id && i < 5) b.heroes.push({ id, def: BB.data.heroes[id], slot: i, cd: 0, cdMax: 14, disabled: 0 }); });
+    }
+    b.gold = 386; b.waveIdx = 2; b.stats.kills = Math.max(b.stats.kills, 17);
+    Object.assign(b.castle, { hp: (b.castle.maxHp || 1200) * 0.64, maxHp: b.castle.maxHp || 1200, wallHp: (b.castle.wallMax || 800) * 0.35, wallMax: b.castle.wallMax || 800, shield: 120 });
+    b.heroes.forEach((h, i) => { h.cdMax = h.cdMax || 14; h.cd = i === 0 ? 0 : i === 1 ? 6 : i === 2 ? 11 : 0; h.disabled = i === 3 ? 4 : 0; });
+    if (q('boss', '1') === '1') b.boss = { type: 'rey_goblin', hp: 6200, maxHp: 10000, phase: 1, def: { name: 'Rey Grikko', title: 'El Rey Goblin', color: '#e8a417', phases: [{ at: 1, name: 'Fase 1' }, { at: 0.66, name: '¡Embestida!' }, { at: 0.33, name: '¡Furia dorada!' }] } };
+    return b;
+  }
+  loadSeq(window.__optional, () => {
+    stubs();
+    BB.save.data = fakeSave();
+    BB.ui.init();
+    const scr = q('screen', 'menu');
+    const p = {};
+    if (scr === 'title') { p.loading = new Promise(r => setTimeout(r, 400)); p.onStart = () => BB.ui.show('menu'); if (q('ready') === '0') { p.loading = new Promise(() => {}); BB.ui.setLoading(0.62); } }
+    if (scr === 'shop') p.tab = q('tab', 'castle');
+    if (scr === 'hero') p.id = q('id', 'arquera');
+    if (scr === 'result') Object.assign(p, { victory: q('win', '1') === '1', level: 12, stars: 2, rewards: { gold: 1840, gems: 5 }, firstClear: true, stats: { kills: 64, timeSec: 143, castleHpFrac: 0.71 }, unlocked: ['druida'], achievements: ['kills100'] });
+    if (scr === 'enemyIntro') Object.assign(p, { types: [q('enemy', 'orco_escudo'), 'goblin_planeador'], onDone: () => BB.ui.toast('onDone') });
+    if (scr === 'hud' || scr === 'pause') {
+      const canvas = document.getElementById('battle');
+      const b = fakeBattle();
+      window.__B = b;
+      if (BB.render && BB.render.init) { BB.render.init(canvas); BB.render.draw(b, 0); }
+      BB.hud.attach(b);
+      BB.hud.frame(0.016, b);
+      if (scr === 'pause') BB.ui.show('pause', { onResume() {}, onRestart() {}, onQuit() {} });
+    } else BB.ui.show(scr, p);
+    if (q('modal') === '1') BB.ui.confirm('¿Seguro que quieres hacerlo?', () => {}, { title: 'Confirmar' });
+    if (q('toast')) BB.ui.toast(q('toast'), { type: 'good', icon: 'gem' });
+    if (q('audio') === '1') {
+      // Analiza todas las pistas y efectos sin conexión y deja el resultado en #errs
+      const out = [];
+      const jobs = BB.audio.tracks.map(t => () => BB.audio.analyze('music', t, 8).then(r => out.push('M ' + t + ' ' + r.peak + ' ' + r.rms)))
+        .concat(BB.audio.sfxNames.map(s => () => BB.audio.analyze('sfx', s, 3).then(r => out.push('S ' + s + ' ' + r.peak + ' ' + r.rms))));
+      let i = 0;
+      const nxt = () => { if (i >= jobs.length) { window.__audio = out.join('\n'); document.getElementById('errs').setAttribute('data-audio', out.join(';')); document.title = 'AUDIO ' + out.length; return; } jobs[i++]().then(nxt, e => { out.push('ERR ' + e); nxt(); }); };
+      nxt();
+      return;
+    }
+    setTimeout(report, +q('wait', 2500));
+  });
+</script>
+</body>
+</html>

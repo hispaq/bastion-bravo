@@ -1,0 +1,382 @@
+{
+ "app_icon": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 805627
+ },
+ "bg_bosque": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 969100
+ },
+ "bg_desierto": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 365023
+ },
+ "bg_dragon": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 578599
+ },
+ "bg_forja": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 188035
+ },
+ "bg_hielo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 383562
+ },
+ "bg_montanas": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 249364
+ },
+ "bg_oscuras": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 694754
+ },
+ "bg_pantano": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 674680
+ },
+ "bg_ruinas": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 303814
+ },
+ "bg_volcan": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 88331
+ },
+ "boss_chaman_gigante": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 561583
+ },
+ "boss_dragon": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 506754
+ },
+ "boss_escorpion": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 278381180
+ },
+ "boss_gigante_escarcha": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 910709314
+ },
+ "boss_golem": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1107784222
+ },
+ "boss_nigromante": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1706546514
+ },
+ "boss_rey_goblin": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 234830
+ },
+ "boss_senor_fuego": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 795328
+ },
+ "boss_senor_guerra": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 256789
+ },
+ "boss_troll_piedra": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1388001009
+ },
+ "castle_1": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 487124348
+ },
+ "castle_2": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 744409248
+ },
+ "castle_3": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 172853977
+ },
+ "castle_4": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 228710520
+ },
+ "castle_5": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 817911173
+ },
+ "enemy_chaman": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 844671
+ },
+ "enemy_goblin_arquero": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 267427349
+ },
+ "enemy_goblin_bombardero": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1988185972
+ },
+ "enemy_goblin_planeador": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 250383
+ },
+ "enemy_goblin_topo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 590823
+ },
+ "enemy_goblin_veloz": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 70915
+ },
+ "enemy_jinete_lobo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 248950
+ },
+ "enemy_orco_ariete": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1569163556
+ },
+ "enemy_orco_berserker": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 9340
+ },
+ "enemy_orco_escudo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 958689
+ },
+ "enemy_orco_tambor": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 917545
+ },
+ "enemy_troll": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1409156283
+ },
+ "hero_alquimista": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 463677
+ },
+ "hero_arcano": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 550197
+ },
+ "hero_arquera": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1227353423
+ },
+ "hero_ballestero": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 713239
+ },
+ "hero_bardo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 576965
+ },
+ "hero_brujo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 734975
+ },
+ "hero_cazadora": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1243514283
+ },
+ "hero_druida": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1732238240
+ },
+ "hero_envenenadora": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 457644597
+ },
+ "hero_granadero": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 763345
+ },
+ "hero_halconera": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1544327470
+ },
+ "hero_hechicera_rayo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 794924906
+ },
+ "hero_ingeniero": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 720994
+ },
+ "hero_maga_hielo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 147896393
+ },
+ "hero_mago_fuego": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1467491621
+ },
+ "hero_martillo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 84176
+ },
+ "hero_monje_viento": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 43836606
+ },
+ "hero_mosquetera": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 678015
+ },
+ "hero_sacerdote": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 310370
+ },
+ "hero_sacerdotisa_sol": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 118225412
+ },
+ "icon_castle": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 249739
+ },
+ "icon_fire": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 959270
+ },
+ "icon_gem": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 538932
+ },
+ "icon_gift": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 600036
+ },
+ "icon_gold": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 426488
+ },
+ "icon_hammer": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 820885
+ },
+ "icon_heart": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 201243
+ },
+ "icon_lightning": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 64258
+ },
+ "icon_lock": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 461415
+ },
+ "icon_map": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 701247
+ },
+ "icon_play": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 110419
+ },
+ "icon_potion": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 267406
+ },
+ "icon_scroll": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 697504
+ },
+ "icon_settings": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 29306
+ },
+ "icon_shield": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 574539
+ },
+ "icon_skull": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 111070
+ },
+ "icon_snow": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 876314
+ },
+ "icon_star": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 471805
+ },
+ "icon_sword": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 245234
+ },
+ "icon_trophy": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 775882
+ },
+ "map_bosque": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 533859
+ },
+ "map_desierto": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 130538
+ },
+ "map_dragon": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 35784
+ },
+ "map_forja": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 259796
+ },
+ "map_hielo": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 637213
+ },
+ "map_montanas": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 185569
+ },
+ "map_oscuras": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 367340
+ },
+ "map_pantano": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 851001486
+ },
+ "map_ruinas": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1704805341
+ },
+ "map_volcan": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1195376987
+ },
+ "title_art": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 353009
+ },
+ "tower_barricada": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 446574088
+ },
+ "tower_brea": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 191136
+ },
+ "tower_catapulta": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 378014
+ },
+ "tower_flechas": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 772418
+ },
+ "tower_pinchos": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 588955
+ },
+ "tower_rayos": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 220923
+ }
+}

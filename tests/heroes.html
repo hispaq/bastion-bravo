@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Banco de héroes</title>
+<style>
+  html, body { margin: 0; background: #1e1527; color: #f3ead8; font: 14px/1.35 system-ui, sans-serif; }
+  #wrap { display: flex; height: 100vh; }
+  #side { width: 340px; overflow: auto; padding: 10px; box-sizing: border-box; background: #2b1d38; }
+  #main { flex: 1; position: relative; }
+  #c { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #side h2 { font-size: 15px; margin: 12px 0 6px; color: #ffe58a; }
+  select, input, button { font: inherit; margin: 2px 0; }
+  button { background: #ffcf3d; border: 0; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
+  button.ab { display: block; width: 100%; text-align: left; margin: 3px 0; background: #6a4fa0; color: #fff; }
+  table { border-collapse: collapse; font-size: 12px; width: 100%; }
+  td, th { border-bottom: 1px solid #4a3a5a; padding: 2px 4px; text-align: right; }
+  td:first-child, th:first-child { text-align: left; }
+  #log { white-space: pre-wrap; font: 12px monospace; color: #cfe; }
+  body.auto #side { display: none; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="side">
+    <h2>Héroes en los huecos</h2>
+    <div id="slots"></div>
+    <label>Nivel de héroe <input id="lvl" type="number" min="1" max="100" value="20" style="width:60px"></label><br>
+    <label>Talentos <select id="tal">
+      <option value="none">ninguno</option><option value="0">rama 1</option><option value="1">rama 2</option>
+      <option value="2">rama 3</option><option value="all">todo al máximo</option></select></label><br>
+    <label>Nivel del mapa <input id="map" type="number" min="1" max="100" value="12" style="width:60px"></label><br>
+    <button id="go">▶ Batalla</button> <button id="x2">×2</button> <button id="pause">Pausa</button>
+    <h2>Habilidades</h2><div id="abil"></div>
+    <h2>Simulación sin dibujo (daño por segundo, 1 héroe)</h2>
+    <button id="dps">Calcular tabla</button>
+    <div id="dpsOut"></div>
+    <h2>Registro</h2><div id="log"></div>
+  </div>
+  <div id="main"><canvas id="c"></canvas></div>
+</div>
+<script src="../sprites/manifest.js"></script>
+<script src="../js/core/util.js"></script>
+<script src="../js/core/assets.js"></script>
+<script src="../js/data/balance.js"></script>
+<script src="../js/core/save.js"></script>
+<script src="../js/audio.js"></script>
+<script src="../js/data/zones.js"></script>
+<script src="../js/data/enemies.js"></script>
+<script src="../js/data/bosses.js"></script>
+<script src="../js/data/heroes.js"></script>
+<script src="../js/data/upgrades.js"></script>
+<script src="../js/data/levels.js"></script>
+<script src="../js/data/rewards.js"></script>
+<script src="../js/core/fx.js"></script>
+<script src="../js/core/battle.js"></script>
+<script src="../js/core/render.js"></script>
+<script src="heroes_bench.js"></script>
+</body>
+</html>

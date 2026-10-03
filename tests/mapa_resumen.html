@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>resumen niveles</title></head>
+<body><pre id="out"></pre>
+<script src="../js/core/util.js"></script>
+<script src="../js/data/balance.js"></script>
+<script src="../js/data/zones.js"></script>
+<script src="../js/data/enemies.js"></script>
+<script src="../js/data/levels.js"></script>
+<script src="../js/data/rewards.js"></script>
+<script>
+// Tabla resumen de los 100 niveles (para revisar la curva). Uso: chrome --dump-dom tests/mapa_resumen.html
+(function () {
+  const rows = [];
+  const short = { goblin_veloz: 'gob', orco_escudo: 'esc', goblin_bombardero: 'bom', goblin_planeador: 'pla', jinete_lobo: 'lob', chaman: 'cha', goblin_arquero: 'arq', orco_berserker: 'ber', orco_tambor: 'tam', goblin_topo: 'top', troll: 'tro', orco_ariete: 'ari' };
+  for (let n = 1; n <= 100; n++) {
+    try {
+      const d = BB.levelDef(n);
+      const cnt = {};
+      d.spawns.forEach(s => { if (!s.boss) cnt[s.type] = (cnt[s.type] || 0) + 1; });
+      rows.push([n, d.kind.padEnd(8), 'W' + d.waves.length, ('n' + d.total).padEnd(4), ('e' + d.elites).padEnd(3), (d.duration + 's').padEnd(5),
+        ('rec' + d.recommended).padEnd(6), ('b' + d.budget).padEnd(6), d.boss ? ('JEFE ' + d.boss + '@' + d.bossAt) : '',
+        d.newEnemies.join(','), Object.keys(cnt).map(k => short[k] + cnt[k]).join(' '), '| ' + d.waveInfo.map(w => w.label + ':' + w.count).join(', ')].join(' '));
+    } catch (e) { rows.push(n + ' ERROR ' + e.stack); }
+  }
+  document.getElementById('out').textContent = rows.join('\n');
+  rows.forEach(r => console.log('RES ' + r));
+})();
+</script>
+</body></html>

@@ -1,0 +1,81 @@
+<!doctype html><html><head><meta charset="utf-8"><title>campaña</title></head><body>
+<script src="../sprites/manifest.js"></script>
+<script src="../js/core/util.js"></script><script src="../js/core/assets.js"></script>
+<script src="../js/data/balance.js"></script><script src="../js/core/save.js"></script>
+<script src="../js/data/zones.js"></script><script src="../js/data/enemies.js"></script>
+<script src="../js/data/bosses.js"></script><script src="../js/data/heroes.js"></script>
+<script src="../js/data/upgrades.js"></script><script src="../js/data/levels.js"></script>
+<script src="../js/data/rewards.js"></script><script src="../js/core/fx.js"></script>
+<script src="../js/core/battle.js"></script>
+<script>
+// Jugador simulado: juega cada nivel; si pierde, repite el anterior para ganar oro y mejora.
+// Gasta el oro con una regla sencilla: sube al héroe más barato, castillo, huecos y héroes nuevos.
+const T0 = performance.now();
+const save = BB.save.data = JSON.parse(JSON.stringify(BB.save.defaults()));
+BB.ensureSaveDefaults(save);
+save.settings.autoSkills = true;
+const log = [];
+let plays = 0, defeats = 0, maxRetries = 0;
+const order = ['arquera','mago_fuego','maga_hielo','ballestero','hechicera_rayo','halconera','ingeniero','sacerdote','druida','alquimista','mosquetera','arcano','granadero','cazadora'];
+function spend() {
+  for (let guard = 0; guard < 400; guard++) {
+    const opts = [];
+    for (const id of order) {
+      if (BB.heroes.canUnlock && BB.heroes.canUnlock(id) && !(save.heroes[id] && save.heroes[id].owned)) opts.push(['u', id, 0]);
+    }
+    if (BB.castle.canUpgrade('huecos')) opts.push(['c', 'huecos', 1]);
+    for (const k of ['torreon', 'muralla', 'ballesta', 'reparacion']) if (BB.castle.canUpgrade(k)) opts.push(['c', k, BB.castle.cost(k).gold || 0]);
+    const owned = order.filter(id => save.heroes[id] && save.heroes[id].owned);
+    for (const id of owned) { const c = BB.heroes.levelCost(id); if (c && BB.econ.canAfford(c)) opts.push(['h', id, (c.gold || 0) * 0.8]); }
+    if (!opts.length) break;
+    opts.sort((a, b) => a[2] - b[2]);
+    const [t, id] = opts[0];
+    let ok = false;
+    if (t === 'u') ok = BB.heroes.unlock(id);
+    else if (t === 'c') ok = BB.castle.upgrade(id);
+    else ok = BB.heroes.levelUp(id);
+    if (!ok) break;
+    // talentos
+    for (const hid of owned) {
+      const nodes = (BB.data.talents[hid] || []);
+      for (let k = 0; k < 5 && BB.heroes.pointsLeft(hid) > 0; k++) { const n = nodes.find(n => BB.heroes.canTalent(hid, n.id)); if (!n) break; BB.heroes.talentUp(hid, n.id); }
+    }
+  }
+  const owned = order.filter(id => save.heroes[id] && save.heroes[id].owned);
+  const slots = BB.castleStats(save).slots;
+  save.lineup = owned.slice(0, slots); while (save.lineup.length < 10) save.lineup.push(null);
+}
+function play(n, replay) {
+  plays++;
+  const b = new BB.Battle({ level: n, save, headless: true, seed: plays * 7 + n, autoSkills: true });
+  while (!b.over && b.t < 600) b.step(1 / 60);
+  const r = b.result || { victory: false, castleHpFrac: 0, gold: b.gold, progress: 0 };
+  let rew;
+  if (r.victory) {
+    const prev = save.levels[n] || { stars: 0, clears: 0 };
+    const stars = BB.starsFor(r.castleHpFrac);
+    rew = BB.rewards.victory(n, { stars, prevStars: prev.stars, firstClear: !prev.clears, replay: !!prev.clears, killGold: r.gold });
+    save.levels[n] = { stars: Math.max(prev.stars, stars), clears: (prev.clears || 0) + 1 };
+    if (n >= save.maxLevel) save.maxLevel = Math.min(100, n + 1);
+  } else { defeats++; rew = BB.rewards.defeat(n, { killGold: r.gold, progress: r.progress }); }
+  BB.econ.add(rew);
+  spend();
+  return r.victory;
+}
+const stuckAt = [];
+for (let n = 1; n <= 100; n++) {
+  let tries = 0;
+  while (!play(n) ) {
+    tries++;
+    // repetir niveles anteriores para farmear
+    for (let k = 0; k < 3; k++) play(Math.max(1, n - 1 - (k % 2)));
+    if (tries > 25) { stuckAt.push(n); break; }
+  }
+  maxRetries = Math.max(maxRetries, tries);
+  if (n % 10 === 0 || tries > 3) log.push('N' + n + ' intentos=' + (tries + 1) + ' héroes=' + order.filter(id => save.heroes[id] && save.heroes[id].owned).length + ' nivHéroe=' + save.heroes.arquera.level + ' huecos=' + BB.castleStats(save).slots + ' vida=' + BB.castleStats(save).maxHp + ' oro=' + save.gold + ' gemas=' + save.gems);
+  if (stuckAt.length) break;
+}
+log.push('partidas=' + plays + ' derrotas=' + defeats + ' atascado=' + stuckAt.join(',') + ' segundos=' + Math.round((performance.now() - T0) / 1000));
+document.body.innerHTML = '<pre style="font:15px monospace;margin:6px">' + log.join('<br>') + '</pre>';
+document.title = 'done';
+</script></body></html>

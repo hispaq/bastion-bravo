@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>enemigos</title>
+<style>
+  html,body{margin:0;height:100%;background:#120b08;color:#fff8e8;font:13px/1.3 'Nunito','Segoe UI',sans-serif;overflow:hidden}
+  #bar{position:absolute;left:0;right:0;top:0;z-index:5;padding:4px 6px;background:rgba(20,12,24,.88);display:flex;flex-wrap:wrap;gap:3px;align-items:center;max-height:44vh;overflow:auto}
+  #bar b{margin:0 4px 0 8px;color:#ffe58a}
+  #bar button{font:inherit;padding:2px 6px;border-radius:4px;border:1px solid #6b4a2b;background:#3a2a1a;color:#fff;cursor:pointer}
+  #bar button:hover{background:#5a3f24}
+  #bar button.boss{border-color:#c0392b}
+  #bar input,#bar select{font:inherit;width:56px}
+  #c{position:absolute;inset:0;width:100%;height:100%}
+  #out{position:absolute;right:0;bottom:0;z-index:5;max-width:52vw;max-height:40vh;overflow:auto;margin:0;padding:6px;background:rgba(0,0,0,.75);font:11px/1.25 Consolas,monospace;white-space:pre-wrap}
+  #info{position:absolute;left:6px;bottom:6px;z-index:5;font:12px Consolas,monospace;background:rgba(0,0,0,.6);padding:4px 6px}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="bar"></div>
+<pre id="out"></pre>
+<div id="info"></div>
+<script src="../sprites/manifest.js"></script>
+<script src="../js/core/util.js"></script>
+<script src="../js/core/assets.js"></script>
+<script src="../js/data/balance.js"></script>
+<script src="../js/core/save.js"></script>
+<script src="../js/audio.js"></script>
+<script src="../js/data/zones.js"></script>
+<script src="../js/data/enemies.js"></script>
+<script src="../js/data/bosses.js"></script>
+<script src="../js/data/heroes.js"></script>
+<script src="../js/data/upgrades.js"></script>
+<script src="../js/data/levels.js"></script>
+<script src="../js/data/rewards.js"></script>
+<script src="../js/core/fx.js"></script>
+<script src="../js/core/battle.js"></script>
+<script src="../js/core/render.js"></script>
+<script src="../js/ui/boss_intro.js"></script>
+<script>
+/* Banco de pruebas de enemigos y jefes dentro del motor real.
+   Modos por URL (para Chrome sin ventana):
+     ?mode=sim                    simulaciones sin dibujo: cada jefe (duración/resultado) + niveles 1..100
+     ?mode=stress                 cada enemigo y jefe con dibujo real durante un rato (busca errores de dibujo)
+     ?mode=shot&boss=id&t=20      foto de una batalla con ese jefe a los t segundos (&enemy=id&n=6 para enemigos)
+     ?mode=intro&boss=id          presentación del jefe
+   Sin modo: banco interactivo con botones. */
+(function () {
+  'use strict';
+  const BB = window.BB;
+  const W = BB.WORLD;
+  const q = new URLSearchParams(location.search);
+  const out = document.getElementById('out');
+  const errors = [];
+  const origErr = console.error.bind(console);
+  console.error = function () { errors.push(Array.from(arguments).map(a => (a && a.stack) ? a.stack.split('\n').slice(0, 3).join(' | ') : String(a)).join(' ')); origErr.apply(null, arguments); };
+  window.addEventListener('error', ev => errors.push('window.onerror: ' + ev.message + ' @' + (ev.filename || '').split('/').pop() + ':' + ev.lineno));
+  const log = s => { out.textContent += s + '\n'; };
+  for (const k in BB.SPRITES) if (!/^\.\.\//.test(BB.SPRITES[k].src)) BB.SPRITES[k].src = '../' + BB.SPRITES[k].src;
+
+  // ---------- héroes y castillo de reserva si aún no existen los módulos de otros agentes
+  const FALLBACK_HEROES = {
+    arquera: { attack: { damage: 9, interval: 0.75, range: 950, projectile: 'arrow', speed: 1100, air: true } },
+    mago_fuego: { attack: { damage: 15, interval: 1.3, range: 760, type: 'fire', projectile: 'fireball', speed: 750, radius: 60, status: [{ kind: 'burn', dps: 3, duration: 2 }] } },
+    maga_hielo: { attack: { damage: 9, interval: 0.9, range: 820, type: 'ice', projectile: 'ice', speed: 900, air: true, status: [{ kind: 'slow', power: 0.35, duration: 2 }] } },
+    ballestero: { attack: { damage: 22, interval: 1.6, range: 1150, projectile: 'bolt', speed: 1300, pierce: 2, prefer: 'healer', air: true } },
+    hechicera_rayo: { attack: { damage: 11, interval: 1.0, range: 800, type: 'lightning', projectile: 'lightning', chain: 3, air: true } },
+    ingeniero: { attack: { damage: 20, interval: 1.7, range: 900, projectile: 'cannon', arc: 160, speed: 700, radius: 70, knockback: 20 } },
+    envenenadora: { attack: { damage: 6, interval: 0.8, range: 800, type: 'poison', projectile: 'dart', speed: 1000, air: true, status: [{ kind: 'poison', dps: 3, duration: 4, maxStacks: 5 }] } },
+    martillo: { attack: { damage: 16, interval: 1.4, range: 720, projectile: 'hammer', speed: 800, status: [{ kind: 'stun', duration: 0.6 }] } },
+    halconera: { attack: { damage: 10, interval: 0.8, range: 950, projectile: 'feather', speed: 800, air: true } },
+    sacerdotisa_sol: { attack: { damage: 13, interval: 1.0, range: 850, type: 'holy', projectile: 'holy', speed: 900, air: true } },
+  };
+  const ORDER = ['arquera', 'mago_fuego', 'maga_hielo', 'ballestero', 'hechicera_rayo', 'ingeniero', 'envenenadora', 'halconera', 'martillo', 'sacerdotisa_sol'];
+  const realHeroes = !!(BB.data.heroes && Object.keys(BB.data.heroes).length);
+  // Castillo: por defecto uno escalado al nivel (como si el jugador hubiera mejorado); ?realcastle=1 usa upgrades.js
+  const realUpgrades = typeof BB.castleStats === 'function' && q.get('realcastle') === '1';
+  function heroDefsFor(level) {
+    const mul = BB.balance.heroDmg(level);
+    const defs = {};
+    for (const id in FALLBACK_HEROES) {
+      const a = Object.assign({}, FALLBACK_HEROES[id].attack);
+      a.damage *= mul;
+      defs[id] = { id, name: id, size: 76, attack: a, ability: { name: 'x', cooldown: 999, cast() {} } };
+    }
+    return defs;
+  }
+  function makeSave(L, nHeroes) {
+    const heroLevel = Math.max(1, Math.round(L * 0.9));
+    const heroes = ORDER.slice(0, nHeroes);
+    if (!realHeroes) BB.data.heroes = heroDefsFor(heroLevel);
+    const s = BB.test.makeSave({ heroes, heroLevel, autoSkills: true });
+    if (!realUpgrades) {
+      const k = BB.balance.enemyDmg(L);
+      s._castle = { maxHp: Math.round(600 * k), wallHp: Math.round(400 * k), wallArmor: 0.15, slots: nHeroes, tapDamage: 12, tapCooldown: 0.25, regen: 0, tier: Math.min(5, 1 + Math.floor(L / 25)), wallTier: Math.min(3, 1 + Math.floor(L / 35)) };
+    } else s.castle.huecos = Math.max(0, nHeroes - 3);
+    return s;
+  }
+  const realCastleStats = BB.castleStats;
+  if (!realUpgrades) BB.castleStats = function (save) { return save._castle || (realCastleStats ? realCastleStats(save) : { maxHp: 600, wallHp: 400, wallArmor: 0.1, slots: 3 }); };
+  BB.save.data = BB.test.makeSave({});
+  const zoneFor = L => { const z = BB.data.zones || []; return z.length ? z[Math.min(z.length - 1, Math.floor((L - 1) / 10))].id : null; };
+  const expectedHeroes = L => Math.min(10, Math.round(3 + (Math.ceil(L / 10) - 1) * 0.8));
+
+  function newBattle(L, spawns, opts) {
+    opts = opts || {};
+    const save = makeSave(L, opts.heroes || expectedHeroes(L));
+    BB.save.data = save;
+    const bossId = (spawns.find(s => BB.data.bosses[s.type]) || {}).type || null;
+    return new BB.Battle({ level: L, save, headless: !!opts.headless, seed: opts.seed || 7,
+      levelDef: { n: L, zone: zoneFor(L), boss: bossId, spawns, waves: [0] }, autoSkills: true });
+  }
+  const step = (B, secs, cb) => { const n = Math.round(secs * 60); for (let i = 0; i < n && !B.over; i++) { B.step(1 / 60); if (cb) cb(i); } };
+
+  // ---------- simulación de un jefe sin dibujo
+  function simBoss(id, opts) {
+    opts = opts || {};
+    const def = BB.data.bosses[id];
+    const L = def.level;
+    const B = newBattle(L, [{ t: 0.5, type: id }], { headless: true, heroes: opts.heroes, seed: opts.seed });
+    let bossT = -1, maxMinions = 0;
+    const casts = {};
+    B.on('bossSpawn', () => { bossT = B.t; });
+    for (const a of def.attacks) { const c = a.cast; a.cast = function (BX, b) { casts[a.id] = (casts[a.id] || 0) + 1; return c.apply(this, arguments); }; a._wrapped = c; }
+    let phases = 0;
+    B.on('bossPhase', () => phases++);
+    const bySrc = {};
+    const dc = B.damageCastle.bind(B), dw = B.damageWall.bind(B);
+    B.damageCastle = function (a, o) { const k = 'C:' + ((o && o.source && (o.source.type || o.source)) || '?'); bySrc[k] = Math.round((bySrc[k] || 0) + a); return dc(a, o); };
+    B.damageWall = function (a, src) { const k = 'W:' + ((src && (src.type || src)) || '?'); bySrc[k] = Math.round((bySrc[k] || 0) + a); return dw(a, src); };
+    const cmax = B.castle.maxHp, wmax = B.castle.wallMax;
+    while (!B.over && B.t < (opts.seconds || 300)) { B.step(1 / 60); if (B.enemies.length > maxMinions) maxMinions = B.enemies.length; }
+    for (const a of def.attacks) { a.cast = a._wrapped; delete a._wrapped; }
+    const c = B.castle;
+    return { id, L, heroes: B.heroes.length, win: !!(B.result && B.result.victory), t: Math.round(B.t), bossT: B.bossDefeated ? Math.round(B.t - bossT) : null,
+      castle: Math.round(c.hp / c.maxHp * 100) + '%', wall: Math.round(c.wallHp), phases, maxEnemies: maxMinions, casts, cmax, wmax, bySrc };
+  }
+
+  function runSims() {
+    const t0 = performance.now();
+    const res = [];
+    for (const id of (q.get('bosses') === '0' ? [] : BB.data.bossOrder)) { try { res.push(simBoss(id)); } catch (e) { res.push({ id, error: e.stack }); } }
+    for (const r of res) log('JEFE ' + JSON.stringify(r));
+    // niveles completos (levels.js del agente del mapa) con el poder esperado
+    let lvErr = 0, wins = 0, done = 0;
+    const l0 = +(q.get('from') || 1), l1 = +(q.get('to') || 100);
+    if (typeof BB.levelDef === 'function' && q.get('levels') !== '0') {
+      for (let L = l0; L <= l1; L++) {
+        try {
+          const save = makeSave(L, expectedHeroes(L));
+          const r = BB.test.simulate(L, { save, seconds: 600, seed: 3 });
+          done++; if (r.victory) wins++;
+          if (r.error) { lvErr++; log('NIVEL ' + L + ' ERROR ' + r.error); }
+          if (L % 10 === 0 || !r.victory) log('NIVEL ' + L + ' ' + (r.victory ? 'gana' : 'PIERDE') + ' t=' + r.t + ' castillo=' + r.castleHpFrac + ' bajas=' + r.kills + '/' + r.spawns);
+        } catch (e) { lvErr++; log('NIVEL ' + L + ' EXCEPCIÓN ' + e.stack); }
+      }
+    }
+    log('niveles: ' + done + ' simulados, ' + wins + ' victorias, ' + lvErr + ' errores; ' + Math.round(performance.now() - t0) + ' ms');
+    finish('SIM bosses=' + res.length + ' niveles=' + done + ' wins=' + wins);
+  }
+
+  // ---------- prueba con dibujo real (detecta errores de los dibujos propios)
+  function runStress() {
+    BB.render.init(document.getElementById('c'));
+    const all = BB.data.enemyOrder.map(id => ({ id, boss: false })).concat(BB.data.bossOrder.map(id => ({ id, boss: true })));
+    let draws = 0;
+    for (const it of all) {
+      const L = it.boss ? BB.data.bosses[it.id].level : Math.max(BB.data.enemies[it.id].unlockLevel, 5);
+      const sp = it.boss ? [{ t: 0.3, type: it.id }] : Array.from({ length: 8 }, (_, i) => ({ t: 0.3 + i * 0.8, type: it.id }));
+      if (!it.boss) sp.push({ t: 1, type: 'orco_tambor' }, { t: 1.5, type: 'chaman' });
+      const B = newBattle(L, sp, { headless: false, seed: 11 });
+      if (it.boss) { const b0 = () => B.boss; B.on('bossSpawn', () => {}); }
+      step(B, it.boss ? 70 : 30, i => { if (i % 4 === 0) { BB.render.draw(B, 4 / 60); draws++; } });
+      log((it.boss ? 'JEFE ' : 'ENEMIGO ') + it.id + ' t=' + Math.round(B.t) + ' over=' + B.over + ' vivos=' + B.enemies.length + ' proj=' + B.projectiles.length);
+    }
+    finish('STRESS draws=' + draws);
+  }
+
+  function finish(msg) {
+    log('ERRORES (' + errors.length + '):\n' + errors.slice(0, 30).join('\n'));
+    log(msg);
+    out.style.cssText = 'position:absolute;inset:0;max-width:none;max-height:none;font:14px/1.3 Consolas,monospace;background:#000;color:#fff;z-index:20';
+    document.title = msg + ' | errores=' + errors.length + (errors.length ? ' | ' + errors[0].slice(0, 300) : '');
+  }
+
+  // ---------- foto de una batalla
+  function runShot() {
+    BB.assets.loadAll().then(function () {
+      BB.render.init(document.getElementById('c'));
+      document.getElementById('bar').style.display = 'none';
+      out.style.display = 'none';
+      const id = q.get('boss'), en = q.get('enemy');
+      const t = +(q.get('t') || 15);
+      let B;
+      if (id) {
+        B = newBattle(BB.data.bosses[id].level, [{ t: 0.2, type: id, x: +(q.get('x') || 200) }], { seed: +(q.get('seed') || 7) });
+        B.spawns[0].t = 0.2;
+        // posición inicial opcional para ver al jefe ya en el campo
+        B.on('bossSpawn', ev => { if (q.get('x')) ev.boss.x = +q.get('x'); if (q.get('hp')) ev.boss.hp = ev.boss.maxHp * +q.get('hp'); });
+      } else {
+        const n = +(q.get('n') || 6);
+        const L = +(q.get('level') || Math.max(5, BB.data.enemies[en].unlockLevel));
+        const sp = Array.from({ length: n }, (_, i) => ({ t: 0.2 + i * +(q.get('gap') || 0.6), type: en }));
+        (q.get('with') || '').split(',').filter(Boolean).forEach((x, i) => sp.push({ t: 0.5 + i, type: x }));
+        B = newBattle(L, sp, { seed: 5 });
+      }
+      step(B, t, i => { if (i % 6 === 0) BB.render.draw(B, 0.1); });
+      BB.render.draw(B, 1 / 60);
+      const b = B.boss || B.bossDefeated;
+      document.title = 'SHOT t=' + B.t.toFixed(1) + ' enemigos=' + B.enemies.length + (b ? ' jefe=' + Math.round(b.hp) + '/' + Math.round(b.maxHp) + ' fase=' + b.phase : '') +
+        ' castillo=' + Math.round(B.castle.hp) + ' muralla=' + Math.round(B.castle.wallHp) + ' | errores=' + errors.length + (errors.length ? ' ' + errors[0].slice(0, 200) : '');
+    });
+  }
+
+  function runIntro() {
+    BB.assets.loadAll().then(function () {
+      document.getElementById('bar').style.display = 'none';
+      out.style.display = 'none';
+      BB.bossIntro.play(q.get('boss') || 'rey_goblin', function () { document.title = 'INTRO cerrada'; });
+      document.title = 'INTRO ' + (q.get('boss') || 'rey_goblin') + ' | errores=' + errors.length;
+    });
+  }
+
+  // ---------- banco interactivo
+  let B = null, last = 0, level = 10;
+  function interactive() {
+    BB.render.init(document.getElementById('c'));
+    const bar = document.getElementById('bar');
+    const add = (txt, fn, cls) => { const b = document.createElement('button'); b.textContent = txt; if (cls) b.className = cls; b.onclick = fn; bar.appendChild(b); return b; };
+    const lab = t => { const e = document.createElement('b'); e.textContent = t; bar.appendChild(e); };
+    lab('Nivel');
+    const lv = document.createElement('input'); lv.type = 'number'; lv.min = 1; lv.max = 100; lv.value = level; lv.onchange = () => { level = +lv.value || 1; reset(); }; bar.appendChild(lv);
+    add('Reiniciar', reset); add('x2', () => B && B.setSpeed(B.speed === 2 ? 1 : 2)); add('Pausa', () => B && (B.paused ? B.resume() : B.pause()));
+    add('Muralla 0', () => { if (B) B.damageWall(B.castle.wallHp + 1); });
+    add('Jefe -25%', () => { const b = B && B.boss; if (b) B.damage(b, b.maxHp * 0.25, { type: 'true', source: 'tap' }); });
+    lab('Enemigos');
+    for (const id of BB.data.enemyOrder) add(BB.data.enemies[id].name, () => spawn(id));
+    add('x5 mezcla', () => ['goblin_veloz', 'orco_escudo', 'chaman', 'orco_tambor', 'goblin_bombardero'].forEach((t, i) => setTimeout(() => spawn(t), i * 300)));
+    lab('Jefes');
+    for (const id of BB.data.bossOrder) add(BB.data.bosses[id].name, () => { level = BB.data.bosses[id].level; lv.value = level; reset(); spawn(id); }, 'boss');
+    lab('Presentación');
+    for (const id of BB.data.bossOrder) add(BB.data.bosses[id].level, () => BB.bossIntro.play(id, () => log('intro ' + id + ' cerrada')), 'boss');
+    lab('Pruebas');
+    add('Simular jefes', () => { out.textContent = ''; setTimeout(runSims, 30); });
+    const canvas = document.getElementById('c');
+    canvas.addEventListener('pointerdown', ev => { if (!B) return; const w = BB.render.screenToWorld(ev.clientX, ev.clientY); B.tap(w.x, w.y); });
+    BB.assets.loadAll().then(() => BB.render.invalidate());
+    reset();
+    requestAnimationFrame(loop);
+  }
+  function reset() { B = newBattle(level, [], { seed: (Math.random() * 1e6) | 0 }); B.spawns = []; B.totalSpawns = 0; B.victoryT = -1e9; B._checkEnd = function () {}; }
+  function spawn(type) { if (!B || B.over) reset(); B.spawnEnemy(type, {}); }
+  function loop(ts) {
+    requestAnimationFrame(loop);
+    const dt = last ? Math.min(0.1, (ts - last) / 1000) : 0; last = ts;
+    if (!B) return;
+    B.update(dt);
+    BB.render.draw(B, dt);
+    const b = B.boss;
+    document.getElementById('info').textContent = 'nivel ' + level + ' · t=' + B.t.toFixed(1) + ' · enemigos ' + B.enemies.length + ' · castillo ' + Math.round(B.castle.hp) + '/' + Math.round(B.castle.maxHp) +
+      ' · muralla ' + Math.round(B.castle.wallHp) + (b ? ' · ' + b.def.name + ' ' + Math.round(b.hp) + '/' + Math.round(b.maxHp) + ' fase ' + (b.phase + 1) : '') + ' · errores ' + errors.length;
+  }
+
+  const mode = q.get('mode');
+  try {
+    if (mode === 'sim') runSims();
+    else if (mode === 'stress') runStress();
+    else if (mode === 'shot') runShot();
+    else if (mode === 'intro') runIntro();
+    else interactive();
+  } catch (e) { errors.push('EXCEPCIÓN ' + e.stack); finish('FALLO'); }
+})();
+</script>
+</body>
+</html>

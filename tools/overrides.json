@@ -1,0 +1,13 @@
+{
+ "boss_dragon": {
+  "flip": true,
+  "sha": "a4cdab4fa74b"
+ },
+ "boss_troll_piedra": {
+  "method": "combo"
+ },
+ "title_art": {
+  "flip": true,
+  "sha": "a92e1f2061ec"
+ }
+}

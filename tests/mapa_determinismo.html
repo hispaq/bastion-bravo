@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>determinismo</title></head>
+<body>
+<script src="../js/core/util.js"></script>
+<script src="../js/data/balance.js"></script>
+<script src="../js/data/zones.js"></script>
+<script src="../js/data/enemies.js"></script>
+<script src="../js/data/levels.js"></script>
+<script>
+// Llama a BB.levelDef muchas veces y avisa si alguna vez cambia el resultado
+(function () {
+  // 1) ¿el generador aleatorio es estable tras optimizarse?
+  const seq = () => { const r = BB.util.mulberry32(12345); let s = ''; for (let i = 0; i < 200; i++) s += r().toFixed(12); return s; };
+  const s0 = seq(); let rb = 0;
+  for (let k = 0; k < 3000; k++) if (seq() !== s0) { rb++; }
+  console.log('MAPA rng estable: ' + (rb ? 'NO (' + rb + ')' : 'sí'));
+  // 2) ¿sort con comparador aleatorio?
+  const sr = () => { const r = BB.util.mulberry32(99); return [1, 2, 3, 4, 5, 6, 7, 8].sort(() => r() - 0.5).join(''); };
+  const t0 = sr(); let sb = 0;
+  for (let k = 0; k < 3000; k++) if (sr() !== t0) sb++;
+  console.log('MAPA sort estable: ' + (sb ? 'NO (' + sb + ')' : 'sí'));
+  let bad = 0;
+  for (let n = 1; n <= 100; n++) {
+    const a = JSON.stringify(BB.levelDef(n));
+    for (let k = 0; k < 60; k++) {
+      const b = JSON.stringify(BB.levelDef(n));
+      if (a !== b) {
+        bad++;
+        let i = 0; while (a[i] === b[i]) i++;
+        console.log('MAPA DIF nivel ' + n + ' intento ' + k + ' @' + i + ': ' + a.slice(i - 80, i + 60) + ' ||| ' + b.slice(i - 80, i + 60));
+        break;
+      }
+    }
+  }
+  console.log('MAPA determinismo: ' + (bad ? bad + ' niveles cambian' : 'OK'));
+})();
+</script>
+</body></html>

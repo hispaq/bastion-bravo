@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>mapa en el juego</title>
+<style>html,body{margin:0;height:100%;background:#000}iframe{border:0;width:100%;height:100%}</style></head>
+<body>
+<!-- Abre el juego real (index.html) en un iframe, prepara una partida de ejemplo, va al mapa y abre un panel.
+     ?n=37 nivel máximo · ?panel=N · ?play=N (pulsa Jugar: arranca la batalla real) -->
+<iframe id="f"></iframe>
+<script>
+(function () {
+  const q = new URLSearchParams(location.search);
+  const top = +(q.get('n') || 37);
+  try {
+    const s = { maxLevel: top, levels: {}, gold: 5000, gems: 40 };
+    for (let n = 1; n < top; n++) s.levels[n] = { stars: n % 3 === 0 ? 2 : 3, clears: 1, best: 0.9 };
+    localStorage.setItem('bastionbravo.v1', JSON.stringify(s));
+  } catch (e) { console.log('MAPA sin localStorage ' + e); }
+  const f = document.getElementById('f');
+  f.src = '../index.html?noanim';
+  f.onload = () => {
+    const w = f.contentWindow;
+    const errs = [];
+    w.addEventListener('error', e => errs.push(e.message));
+    let tries = 0;
+    const go = () => {
+      const BB = w.BB;
+      if (!BB || !BB.app || !BB.ui || !BB.ui.screens || !BB.ui.screens.map) { if (tries++ < 50) return setTimeout(go, 100); console.log('MAPA juego: no arrancó'); return; }
+      try {
+        BB.app.goMap();
+        const ms = BB.mapScreen;
+        const p = ms.nodeScreen(BB.save.data.maxLevel);
+        console.log('MAPA juego: mapa visible=' + BB.ui.isOpen('map') + ' maxLevel=' + BB.save.data.maxLevel + ' nodo actual x=' + Math.round(p.x) + ' / ' + w.innerWidth);
+        if (q.get('panel')) ms.openPanel(+q.get('panel'));
+        if (q.get('play')) {
+          ms.openPanel(+q.get('play'));
+          const btn = w.document.querySelector('.bbm-play');
+          btn.click();
+          setTimeout(() => {
+            const B = BB.app.battle;
+            console.log('MAPA juego: batalla=' + (B ? 'sí nivel ' + B.level + ' zona ' + (B.zone && B.zone.id) + ' spawns ' + B.spawns.length : 'no (intro en curso: ' + BB.ui.current + ')'));
+          }, 1500);
+        }
+      } catch (e) { console.log('MAPA juego ERROR ' + e.stack); }
+      setTimeout(() => console.log('MAPA juego errores: ' + (errs.length ? errs.join(' | ') : 'ninguno')), 2500);
+    };
+    go();
+  };
+})();
+</script>
+</body></html>

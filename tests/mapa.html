@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Prueba del mapa</title>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/ui.css">
+<link rel="stylesheet" href="../css/map.css">
+<style>
+  #report { position: fixed; left: 8px; bottom: 8px; z-index: 99; max-width: 60vw; max-height: 45vh; overflow: auto; margin: 0;
+    font: 12px/1.3 Consolas, monospace; background: rgba(0,0,0,.8); color: #9f9; padding: 6px 8px; border-radius: 6px; display: none; }
+  body.show-report #report { display: block; }
+</style>
+</head>
+<body>
+<!-- Prueba del mapa de progresión.
+     Parámetros: ?save=demo|nuevo|fin  ?at=N (centrar)  ?panel=N (abrir panel)  ?report=1 (ver resultados)
+                 ?sim=1 (simula niveles con BB.test.simulate si existe el núcleo y los héroes)
+     Resultados: document.title y console.log("MAPA ...") -->
+<div id="game"><canvas id="battle" style="visibility:hidden"></canvas><div id="ui"></div></div>
+<pre id="report"></pre>
+<script src="../sprites/manifest.js"></script>
+<script src="../js/core/util.js"></script>
+<script src="../js/core/assets.js"></script>
+<script src="../js/data/balance.js"></script>
+<script src="../js/core/save.js"></script>
+<script>
+(function () {
+  'use strict';
+  const BB = window.BB;
+  const q = new URLSearchParams(location.search);
+  if (q.get('report')) document.body.classList.add('show-report');
+  for (const k in BB.SPRITES || {}) BB.SPRITES[k].src = '../' + BB.SPRITES[k].src.replace(/^\.\.\//, '');
+  // Módulos opcionales (si aún no existen, se sigue con sustitutos)
+  const optional = ['../js/audio.js', '../js/data/zones.js', '../js/data/enemies.js', '../js/data/bosses.js', '../js/data/heroes.js',
+    '../js/data/upgrades.js', '../js/data/levels.js', '../js/data/rewards.js', '../js/core/fx.js', '../js/core/battle.js',
+    '../js/ui/ui.js', '../js/ui/map.js'];
+  const loaded = {};
+  function next(i) {
+    if (i >= optional.length) return ready();
+    const s = document.createElement('script');
+    s.src = optional[i];
+    s.onload = () => { loaded[optional[i]] = true; next(i + 1); };
+    s.onerror = () => { loaded[optional[i]] = false; next(i + 1); };
+    document.body.appendChild(s);
+  }
+  next(0);
+
+  const results = [];
+  let fails = 0;
+  function check(ok, msg) { if (!ok) { fails++; results.push('FALLO ' + msg); } return ok; }
+  function log(msg) { results.push(msg); }
+
+  function sampleSave(kind) {
+    const s = JSON.parse(JSON.stringify(BB.save.defaults()));
+    if (typeof BB.ensureSaveDefaults === 'function') { try { BB.ensureSaveDefaults(s); } catch (e) { /* nada */ } }
+    s.gold = 12840; s.gems = 57;
+    if (kind === 'nuevo') return s;
+    const top = kind === 'fin' ? 100 : 37;
+    for (let n = 1; n < top; n++) s.levels[n] = { stars: n % 7 === 0 ? 1 : n % 3 === 0 ? 2 : 3, clears: 1 + (n % 4), best: 0.6 + (n % 5) * 0.08 };
+    if (kind === 'fin') s.levels[100] = { stars: 3, clears: 1, best: 1 };
+    s.maxLevel = top;
+    for (const id in s.heroes) s.heroes[id].level = 24;
+    s.stats.kills = 2400; s.stats.killsByType = { goblin_veloz: 900, orco_escudo: 260, goblin_planeador: 140 };
+    s.stats.goldEarned = 64000; s.stats.flawless = 4; s.stats.levelsWon = 52;
+    return s;
+  }
+
+  // ------------------------------------------------------------ comprobaciones de datos
+  function checkData() {
+    const E = BB.levels.ENEMIES;
+    const known = Object.keys(E);
+    check(BB.data.zones && BB.data.zones.length === 10, 'hay 10 zonas');
+    const zids = ['bosque', 'pantano', 'montanas', 'desierto', 'volcan', 'oscuras', 'hielo', 'ruinas', 'forja', 'dragon'];
+    const bosses = ['rey_goblin', 'chaman_gigante', 'troll_piedra', 'escorpion', 'senor_fuego', 'senor_guerra', 'gigante_escarcha', 'nigromante', 'golem', 'dragon'];
+    BB.data.zones.forEach((z, i) => {
+      check(z.id === zids[i], 'zona ' + i + ' id ' + z.id);
+      check(z.boss === bosses[i], 'jefe de zona ' + z.id);
+      const p = z.palette || {};
+      check(['sky', 'skyLow', 'groundTop', 'ground', 'groundDark', 'accent', 'fog'].every(k => typeof p[k] === 'string'), 'paleta completa ' + z.id);
+      check(['grass', 'reeds', 'rocks', 'sand', 'lava', 'ash', 'snow', 'bones', 'gears', 'embers'].indexOf(z.decor) >= 0, 'decor ' + z.id);
+      check(z.music === z.id && z.desc && z.levels[0] === i * 10 + 1, 'música/desc/niveles ' + z.id);
+    });
+    const unlock = { goblin_veloz: 1, orco_escudo: 3, goblin_bombardero: 5, goblin_planeador: 7, jinete_lobo: 12, chaman: 15, goblin_arquero: 18, orco_berserker: 23, orco_tambor: 27, goblin_topo: 32, troll: 36, orco_ariete: 42 };
+    const enemiesDef = BB.data.enemies || null;
+    let eliteLevels = 0, prevRec = 0;
+    for (let n = 1; n <= 100; n++) {
+      let d;
+      try { d = BB.levelDef(n); } catch (e) { check(false, 'levelDef(' + n + ') lanza ' + e.message); continue; }
+      const tag = 'nivel ' + n + ': ';
+      check(d.n === n && d.zone === zids[Math.floor((n - 1) / 10)], tag + 'n/zona');
+      check(Array.isArray(d.spawns) && d.spawns.length > 0, tag + 'spawns');
+      let lastT = -1, sorted = true, typesOk = true, unlockOk = true, eliteOk = true, bossSp = 0;
+      for (const s of d.spawns) {
+        if (!(s.t >= lastT) || !isFinite(s.t)) sorted = false;
+        lastT = s.t;
+        if (s.boss) { bossSp++; if (s.type !== d.boss) typesOk = false; continue; }
+        if (known.indexOf(s.type) < 0 || (enemiesDef && !enemiesDef[s.type])) typesOk = false;
+        if (unlock[s.type] > n) unlockOk = false;
+        if (s.elite && n < 21) eliteOk = false;
+        if (typeof s.elite !== 'boolean') eliteOk = false;
+      }
+      check(sorted, tag + 'tiempos ordenados');
+      check(typesOk, tag + 'tipos existentes');
+      check(unlockOk, tag + 'enemigos ya desbloqueados');
+      check(eliteOk, tag + 'élites solo desde la zona 3');
+      check(d.waves.length >= 2 && d.waves.length <= 6, tag + 'nº de oleadas ' + d.waves.length);
+      check(d.waves.every((t, i) => i === 0 || t > d.waves[i - 1]) && d.waves[0] <= d.spawns[0].t + 0.01, tag + 'oleadas ordenadas');
+      if (n % 10 === 0) {
+        check(d.boss === bosses[n / 10 - 1] && bossSp === 1 && d.bossAt > d.waves[0], tag + 'jefe en su sitio');
+      } else {
+        check(!d.boss && bossSp === 0, tag + 'sin jefe');
+        check(d.duration >= 30 && d.duration <= 105, tag + 'duración ' + d.duration);
+      }
+      const fresh = Object.keys(unlock).filter(k => unlock[k] === n);
+      check(JSON.stringify(d.newEnemies) === JSON.stringify(fresh), tag + 'newEnemies ' + d.newEnemies);
+      if (fresh.length) {
+        const w0 = d.spawns.filter(s => s.wave === 0);
+        check(w0.filter(s => s.type === fresh[0]).length / w0.length >= 0.5, tag + 'oleada protagonizada por ' + fresh[0]);
+      }
+      if (n >= 21 && d.elites > 0) eliteLevels++;
+      check(d.rewards.gold === BB.balance.levelGold(n) && d.rewards.firstGems > 0, tag + 'recompensas');
+      check(d.recommended >= 1 && d.recommended <= 100 && d.recommended >= prevRec - 12, tag + 'recomendado ' + d.recommended);
+      prevRec = Math.max(prevRec, d.recommended);
+      check(JSON.stringify(BB.levelDef(n)) === JSON.stringify(d), tag + 'determinista');
+    }
+    check(eliteLevels >= 75, 'élites presentes en los niveles ≥ 21 (' + eliteLevels + ')');
+    // estrellas y recompensas
+    check(BB.starsFor(1) === 3 && BB.starsFor(0.8) === 3 && BB.starsFor(0.79) === 2 && BB.starsFor(0.45) === 2 && BB.starsFor(0.44) === 1 && BB.starsFor(0) === 1, 'starsFor');
+    const v1 = BB.rewards.victory(5, { stars: 3, prevStars: 0, firstClear: true, replay: false, killGold: 40 });
+    check(v1.gold === BB.balance.levelGold(5) + 40 && v1.gems === BB.levels.firstGems(5) + 4, 'victoria primera vez ' + JSON.stringify(v1));
+    const v2 = BB.rewards.victory(5, { stars: 3, prevStars: 3, firstClear: false, replay: true, killGold: 40 });
+    check(v2.gold === Math.round(BB.balance.levelGold(5) * 0.6) + 40 && v2.gems === 0, 'repetición ' + JSON.stringify(v2));
+    const v3 = BB.rewards.victory(20, { stars: 3, prevStars: 2, firstClear: false, replay: true, killGold: 0 });
+    check(v3.gems === 6, 'tercera estrella en jefe = 6 gemas ' + v3.gems);
+    const df = BB.rewards.defeat(5, { killGold: 50, progress: 0.5 });
+    check(df.gold > 0 && df.gold < v1.gold && df.gems === 0, 'derrota ' + JSON.stringify(df));
+    // logros
+    const A = BB.data.achievements;
+    check(A.length >= 24, 'logros ≥ 24 (' + A.length + ')');
+    check(new Set(A.map(a => a.id)).size === A.length, 'ids de logro únicos');
+    const demo = sampleSave('demo'), empty = sampleSave('nuevo');
+    for (const a of A) {
+      check(a.name && a.desc && a.icon && a.target > 0 && a.reward && (a.reward.gems || a.reward.gold), 'logro ' + a.id + ' completo');
+      check(isFinite(a.progress(demo)) && isFinite(a.progress(empty)), 'progreso ' + a.id);
+    }
+    const lst = BB.achievementsApi.list(demo);
+    check(lst.length === A.length && lst.some(x => x.done) && lst.every(x => 'value' in x && 'claimed' in x), 'achievementsApi.list');
+    // diaria (sobre una copia)
+    const ds = sampleSave('nuevo');
+    const keep = BB.save.data; BB.save.data = ds;
+    const d1 = new Date(2026, 9, 1, 12), d2 = new Date(2026, 9, 2, 12), d4 = new Date(2026, 9, 4, 12);
+    let st = BB.daily.status(ds, d1); check(st.canClaim && st.day === 1, 'diaria día 1');
+    const r1 = BB.daily.claim(ds, d1); check(r1 && r1.day === 1 && !BB.daily.status(ds, d1).canClaim, 'diaria reclamada');
+    st = BB.daily.status(ds, d2); check(st.canClaim && st.day === 2, 'diaria racha día 2');
+    BB.daily.claim(ds, d2);
+    st = BB.daily.status(ds, d4); check(st.canClaim && st.day === 1, 'diaria: saltarse un día reinicia');
+    let day = new Date(2026, 9, 10, 12), gemsBefore = ds.gems, big = null;
+    for (let i = 0; i < 8; i++) { const r = BB.daily.claim(ds, day); if (r && r.day === 7) big = r; day = new Date(day.getTime() + 86400000); }
+    check(big && big.gems >= 40 && ds.daily.streak === 8 && BB.daily.status(ds, day).day === 2, 'diaria: ciclo de 7 días con premio grande');
+    check(ds.gems > gemsBefore, 'diaria suma gemas');
+    BB.save.data = keep;
+  }
+
+  function simulate() {
+    if (!BB.test || !BB.test.simulate || !BB.data.heroes) { log('SIM no disponible'); return; }
+    const pick = (q.get('simLevels') || '1,3,5,9,10,15,20,25,30,40,50,60,75,90,100').split(',').map(Number);
+    const ids = Object.keys(BB.data.heroes);
+    for (const n of pick) {
+      const rec = BB.levelDef(n).recommended;
+      const weak = q.get('weak');
+      const slots = weak ? 0 : Math.min(7, Math.floor(n / 13));
+      const heroes = ids.slice(0, 3 + slots);
+      for (const mul of (q.get('muls') || '1,0.7').split(',').map(Number)) {
+        const lvl = weak ? Math.max(1, Math.round(+weak * mul)) : Math.max(1, Math.round(rec * mul));
+        const r = BB.test.simulate(n, { heroes, heroLevel: lvl, slots, castle: weak ? {} : { torreon: Math.floor(n / 4), muralla: Math.floor(n / 4) } });
+        log('SIM nivel ' + n + ' héroes ' + heroes.length + ' nv ' + lvl + ' (' + Math.round(mul * 100) + ' %)' + ' → ' + (r.victory ? 'VICTORIA' : 'derrota') + ' castillo ' + r.castleHpFrac + ' t ' + r.t + ' bajas ' + r.kills + '/' + r.spawns + (r.error ? ' ERROR ' + r.error : ''));
+      }
+    }
+  }
+
+  function ready() {
+    // Sustitutos mínimos SOLO para esta página
+    if (!BB.ui || !BB.ui.register) {
+      const screens = {};
+      BB.ui = {
+        register(s) { screens[s.id] = s; const w = document.createElement('div'); w.className = 'ui-screen'; w.appendChild(s.el); document.getElementById('ui').appendChild(w); s.wrap = w; },
+        show(id, p) { for (const k in screens) if (screens[k].wrap.classList.contains('is-on') && k !== id) { screens[k].hide(); screens[k].wrap.classList.remove('is-on'); } const s = screens[id]; if (!s) { this.toast('Pantalla «' + id + '»'); return; } s.wrap.classList.add('is-on'); s.show(p || {}); },
+        toast(t) { console.log('TOAST ' + t); },
+        refreshTop() {},
+      };
+      log('(BB.ui sustituto)');
+    } else BB.ui.init(document.getElementById('ui'));
+    BB.app = BB.app || {
+      startLevel(n, o) { const msg = 'startLevel(' + n + ', ' + JSON.stringify(o) + ')'; console.log('MAPA ' + msg); BB.ui.toast(msg); document.title = msg; },
+      goMenu() { BB.ui.toast('Volver al menú'); },
+      goMap() { BB.ui.show('map'); },
+    };
+    BB.save.data = sampleSave(q.get('save') || 'demo');
+    log('módulos: ' + Object.keys(loaded).map(k => k.replace('../js/', '') + (loaded[k] ? '' : ' (falta)')).join(', '));
+    try { checkData(); } catch (e) { check(false, 'excepción en comprobaciones: ' + e.stack); }
+    if (q.get('cap')) BB.levels.TUNE.capacity = +q.get('cap');
+    if (q.get('p1')) BB.levels.TUNE.pressure1 = +q.get('p1');
+    if (q.get('sim')) { try { simulate(); } catch (e) { log('SIM ERROR ' + e.stack); } }
+    const go = () => {
+      try {
+        BB.ui.show('map', q.get('at') ? { focus: +q.get('at') } : {});
+        const ms = BB.mapScreen;
+        check(ms && ms.nodes.length === 101, 'mapa con 100 nodos');
+        const cv = document.querySelector('.bbm-canvas');
+        check(cv && cv.width > 0, 'lienzo del mapa');
+        const cur = ms.nodeScreen(BB.save.data.maxLevel);
+        check(cur.x > 0 && cur.x < innerWidth, 'centrado en el nivel actual');
+        log('nodo actual en x=' + Math.round(cur.x) + ' de ' + innerWidth + ' (viewX ' + Math.round(ms.viewX) + ', lienzo ' + cv.width + 'x' + cv.height + ')');
+        if (q.get('panel')) ms.openPanel(+q.get('panel'));
+        else if (q.get('tap')) { const p = ms.nodeScreen(+q.get('tap')); const r = cv.getBoundingClientRect(); ms.tapAt(r.left + p.x, r.top + p.y); }
+        const panel = document.querySelector('.bbm-panel');
+        if (q.get('panel') || q.get('tap')) check(panel && /Nivel/.test(panel.textContent), 'panel del nivel');
+      } catch (e) { check(false, 'mapa: ' + e.stack); }
+      const head = fails ? 'MAPA: ' + fails + ' FALLOS' : 'MAPA: OK';
+      if (!/startLevel/.test(document.title)) document.title = head;
+      document.getElementById('report').textContent = head + '\n' + results.join('\n');
+      console.log(head);
+      results.forEach(r => console.log('MAPA ' + r));
+    };
+    const ld = BB.assets && BB.assets.loadAll ? BB.assets.loadAll() : Promise.resolve();
+    Promise.race([ld, new Promise(r => setTimeout(r, 2500))]).then(go);
+  }
+})();
+</script>
+</body>
+</html>

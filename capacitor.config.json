@@ -1,0 +1,14 @@
+{
+  "appId": "com.bastionbravo.juego",
+  "appName": "Bastión Bravo",
+  "webDir": "www",
+  "backgroundColor": "#1e1208",
+  "android": {
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "StatusBar": {
+      "overlaysWebView": true
+    }
+  }
+}
