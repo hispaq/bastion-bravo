@@ -79,6 +79,7 @@
 
       this._buildHeroes(cs.slots || 3);
       this._buildTowers();
+      this._buildTroops();
 
       // Apariciones
       this.spawns = (this.levelDef.spawns || []).slice().sort((a, b) => a.t - b.t);
@@ -118,6 +119,34 @@
           atkAnim: 0, castAnim: 0, readyFlash: 0, data: {},
         });
       }
+    }
+    _buildTroops() {
+      this.troops = [];
+      const defs = (BB.data && BB.data.troops) || {};
+      const order = (BB.data && BB.data.troopOrder) || Object.keys(defs);
+      const slots = BB.TROOP_SLOTS || [];
+      const own = this.save.troops || {};
+      let i = 0;
+      for (const id of order) {
+        const n = (own[id] && own[id].count) || 0;
+        for (let k = 0; k < n && i < slots.length; k++, i++) {
+          const a = BB.troopsApi ? BB.troopsApi.stats(id, this.save) : Object.assign({}, defs[id].attack);
+          this.troops.push({ id, def: defs[id], attack: a, x: slots[i].x, y: slots[i].y, slot: i,
+            atkTimer: 0.3 + this.rng() * a.interval, atkAnim: 0, level: (own[id] && own[id].level) || 1 });
+        }
+      }
+    }
+    _updateTroop(u, dt) {
+      if (u.atkAnim > 0) u.atkAnim -= dt;
+      const a = u.attack;
+      u.atkTimer -= dt * this.heroAtkMul();
+      if (u.atkTimer > 0) return;
+      const target = this.pickTarget(u.x, a.range || 850, { prefer: a.prefer || 'front', air: airMode(a) });
+      if (!target) { u.atkTimer = 0.15; return; }
+      this._fireAttack(u, a, target, { x: u.x - 14, y: u.y - (u.def.size || 52) * 0.62 }, null);
+      u.atkTimer += a.interval || 1.2;
+      if (u.atkTimer < 0) u.atkTimer = a.interval || 1.2;
+      u.atkAnim = 0.22;
     }
     _buildTowers() {
       const defs = (BB.data && BB.data.towers) || {};
@@ -176,6 +205,7 @@
       this._updateSpawns();
       this._updateCastle(dt);
       for (const h of this.heroes) this._updateHero(h, dt);
+      for (const u of this.troops) this._updateTroop(u, dt);
       for (const tw of this.towers) this._updateTower(tw, dt);
       for (let i = 0; i < this.enemies.length; i++) {
         const e = this.enemies[i];

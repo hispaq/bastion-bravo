@@ -4,7 +4,7 @@
 <script src="../js/data/balance.js"></script><script src="../js/core/save.js"></script>
 <script src="../js/data/zones.js"></script><script src="../js/data/enemies.js"></script>
 <script src="../js/data/bosses.js"></script><script src="../js/data/heroes.js"></script>
-<script src="../js/data/upgrades.js"></script><script src="../js/data/levels.js"></script>
+<script src="../js/data/upgrades.js"></script><script src="../js/data/troops.js"></script><script src="../js/data/levels.js"></script>
 <script src="../js/data/rewards.js"></script><script src="../js/core/fx.js"></script>
 <script src="../js/core/battle.js"></script>
 <script>
@@ -27,12 +27,19 @@ function spend() {
     for (const k of ['torreon', 'muralla', 'ballesta', 'reparacion']) if (BB.castle.canUpgrade(k)) opts.push(['c', k, BB.castle.cost(k).gold || 0]);
     const owned = order.filter(id => save.heroes[id] && save.heroes[id].owned);
     for (const id of owned) { const c = BB.heroes.levelCost(id); if (c && BB.econ.canAfford(c)) opts.push(['h', id, (c.gold || 0) * 0.8]); }
+    for (const id of BB.data.troopOrder) {
+      if (BB.troopsApi.canRecruit(id, save)) opts.push(['r', id, BB.troopsApi.recruitCost(id, save).gold * 0.9]);
+      const s = BB.troopsApi.state(id, save);
+      if (s.count) { const c = BB.troopsApi.levelCost(id, save); if (BB.econ.canAfford(c)) opts.push(['tl', id, c.gold * 1.1]); }
+    }
     if (!opts.length) break;
     opts.sort((a, b) => a[2] - b[2]);
     const [t, id] = opts[0];
     let ok = false;
     if (t === 'u') ok = BB.heroes.unlock(id);
     else if (t === 'c') ok = BB.castle.upgrade(id);
+    else if (t === 'r') ok = BB.troopsApi.recruit(id);
+    else if (t === 'tl') ok = BB.troopsApi.levelUp(id);
     else ok = BB.heroes.levelUp(id);
     if (!ok) break;
     // talentos
@@ -72,7 +79,7 @@ for (let n = 1; n <= 100; n++) {
     if (tries > 25) { stuckAt.push(n); break; }
   }
   maxRetries = Math.max(maxRetries, tries);
-  if (n % 10 === 0 || tries > 3) log.push('N' + n + ' intentos=' + (tries + 1) + ' héroes=' + order.filter(id => save.heroes[id] && save.heroes[id].owned).length + ' nivHéroe=' + save.heroes.arquera.level + ' huecos=' + BB.castleStats(save).slots + ' vida=' + BB.castleStats(save).maxHp + ' oro=' + save.gold + ' gemas=' + save.gems);
+  if (n % 10 === 0 || tries > 3) log.push('N' + n + ' intentos=' + (tries + 1) + ' héroes=' + order.filter(id => save.heroes[id] && save.heroes[id].owned).length + ' nivHéroe=' + save.heroes.arquera.level + ' huecos=' + BB.castleStats(save).slots + ' vida=' + BB.castleStats(save).maxHp + ' oro=' + save.gold + ' gemas=' + save.gems + ' tropas=' + BB.troopsApi.total(save));
   if (stuckAt.length) break;
 }
 log.push('partidas=' + plays + ' derrotas=' + defeats + ' atascado=' + stuckAt.join(',') + ' segundos=' + Math.round((performance.now() - T0) / 1000));

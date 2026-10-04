@@ -6,6 +6,7 @@
   const images = {};      // clave → Image cargada
   const failed = {};      // clave → true si falló
   const silCache = {};    // clave → canvas blanco (destello al recibir daño)
+  const urlCache = {};    // clave → dataURL de los personajes dibujados
   let total = 0, done = 0, started = false;
   const waiters = [];
 
@@ -38,12 +39,20 @@
       });
     },
     progress() { return total ? done / total : 1; },
+    // Personajes: siempre el dibujo vectorial animable (estilo unificado), no la imagen de IA
+    isRig(key) { return !!(BB.rig && BB.rig.has(key)); },
     get(key) {
+      if (BB.rig && BB.rig.has(key)) { try { return BB.rig.image(key, 256); } catch (err) { /* sigue con la imagen */ } }
+      const cm = /^castle_([1-5])$/.exec(key);
+      if (cm && BB.scenery && BB.scenery.castleImage) { try { return BB.scenery.castleImage(+cm[1]); } catch (err) { /* sigue */ } }
       const img = images[key];
       return img && img.naturalWidth > 0 ? img : null;
     },
     has(key) { return !!BB.assets.get(key); },
-    meta(key) { return (BB.SPRITES || {})[key] || null; },
+    meta(key) {
+      if (BB.rig && BB.rig.has(key)) { const c = BB.rig.image(key, 256); return { src: BB.assets.url(key), w: c.width, h: c.height, facing: 'right' }; }
+      return (BB.SPRITES || {})[key] || null;
+    },
     // Silueta blanca de un sprite para el parpadeo al recibir daño
     silhouette(key) {
       if (silCache[key] !== undefined) return silCache[key];
@@ -65,7 +74,15 @@
     },
     // URL de la imagen (para <img> en la interfaz) o null
     url(key) {
-      const m = BB.assets.meta(key);
+      if (BB.rig && BB.rig.has(key)) {
+        if (!urlCache[key]) { try { urlCache[key] = BB.rig.image(key, 256).toDataURL('image/png'); } catch (err) { urlCache[key] = null; } }
+        if (urlCache[key]) return urlCache[key];
+      }
+      if (/^castle_[1-5]$/.test(key) && BB.scenery) {
+        if (!urlCache[key]) { try { urlCache[key] = BB.assets.get(key).toDataURL('image/png'); } catch (err) { urlCache[key] = null; } }
+        if (urlCache[key]) return urlCache[key];
+      }
+      const m = (BB.SPRITES || {})[key];
       return m && !failed[key] ? m.src : null;
     },
   };

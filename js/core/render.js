@@ -38,6 +38,7 @@
   }
 
   // ------------------------------------------------------------------ sprites
+  function smoothstep(a, b, x) { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); }
   function spriteFacing(key) { const m = BB.assets.meta(key); return (m && m.facing) || null; }
   // Dibuja un sprite anclado por los pies (abajo-centro) con alto h. want: 'left'|'right'
   function drawSprite(key, x, y, h, o) {
@@ -123,6 +124,7 @@
     g.scale(cam.s, cam.s);
     const P = pal(B);
     const L = cam.left - 4, Tp = cam.top - 4, R = W.W + 4, Bt = cam.bottom + 4;
+    if (BB.scenery) { BB.scenery.buildBack(g, B, P, { L, T: Tp, R, Bt }); return; }
     // cielo
     const sky = g.createLinearGradient(0, Tp, 0, W.GROUND);
     sky.addColorStop(0, P.sky); sky.addColorStop(1, P.skyLow || P.sky);
@@ -230,6 +232,7 @@
 
   // ------------------------------------------------------------------ castillo y muralla
   function drawCastle(B) {
+    if (BB.scenery) { BB.scenery.castle(ctx, B, time); return; }
     const c = B.castle;
     const key = 'castle_' + Math.max(1, Math.min(5, c.tier || 1));
     const img = BB.assets.get(key);
@@ -272,7 +275,17 @@
     if (hitA > 0) { ctx.globalAlpha = hitA * 0.35; ctx.fillStyle = '#fff'; ctx.fillRect(x0, top - 70, x1 - x0, baseY - top + 70); }
     ctx.restore();
   }
+  function drawTroop(B, u) {
+    const iv = (u.attack && u.attack.interval) || 1.2;
+    const prog = 1 - Math.max(0, Math.min(iv, u.atkTimer)) / iv;
+    const key = (u.def && u.def.rig) || 'troop_' + u.id;
+    const pose = { t: time + u.slot * 0.7, moving: false, windup: smoothstep(0.35, 1, prog), strike: u.atkAnim > 0 ? u.atkAnim / 0.22 : 0, seed: u.slot };
+    if (!BB.rig || !BB.rig.draw(ctx, BB.rig.has(key) ? key : 'troop_arquero', u.x, u.y, (u.def && u.def.size) || 52, -1, pose)) {
+      drawFallbackUnit(u.x, u.y, 46, { face: -1, color: '#f3c79e', cloth: '#3a6fd0' });
+    }
+  }
   function drawWall(B) {
+    if (BB.scenery) { BB.scenery.wall(ctx, B, time); return; }
     const c = B.castle;
     const x = W.WALL_X, w = 52, base = W.GROUND + 16, h = 176;
     const frac = c.wallMax > 0 ? c.wallHp / c.wallMax : 0;
@@ -360,7 +373,16 @@
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y - size * 0.5, size * 0.9, 0, TAU); ctx.fill();
       ctx.restore();
     }
-    const ok = drawSprite('hero_' + h.id, x, y, size, { want: 'left', sx: breath, sy: 2 - breath, rot: h.atkAnim > 0 ? 0.05 * (h.atkAnim / 0.22) : 0 });
+    let ok = false;
+    if (BB.rig && BB.rig.has('hero_' + h.id)) {
+      const iv = (h.stats && h.stats.attack && h.stats.attack.interval) || 1;
+      const prog = 1 - Math.max(0, Math.min(iv, h.atkTimer)) / iv;
+      ok = BB.rig.draw(ctx, 'hero_' + h.id, h.x, y, size * 1.12 * BB.rig.norm('hero_' + h.id), -1, {
+        t: time + h.slot, moving: false, windup: h.disabled > 0 ? 0 : smoothstep(0.35, 1, prog),
+        strike: h.atkAnim > 0 ? h.atkAnim / 0.22 : 0, frozen: h.disabled > 0, seed: h.slot,
+      });
+    }
+    if (!ok) ok = drawSprite('hero_' + h.id, x, y, size, { want: 'left', sx: breath, sy: 2 - breath, rot: h.atkAnim > 0 ? 0.05 * (h.atkAnim / 0.22) : 0 });
     if (!ok) drawFallbackUnit(x, y, size * 0.9, { face: -1, color: '#f3c79e', cloth: hashColor(h.id, 60, 45), sx: breath, sy: 2 - breath });
     if (h.disabled > 0) {
       ctx.save();
@@ -391,6 +413,18 @@
     }
     const squash = tw.atkAnim > 0 ? 1 - (tw.atkAnim / 0.3) * 0.06 : 1;
     const flash = tw.hitT > 0 ? tw.hitT / 0.15 : 0;
+    const rk = 'tower_' + tw.id;
+    if (BB.rig && BB.rig.has(rk)) {
+      const iv = (tw.stats && tw.stats.attack && tw.stats.attack.interval) || 1.5;
+      const prog = 1 - Math.max(0, Math.min(iv, tw.atkTimer)) / iv;
+      const low = tw.kind === 'trap';
+      BB.rig.draw(ctx, rk, tw.x, W.GROUND + (low ? 12 : 10), low ? 100 * 0.95 : size * BB.rig.norm(rk), -1, {
+        t: time + tw.slot, windup: tw.kind === 'tower' ? smoothstep(0.4, 1, prog) : 0, strike: tw.atkAnim > 0 ? tw.atkAnim / 0.3 : 0,
+        flash, hit: flash, seed: tw.slot,
+      });
+      if (tw.kind === 'block' && tw.maxHp > 0 && tw.hp < tw.maxHp) hpBar(tw.x, W.GROUND - size - 8, 60, tw.hp / tw.maxHp, '#ffcf3d');
+      return;
+    }
     if (tw.kind === 'trap') {
       if (tw.id === 'brea' && !BB.assets.get(key)) {
         ctx.save(); ctx.fillStyle = '#1b1612'; ctx.strokeStyle = '#3a2a1a'; ctx.lineWidth = 4;
@@ -522,7 +556,20 @@
     const footY = e.air ? y + size * 0.5 : y;
     const flash = e.hitFlash > 0 ? e.hitFlash / 0.12 : 0;
     const frozen = !e.dead && e.status.freeze;
-    const ok = drawSprite(sprite, x, footY, size, { want: 'right', rot, sx, sy, alpha, flash: frozen ? 0.45 : flash });
+    let ok = false;
+    if (BB.rig && BB.rig.has(key)) {
+      // Personaje por piezas: las piernas y brazos se animan solos; el paso va ligado a la distancia (sin patinar)
+      const stride = size * 0.62;
+      const prog = e.state === 'attack' && e.atkInterval ? 1 - Math.max(0, e.atkTimer) / e.atkInterval : 0;
+      const rp = {
+        phase: (e.x / stride) * Math.PI + e.id, moving: walking && !e.dead, t: time + e.id * 0.37, seed: e.id,
+        windup: e.dead ? 0 : smoothstep(0.45, 1, prog), strike: e.atkAnim > 0 ? e.atkAnim / 0.35 : 0,
+        flash: frozen ? 0 : flash, frozen, alpha, dead: e.dead ? Math.min(1, e.dying / 0.45) : 0,
+        rot: e.dead ? rot : (e.kbLeft > 0 ? -0.15 : 0), bp: e.phase || 0, rage: e.data && e.data.rage ? 1 : 0,
+      };
+      ok = BB.rig.draw(ctx, key, e.dead ? x : e.x, footY, size * BB.rig.norm(key), 1, rp);
+    }
+    if (!ok) ok = drawSprite(sprite, x, footY, size, { want: 'right', rot, sx, sy, alpha, flash: frozen ? 0.45 : flash });
     if (!ok) drawFallbackUnit(x, footY, size, { face: 1, color: e.boss ? '#c0392b' : e.type.indexOf('goblin') >= 0 ? '#8fcf3c' : e.type === 'troll' ? '#6f9a5a' : '#6fae3d', cloth: hashColor(e.type, 45, 38), rot, sx, sy, alpha, flash });
     if (e.dead) return;
     // estados
@@ -722,18 +769,22 @@
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(staticLayer, Math.round(sh.x * dpr * cam.s), Math.round(sh.y * dpr * cam.s));
     ctx.setTransform(dpr * cam.s, 0, 0, dpr * cam.s, dpr * (cam.ox + sh.x * cam.s), dpr * (cam.oy + sh.y * cam.s));
+    const box = { L: cam.left - 4, T: cam.top - 4, R: W.W + 4, Bt: cam.bottom + 4 };
+    if (BB.scenery) BB.scenery.drawSky(ctx, B, pal(B), box, time);
     if (B.fx.drawGround) B.fx.drawGround(ctx, time);
     for (const tw of B.towers) if (tw.kind === 'trap') drawTower(B, tw);
     drawCastle(B);
     drawWall(B);
     drawBalconies(B);
     for (const h of B.heroes) drawHero(B, h);
+    if (B.troops) for (const u of B.troops) drawTroop(B, u);
     for (const tw of B.towers) if (tw.kind !== 'trap') drawTower(B, tw);
     const ground = [], air = [];
     for (const e of B.corpses) (e.air ? air : ground).push(e);
     for (const e of B.enemies) (e.air ? air : ground).push(e);
     ground.sort((a, b) => a.y - b.y || a.x - b.x);
     for (const e of ground) drawEnemy(B, e);
+    if (BB.scenery) BB.scenery.drawFront(ctx, B, pal(B), box, time);
     for (const e of air) drawEnemy(B, e);
     for (const p of B.projectiles) drawProjectile(B, p);
     if (B.fx.draw) B.fx.draw(ctx, time);

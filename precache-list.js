@@ -1,5 +1,5 @@
 /* Generado por build/make_precache.py */
-self.PRECACHE_VERSION = "9eee7987e0";
+self.PRECACHE_VERSION = "d369be2dd8";
 self.PRECACHE_LIST = [
 "./",
 "css/base.css",
@@ -12,7 +12,13 @@ self.PRECACHE_LIST = [
 "js/core/battle.js",
 "js/core/fx.js",
 "js/core/render.js",
+"js/core/rig.js",
+"js/core/rig_bosses.js",
+"js/core/rig_enemies.js",
+"js/core/rig_heroes.js",
+"js/core/rig_structures.js",
 "js/core/save.js",
+"js/core/scenery.js",
 "js/core/util.js",
 "js/data/balance.js",
 "js/data/bosses.js",
@@ -20,6 +26,7 @@ self.PRECACHE_LIST = [
 "js/data/heroes.js",
 "js/data/levels.js",
 "js/data/rewards.js",
+"js/data/troops.js",
 "js/data/upgrades.js",
 "js/data/zones.js",
 "js/ui/boss_intro.js",

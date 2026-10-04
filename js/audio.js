@@ -68,7 +68,12 @@
     comp.connect(ctx.destination);
     musicBus = ctx.createGain();
     musicBus.gain.value = MUSIC_VOL;
-    musicBus.connect(master);
+    // Filtro suave: quita los agudos chillones y deja un sonido cálido de orquesta
+    const warmth = ctx.createBiquadFilter();
+    warmth.type = 'lowpass'; warmth.frequency.value = 3600; warmth.Q.value = 0.5;
+    const shelf = ctx.createBiquadFilter();
+    shelf.type = 'highshelf'; shelf.frequency.value = 2500; shelf.gain.value = -5;
+    musicBus.connect(warmth); warmth.connect(shelf); shelf.connect(master);
     sfxBus = ctx.createGain();
     sfxBus.gain.value = SFX_VOL;
     sfxBus.connect(master);
@@ -202,10 +207,12 @@
 
   // ------------------------------------------------------------------ instrumentos
   const PRESET = {
-    lead: { wave: 'square', gain: 0.085, a: 0.01, d: 0.15, s: 0.6, r: 0.08, cutoff: 3000, q: 1, vib: [5.5, 12, 0.18] },
-    lead2: { wave: 'sawtooth', gain: 0.07, a: 0.01, d: 0.2, s: 0.6, r: 0.1, cutoff: 2000, fenv: 2200, fdcy: 0.2, vib: [5, 10, 0.2] },
-    flute: { wave: 'triangle', gain: 0.22, a: 0.035, d: 0.2, s: 0.8, r: 0.12, vib: [5, 14, 0.2], breath: 0.06, harm: [['sine', 2, 0.18]] },
-    brass: { wave: 'sawtooth', voices: 2, spread: 9, gain: 0.07, a: 0.05, d: 0.25, s: 0.75, r: 0.15, cutoff: 800, fenv: 2400, fdcy: 0.25, q: 1.8, vib: [5, 10, 0.3] },
+    lead: { wave: 'triangle', gain: 0.17, a: 0.02, d: 0.2, s: 0.7, r: 0.15, cutoff: 2200, q: 0.6, vib: [5, 10, 0.25], harm: [['sine', 2, 0.15]] },
+    lead2: { wave: 'sawtooth', gain: 0.05, a: 0.02, d: 0.2, s: 0.6, r: 0.12, cutoff: 1200, fenv: 900, fdcy: 0.2, vib: [5, 8, 0.25] },
+    flute: { wave: 'triangle', gain: 0.2, a: 0.04, d: 0.2, s: 0.8, r: 0.16, vib: [5, 12, 0.25], breath: 0.05, harm: [['sine', 2, 0.12]] },
+    brass: { wave: 'sawtooth', voices: 2, spread: 7, gain: 0.06, a: 0.06, d: 0.3, s: 0.75, r: 0.2, cutoff: 600, fenv: 1300, fdcy: 0.3, q: 1.2, vib: [5, 8, 0.35] },
+    horn: { wave: 'sawtooth', voices: 2, spread: 6, gain: 0.055, a: 0.09, d: 0.3, s: 0.85, r: 0.3, cutoff: 520, fenv: 700, fdcy: 0.35, q: 0.9, vib: [4.5, 7, 0.4] },
+    harp: { wave: 'triangle', gain: 0.17, a: 0.003, d: 0.9, perc: true, cutoff: 2600, fenv: 1500, fdcy: 0.12, harm: [['sine', 2, 0.25, 0.4]] },
     pluck: { wave: 'triangle', gain: 0.16, a: 0.003, d: 0.28, perc: true, cutoff: 3500, fenv: 3000, fdcy: 0.1 },
     pizz: { wave: 'sawtooth', gain: 0.065, a: 0.003, d: 0.2, perc: true, cutoff: 1300, fenv: 2600, fdcy: 0.06 },
     marimba: { wave: 'sine', gain: 0.26, a: 0.002, d: 0.38, perc: true, harm: [['sine', 4, 0.2, 0.06]] },
@@ -218,7 +225,7 @@
     organ: { wave: 'sine', gain: 0.06, a: 0.06, d: 0.2, s: 0.95, r: 0.35, harm: [['sine', 2, 0.6], ['sine', 3, 0.35], ['sine', 4, 0.18]], trem: [5, 0.12] },
     choir: { wave: 'sawtooth', voices: 3, spread: 14, gain: 0.045, a: 0.35, d: 0.4, s: 0.9, r: 0.6, formant: [650, 1100], vib: [5, 12, 0.3] },
     strings: { wave: 'sawtooth', voices: 2, spread: 10, gain: 0.05, a: 0.09, d: 0.3, s: 0.8, r: 0.3, cutoff: 2500, q: 0.7 },
-    stacc: { wave: 'sawtooth', voices: 2, spread: 10, gain: 0.06, a: 0.004, d: 0.13, perc: true, cutoff: 2000, fenv: 2200, fdcy: 0.08 },
+    stacc: { wave: 'sawtooth', voices: 2, spread: 10, gain: 0.05, a: 0.006, d: 0.16, perc: true, cutoff: 1100, fenv: 1000, fdcy: 0.08 },
     bass: { wave: 'triangle', gain: 0.3, a: 0.005, d: 0.25, s: 0.7, r: 0.06 },
     bassSaw: { wave: 'sawtooth', gain: 0.11, a: 0.004, d: 0.2, s: 0.6, r: 0.05, cutoff: 650, fenv: 1000, fdcy: 0.12, q: 4 },
     sub: { wave: 'sine', gain: 0.36, a: 0.005, d: 0.3, s: 0.75, r: 0.08 },
@@ -365,6 +372,15 @@
     tamb(t, v, out) { noise(t, out, 0.1, 0.11 * v, 'bandpass', 9000, null, { q: 1.5 }); tone(t, out, 'square', 4200, 4100, 0.05, 0.02 * v, { hp: 3000 }); },
     tom(t, v, out) { tone(t, out, 'sine', 190, 110, 0.3, 0.6 * v, { sweep: 0.15 }); },
     ltom(t, v, out) { tone(t, out, 'sine', 125, 70, 0.4, 0.7 * v, { sweep: 0.2 }); },
+    timp(t, v, out) {
+      tone(t, out, 'sine', 98, 82, 0.9, 0.75 * v, { sweep: 0.3 });
+      tone(t, out, 'sine', 147, 130, 0.5, 0.18 * v, { sweep: 0.3 });
+      noise(t, out, 0.06, 0.18 * v, 'lowpass', 600, null, { q: 0.7 });
+    },
+    timpH(t, v, out) {
+      tone(t, out, 'sine', 131, 110, 0.7, 0.65 * v, { sweep: 0.25 });
+      noise(t, out, 0.05, 0.15 * v, 'lowpass', 700, null, { q: 0.7 });
+    },
     taiko(t, v, out) {
       tone(t, out, 'sine', 95, 46, 0.75, 0.95 * v, { sweep: 0.25 });
       noise(t, out, 0.09, 0.35 * v, 'lowpass', 400, null, { q: 0.7 });
@@ -391,52 +407,58 @@
 
   // ------------------------------------------------------------------ pistas (compás 4/4 salvo indicación; tokens por paso)
   const TRACKS = {
+    // Tema principal de aventura: trompa heroica, cuerdas en pizzicato, arpa y timbales
     menu: {
-      bpm: 116, reverb: 0.22, vol: 0.95,
-      prog: { len: 8, chords: 'C*2 G*2 Am*2 F*2 C*2 G*2 F G C*2  F*2 G*2 Em*2 Am*2 F*2 G*2 C*2 G*2' },
+      bpm: 104, reverb: 0.3, vol: 1,
+      prog: { len: 16, chords: 'D Bm G A D Bm Em A  G A F#m Bm G Em A A' },
       parts: [
-        { type: 'mel', inst: 'lead', div: 2, vol: 1, mel:
-          'G4 - C5 - E5 - G5 - | G5 - F5 E5 D5 - B4 - | C5 - E5 - A5 - G5 - | F5 - E5 - C5 - - - |' +
-          'G4 - C5 - E5 - G5 - | G5 - B5 - D6 - B5 - | C6 - A5 - B5 - G5 - | C6 - - - - - . . |' +
-          'A5 . A5 G5 A5 - C6 - | B5 - G5 - D5 - - - | G5 . G5 E5 G5 - B5 - | A5 - E5 - C5 - - - |' +
-          'F5 . F5 G5 A5 - C6 - | D6 - C6 - B5 - G5 - | C6 - G5 - E5 - G5 - | B4 - D5 - G5 - F5 - |' },
-        { type: 'mel', inst: 'warm', div: 2, vol: 0.55, oct: -1, mel:
-          'E4 - - - - - - - | D4 - - - - - - - | E4 - - - - - - - | C4 - - - - - - - |' +
-          'E4 - - - - - - - | D4 - - - - - - - | C4 - - - D4 - - - | E4 - - - - - - - |' +
-          'C4 - - - - - - - | D4 - - - - - - - | B3 - - - - - - - | C4 - - - - - - - |' +
-          'A3 - - - - - - - | B3 - - - - - - - | C4 - - - - - - - | D4 - - - - - - - |' },
-        { type: 'arp', inst: 'pluck', div: 4, oct: 4, vol: 0.55, pat: '1 2 3 2 4 3 2 3' },
-        { type: 'bass', inst: 'bass', div: 2, oct: 2, vol: 0.9, pat: 'R . R 5 R . 5 .' },
-        { type: 'drums', div: 4, kit: {
-          kick: 'x.......x.x.....', snare: '....x.......x...', hat: 'x.o.x.o.x.o.x.o.', crash: 'x' + '.'.repeat(127) } },
+        { type: 'mel', inst: 'horn', div: 2, vol: 1, mel:
+          'A3 - D4 - F#4 - - E4 | D4 - - - A3 - - - | B3 - D4 - G4 - F#4 E4 | E4 - - - - - . . |' +
+          'A3 - D4 - F#4 - A4 - | B4 - - A4 F#4 - D4 - | E4 - G4 - F#4 - E4 - | E4 - - - - - . . |' +
+          'B4 - - A4 G4 - D4 - | E4 - F#4 - A4 - - - | F#4 - - E4 C#4 - A3 - | D4 - F#4 - B4 - - - |' +
+          'G4 - - F#4 E4 - D4 - | E4 - G4 - B4 - A4 G4 | F#4 - - - E4 - - - | E4 - - - C#4 - E4 - |' },
+        { type: 'mel', inst: 'flute', div: 2, vol: 0.5, mel:
+          '. . . . . . . . | F#5 - E5 - D5 - . . | . . . . . . . . | C#5 - D5 - E5 - . . |' +
+          '. . . . . . . . | F#5 - G5 - A5 - . . | . . . . . . . . | A5 - G5 - E5 - . . |' +
+          '. . . . . . . . | . . . . C#5 - E5 - | . . . . . . . . | F#5 - - - D5 - . . |' +
+          '. . . . . . . . | . . . . . . . . | A4 - B4 - C#5 - D5 - | E5 - - - - - . . |' },
+        { type: 'arp', inst: 'harp', div: 4, oct: 4, vol: 0.5, pat: '1 2 3 4 3 2 1 2' },
+        { type: 'arp', inst: 'pizz', div: 2, oct: 3, vol: 0.6, pat: '1 . 2 . 3 . 2 .' },
+        { type: 'pad', inst: 'strings', oct: 3, vol: 0.45 },
+        { type: 'bass', inst: 'bass', div: 2, oct: 2, vol: 0.8, pat: 'R . . . 5 . . .' },
+        { type: 'drums', div: 4, kit: { timp: 'x...............', timpH: '..........x.....', shaker: '..o...o...o...o.', crash: 'o' + '.'.repeat(255) } },
       ],
     },
+    // Mapa: marcha tranquila de viaje
     mapa: {
-      bpm: 100, swing: 0.16, reverb: 0.2, vol: 0.95,
-      prog: { len: 16, chords: 'F C Dm Bb F C Bb/C F' },
+      bpm: 92, swing: 0.1, reverb: 0.28, vol: 1,
+      prog: { len: 16, chords: 'F C Dm Bb F C Bb C' },
       parts: [
-        { type: 'mel', inst: 'flute', div: 2, vol: 1, mel:
+        { type: 'mel', inst: 'flute', div: 2, vol: 0.9, mel:
           'C5 - F5 - A5 - G5 F5 | E5 - C5 - G4 - - - | A4 - D5 - F5 - E5 D5 | D5 - - - Bb4 - - - |' +
-          'C5 - F5 - A5 - C6 - | Bb5 - A5 G5 - - E5 - | F5 - D5 - E5 - G5 - | F5 - - - - - . . |' },
-        { type: 'arp', inst: 'pizz', div: 2, oct: 4, vol: 0.9, pat: '1 2 3 2 1 2 3 4' },
-        { type: 'bass', inst: 'bass', div: 2, oct: 2, vol: 0.85, pat: 'R . . 5 . . R .' },
-        { type: 'pad', inst: 'warm', oct: 3, vol: 0.45 },
-        { type: 'drums', div: 4, kit: { kick: 'x.......o.......', shaker: 'o.o.o.o.o.o.o.o.', tamb: '....x.......x...' } },
+          'C5 - F5 - A5 - G5 - | F5 - E5 D5 - - C5 - | D5 - Bb4 - C5 - E5 - | F5 - - - - - . . |' },
+        { type: 'arp', inst: 'harp', div: 2, oct: 4, vol: 0.6, pat: '1 2 3 2 1 2 3 4' },
+        { type: 'mel', inst: 'horn', div: 1, vol: 0.5, oct: -1, mel: 'F4 - - - E4 - - - | D4 - - - D4 - - -' },
+        { type: 'bass', inst: 'pizz', div: 2, oct: 2, vol: 0.9, pat: 'R . . 5 . . R .' },
+        { type: 'pad', inst: 'warm', oct: 3, vol: 0.4 },
+        { type: 'drums', div: 4, kit: { timp: 'x...............', shaker: '..o...o...o...o.', tamb: '............o...' } },
       ],
     },
+    // Bosque: aventura alegre y pegadiza
     bosque: {
-      bpm: 128, swing: 0.08, reverb: 0.18, vol: 0.95,
+      bpm: 112, swing: 0.06, reverb: 0.24, vol: 1,
       prog: { len: 8, chords: 'G*2 Em*2 C*2 D*2 G*2 Em*2 C D G*2' },
       parts: [
-        { type: 'mel', inst: 'flute', div: 2, vol: 1, mel:
-          'D5 . G5 . B5 - A5 G5 | B4 . E5 . G5 - F#5 E5 | E5 . C5 . G5 - E5 - | F#5 - A5 - D6 - - - |' +
-          'B5 . A5 . G5 - D5 - | E5 . G5 . B5 - A5 G5 | E5 - G5 - F#5 - A5 - | G5 - - - . . D5 . |' },
-        { type: 'mel', inst: 'marimba', div: 2, vol: 0.7, oct: -1, mel:
-          '. . . . . . . . | . . . . . . . . | . . . . . . . . | A4 . F#4 . D4 . . . |' +
-          '. . . . . . . . | . . . . . . . . | C5 . . . D5 . . . | B4 . D5 . G5 . . . |' },
-        { type: 'arp', inst: 'marimba', div: 4, oct: 4, vol: 0.45, pat: '1 . 2 3 . 2 4 .' },
-        { type: 'bass', inst: 'bass', div: 2, oct: 2, vol: 0.9, pat: 'R . 5 . R . 5 3' },
-        { type: 'drums', div: 4, kit: { kick: 'x.......x.......', clap: '....x.......x...', shaker: 'o.oxo.oxo.oxo.ox', tamb: '..............x.' } },
+        { type: 'mel', inst: 'flute', div: 2, vol: 0.95, mel:
+          'D5 . G5 . B5 - A5 G5 | B4 . E5 . G5 - F#5 E5 | E5 . C5 . G5 - E5 - | F#5 - A5 - D5 - - - |' +
+          'B4 . A4 . G4 - D5 - | E5 . G5 . B5 - A5 G5 | E5 - G5 - F#5 - A5 - | G5 - - - . . D5 . |' },
+        { type: 'mel', inst: 'horn', div: 2, vol: 0.55, oct: -1, mel:
+          'G4 - - - - - - - | E4 - - - - - - - | C4 - - - E4 - - - | D4 - - - F#4 - - - |' +
+          'G4 - - - - - - - | E4 - - - - - - - | C4 - - - D4 - - - | G4 - - - - - - - |' },
+        { type: 'arp', inst: 'pizz', div: 4, oct: 3, vol: 0.55, pat: '1 . 2 3 . 2 4 .' },
+        { type: 'arp', inst: 'harp', div: 4, oct: 4, vol: 0.3, pat: '. 3 . . 4 . . 2' },
+        { type: 'bass', inst: 'bass', div: 2, oct: 2, vol: 0.8, pat: 'R . 5 . R . 5 3' },
+        { type: 'drums', div: 4, kit: { timp: 'x.......x.......', shaker: 'o.o.o.o.o.o.o.o.', tamb: '....o.......o...' } },
       ],
     },
     pantano: {
@@ -486,12 +508,12 @@
       bpm: 144, reverb: 0.14, vol: 0.9,
       prog: { len: 16, chords: 'Cm Cm Ab Bb Cm Cm Ab/Bb G' },
       parts: [
-        { type: 'mel', inst: 'lead2', div: 2, vol: 1, mel:
+        { type: 'mel', inst: 'horn', div: 2, vol: 1, oct: -1, mel:
           'C5 - Eb5 - G5 - C6 - | Bb5 - G5 - Eb5 - G5 - | Ab5 - - - G5 - F5 - | D5 - F5 - Bb5 - - - |' +
           'C6 - - Bb5 G5 - Eb5 - | F5 - Eb5 - D5 - C5 - | Eb5 - C5 - F5 - D5 - | B4 - D5 - G5 - - - |' },
-        { type: 'bass', inst: 'dist', div: 2, oct: 2, vol: 1, pat: 'R R R R R R 8 R' },
-        { type: 'chords', inst: 'stacc', div: 2, oct: 4, vol: 0.55, pat: '. x . x . x . x' },
-        { type: 'drums', div: 4, kit: { kick: 'x...x...x...x...', snare: '....X.......X..o', hat: 'xoxoxoxoxoxoxoxo', crash: 'x' + '.'.repeat(127), ltom: '.'.repeat(124) + 'xxxx' } },
+        { type: 'bass', inst: 'bassSaw', div: 2, oct: 2, vol: 0.8, pat: 'R . R . R . 8 .' },
+        { type: 'chords', inst: 'stacc', div: 2, oct: 3, vol: 0.45, pat: '. x . x . x . x' },
+        { type: 'drums', div: 4, kit: { timp: 'x.......x.......', taiko: '....x.......x...', crash: 'o' + '.'.repeat(127), ltom: '.'.repeat(124) + 'oooo' } },
       ],
     },
     oscuras: {
@@ -511,7 +533,7 @@
       bpm: 92, reverb: 0.45, vol: 0.95,
       prog: { len: 16, chords: 'A B F#m D A B E E' },
       parts: [
-        { type: 'mel', inst: 'bell', div: 2, vol: 1, mel:
+        { type: 'mel', inst: 'harp', div: 2, vol: 1, oct: -1, mel:
           'E5 - A5 - C#6 - B5 - | D#6 - - - F#5 - B5 - | A5 - C#6 - F#6 - E6 - | D6 - - - A5 - F#5 - |' +
           'E6 - C#6 - A5 - B5 - | D#6 - B5 - F#5 - D#5 - | E5 - G#5 - B5 - E6 - | D#6 - B5 - - - . . |' },
         { type: 'arp', inst: 'glass', div: 4, oct: 5, vol: 0.55, pat: '1 2 3 4 3 2 1 2' },
@@ -550,33 +572,35 @@
       bpm: 136, reverb: 0.3, vol: 1,
       prog: { len: 16, chords: 'Dm Bb Gm A Dm Bb C A7' },
       parts: [
-        { type: 'mel', inst: 'brass', div: 2, vol: 1, mel:
-          'D5 - A4 - D5 - F5 - | Bb5 - - - A5 - F5 - | G5 - Bb5 - D6 - - C6 | C#6 - - - A5 - E5 - |' +
-          'F5 - A5 - D6 - - - | F6 - E6 - D6 - Bb5 - | E6 - D6 - C6 - G5 - | A5 - - - C#6 - E6 - |' },
-        { type: 'pad', inst: 'choir', oct: 4, vol: 0.7 },
-        { type: 'arp', inst: 'stacc', div: 4, oct: 4, vol: 0.5, pat: '1 2 3 2' },
-        { type: 'bass', inst: 'bassSaw', div: 2, oct: 2, vol: 1, pat: 'R R R R R R 5 5' },
-        { type: 'drums', div: 4, kit: { taiko: 'x.....x...x.....', snare: '....x.......x.oo', kick: 'x.x...x.x.x...x.', crash: 'x' + '.'.repeat(63), hat: '..x...x...x...x.' } },
+        { type: 'mel', inst: 'horn', div: 2, vol: 1.05, mel:
+          'D4 - A3 - D4 - F4 - | Bb4 - - - A4 - F4 - | G4 - Bb4 - D5 - - C5 | C#5 - - - A4 - E4 - |' +
+          'F4 - A4 - D5 - - - | F5 - E5 - D5 - Bb4 - | E5 - D5 - C5 - G4 - | A4 - - - C#5 - E5 - |' },
+        { type: 'pad', inst: 'choir', oct: 3, vol: 0.55 },
+        { type: 'arp', inst: 'stacc', div: 4, oct: 3, vol: 0.55, pat: '1 2 3 2' },
+        { type: 'bass', inst: 'bass', div: 2, oct: 2, vol: 0.9, pat: 'R . R . R . 5 .' },
+        { type: 'drums', div: 4, kit: { taiko: 'x.....x...x.....', timpH: '....o.......o...', crash: 'o' + '.'.repeat(63) } },
       ],
     },
+    // Jefe: épica orquestal con ostinato de cuerdas y timbales (tensa pero no estridente)
     jefe: {
-      bpm: 152, reverb: 0.2, vol: 0.95,
+      bpm: 132, reverb: 0.26, vol: 1,
       prog: { len: 16, chords: 'Em Em C D Em Em C B7' },
       parts: [
-        { type: 'mel', inst: 'stacc', div: 2, vol: 1.3, mel:
-          'E5 . E5 . G5 . F#5 . | E5 . B4 . C5 . B4 . | E5 . E5 . G5 . A5 . | F#5 - - - D5 - - - |' +
-          'B5 . B5 . A5 . G5 . | F#5 . G5 . A5 . B5 . | C6 - - - B5 - A5 - | B5 - - - D#5 - F#5 - |' },
-        { type: 'bass', inst: 'bassSaw', div: 4, oct: 2, vol: 1, pat: 'R R 8 R R R 8 R R R 8 R 5 5 8 5' },
-        { type: 'pad', inst: 'strings', oct: 3, vol: 0.6 },
-        { type: 'drums', div: 4, kit: { kick: 'x...x...x...x.x.', snare: '....x.......x...', hat: 'x.x.x.x.x.x.x.x.', tom: '.'.repeat(120) + 'x.x.xxxx', crash: 'x' + '.'.repeat(127) } },
+        { type: 'mel', inst: 'horn', div: 2, vol: 1.1, mel:
+          'E4 - - - G4 - F#4 - | E4 - B3 - - - - - | E4 - - - G4 - A4 - | F#4 - - - D4 - - - |' +
+          'B4 - - - A4 - G4 - | F#4 - G4 - A4 - B4 - | C5 - - - B4 - A4 - | B4 - - - D#4 - F#4 - |' },
+        { type: 'arp', inst: 'stacc', div: 4, oct: 3, vol: 0.7, pat: '1 1 2 1 3 1 2 1' },
+        { type: 'bass', inst: 'bass', div: 4, oct: 2, vol: 0.9, pat: 'R . R . R . 5 . R . R . 8 . 5 .' },
+        { type: 'pad', inst: 'choir', oct: 3, vol: 0.4 },
+        { type: 'drums', div: 4, kit: { timp: 'x..x....x..x....', timpH: '......x.......x.', snare: '....o.......o...', crash: 'o' + '.'.repeat(127) } },
       ],
     },
     victoria: {
       bpm: 156, reverb: 0.3, vol: 1, once: 3,
       prog: { len: 8, chords: 'C*2 F G C*2' },
       parts: [
-        { type: 'mel', inst: 'brass', div: 2, vol: 1.1, mel: 'G4 - C5 - E5 - G5 - | A5 - F5 - B5 - G5 - | C6 - - - - - - - - - - -' },
-        { type: 'mel', inst: 'lead', div: 2, vol: 0.6, mel: 'G5 - C6 - E6 - G6 - | A6 - F6 - B6 - G6 - | C7 - - - - - - - - - - -' },
+        { type: 'mel', inst: 'horn', div: 2, vol: 1.1, mel: 'G3 - C4 - E4 - G4 - | A4 - F4 - B4 - G4 - | C5 - - - - - - - - - - -' },
+        { type: 'mel', inst: 'flute', div: 2, vol: 0.55, mel: 'G4 - C5 - E5 - G5 - | A5 - F5 - B5 - G5 - | C6 - - - - - - - - - - -' },
         { type: 'pad', inst: 'strings', oct: 3, vol: 0.8 },
         { type: 'bass', inst: 'bass', div: 1, oct: 2, vol: 0.9, pat: 'R R R R' },
         { type: 'drums', div: 4, kit: { snare: 'o.o.o.o.x.x.xxxx', crash: '.'.repeat(32) + 'x', taiko: '.'.repeat(32) + 'x' } },

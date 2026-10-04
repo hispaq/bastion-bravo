@@ -469,6 +469,43 @@
         grid.appendChild(card);
       }
     }
+    // Tropas: se reclutan por unidades y aparecen en las almenas y el adarve del castillo
+    function renderTroops(grid) {
+      const T = BB.troopsApi;
+      if (!T || !BB.data.troops) return;
+      const save = S();
+      const total = T.total(save), cap = T.slotsMax();
+      grid.appendChild(el('div', { class: 'card-desc', style: { gridColumn: '1 / -1', fontSize: '1.05em', textAlign: 'center' },
+        text: 'Soldados en el castillo: ' + total + ' / ' + cap + ' · Se ven en las almenas y disparan solos durante la batalla.' }));
+      for (const id of BB.data.troopOrder) {
+        const def = BB.data.troops[id];
+        const st = T.state(id, save);
+        const unlocked = T.unlocked(id, save);
+        const card = el('div', { class: 'card' + (unlocked ? '' : ' is-locked') });
+        const art = el('div', { class: 'card-art' }, [BB.ui.sprite(def.rig)]);
+        art.appendChild(el('span', { class: 'card-lvl', text: '×' + (st.count || 0) }));
+        if (st.count) art.appendChild(el('span', { class: 'card-tag', text: 'Nv. ' + st.level, style: { background: '#2f6fd0' } }));
+        card.appendChild(art);
+        card.appendChild(el('div', { class: 'card-name', text: def.name }));
+        card.appendChild(el('div', { class: 'card-desc', text: def.desc }));
+        const a = T.stats(id, save);
+        const stats = el('div', { class: 'stats' });
+        stats.appendChild(statRow('Daño', num(a.damage), null));
+        stats.appendChild(statRow('Cadencia', num(a.interval) + ' s', null));
+        card.appendChild(stats);
+        if (!unlocked) {
+          art.appendChild(icon('lock', 'lock-ico'));
+          card.appendChild(BB.ui.button('Nivel ' + def.unlockLevel, null, { kind: 'gray', disabled: true, icon: 'lock' }));
+        } else {
+          const full = st.count >= def.max || total >= cap;
+          const btns = [full ? BB.ui.button('Lleno', null, { kind: 'gray', disabled: true })
+            : BB.ui.button('Reclutar', () => { if (afterAction(T.recruit(id), '¡Nuevo ' + def.name.toLowerCase() + ' en las almenas!')) { sfx('unlock'); render(); } }, { cost: T.recruitCost(id, save), kind: 'purple' })];
+          if (st.count) btns.push(BB.ui.button('Mejorar', () => { if (afterAction(T.levelUp(id), def.name + ' nivel ' + (st.level + 1))) render(); }, { cost: T.levelCost(id, save), icon: 'up' }));
+          card.appendChild(el('div', { class: 'card-btns' }, btns));
+        }
+        grid.appendChild(card);
+      }
+    }
     function render() {
       if (!panel) return;
       const scroll = panel.querySelector('.shop-grid');
@@ -484,6 +521,7 @@
           el('div', { class: 'sc-name', style: { fontSize: '0.9em' }, text: 'Etapa ' + tier + ' de 5' })]));
         renderCastle(grid);
       } else if (tab === 'heroes') renderHeroes(grid);
+      else if (tab === 'troops') renderTroops(grid);
       else renderTowers(grid);
       if (!grid.children.length) grid.appendChild(el('div', { class: 't-muted', text: 'Aún no hay nada aquí.' }));
       panel.appendChild(grid);
@@ -501,7 +539,7 @@
           b.addEventListener('click', () => { if (tab !== id) { tab = id; sfx('click'); render(); } });
           return b;
         };
-        tabsEl = el('div', { class: 'bb-tabs' }, [mkTab('castle', 'Castillo', 'castle'), mkTab('heroes', 'Héroes', 'users'), mkTab('towers', 'Torres', 'tower')]);
+        tabsEl = el('div', { class: 'bb-tabs' }, [mkTab('castle', 'Castillo', 'castle'), mkTab('heroes', 'Héroes', 'users'), mkTab('troops', 'Tropas', 'sword'), mkTab('towers', 'Torres', 'tower')]);
         panel = el('div', { class: 'bb-panel shop-panel' });
         root.appendChild(el('div', { class: 'shop-wrap' }, [tabsEl, panel]));
         render();

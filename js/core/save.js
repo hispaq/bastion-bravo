@@ -19,6 +19,7 @@
       lineup: ['arquera', 'mago_fuego', 'maga_hielo', null, null, null, null, null, null, null],
       castle: { torreon: 0, muralla: 0, huecos: 0, ballesta: 0, tesoro: 0, reparacion: 0 },
       towers: {},
+      troops: { arquero: { count: 2, level: 1 } },
       traps: [null, null, null, null],
       settings: { music: true, sfx: true, autoSkills: false, speed: 1, vibration: true, quality: 'alta' },
       daily: { last: '', streak: 0 },

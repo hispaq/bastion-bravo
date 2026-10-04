@@ -136,14 +136,17 @@
   }
   function spriteNode(id) {
     let img = null;
-    try { img = BB.assets && BB.assets.get ? BB.assets.get('boss_' + id) : null; } catch (err) { img = null; }
+    try {
+      img = BB.rig && BB.rig.has('boss_' + id) ? BB.rig.image('boss_' + id, 600)
+        : (BB.assets && BB.assets.get ? BB.assets.get('boss_' + id) : null);
+    } catch (err) { img = null; }
     if (!img) return null;
     if (img.src) { const n = new Image(); n.src = img.src; n.alt = ''; n.draggable = false; return n; }
     try {   // lienzo o ImageBitmap
       const c = document.createElement('canvas');
       c.width = img.width || img.naturalWidth; c.height = img.height || img.naturalHeight;
       c.getContext('2d').drawImage(img, 0, 0);
-      c.style.maxHeight = '100%'; c.style.maxWidth = '100%';
+      c.style.maxHeight = '100%'; c.style.maxWidth = '100%'; c.style.height = '100%'; c.style.width = 'auto'; c.style.objectFit = 'contain';
       return c;
     } catch (err) { return null; }
   }

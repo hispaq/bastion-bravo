@@ -17,10 +17,11 @@
     replayGoldMul: 0.75,
 
     // Enemigos (multiplicadores sobre las estadísticas base de nivel 1)
-    enemyHp(L) { const x = Math.max(0, L - 1); return 1.4 * (1 + 0.15 * x + 0.0045 * x * x); },
-    enemyDmg(L) { const x = Math.max(0, L - 1); return 1 + 0.07 * x + 0.0012 * x * x; },
-    enemyGold(L) { const x = Math.max(0, L - 1); return 1.3 * (1 + 0.12 * x + 0.002 * x * x); },
-    bossHp(L) { return bal.enemyHp(L) * 0.85; },
+    // Más exigente al principio (+40 % en el nivel 1, que se diluye hacia el nivel 40)
+    enemyHp(L) { const x = Math.max(0, L - 1); return 1.55 * (1 + 0.15 * x + 0.0045 * x * x) * (1 + 0.4 * Math.max(0, 1 - x / 40)); },
+    enemyDmg(L) { const x = Math.max(0, L - 1); return 1.2 * (1 + 0.07 * x + 0.0012 * x * x) * (1 + 0.3 * Math.max(0, 1 - x / 40)); },
+    enemyGold(L) { const x = Math.max(0, L - 1); return 1.45 * (1 + 0.12 * x + 0.002 * x * x); },
+    bossHp(L) { return bal.enemyHp(L) * 0.8; },
 
     // Recompensa fija por superar el nivel L (sin contar el oro de los enemigos)
     levelGold(L) { return Math.round(80 + 32 * L + 1.5 * L * L); },

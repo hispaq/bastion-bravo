@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><title>rig</title>
+<style>html,body{margin:0;background:#9fd06a}canvas{display:block}</style></head><body>
+<canvas id="c" width="1600" height="900"></canvas>
+<script src="../js/core/util.js"></script>
+<script src="../js/core/rig.js"></script>
+<script src="../js/core/rig_enemies.js"></script>
+<script src="../js/core/rig_heroes.js"></script>
+<script src="../js/core/rig_bosses.js"></script>
+<script src="../js/core/rig_structures.js"></script>
+<script>
+// Galería: cada fila un personaje; columnas = fases de andar, ataque (preparación, golpe), daño y muerte
+const q = new URLSearchParams(location.search);
+const keys = (q.get('k') || BB.rig.keys().join(',')).split(',');
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const rowH = Math.min(220, 880 / keys.length);
+cv.height = rowH * keys.length + 20;
+ctx.fillStyle = '#9fd06a'; ctx.fillRect(0, 0, cv.width, cv.height);
+const cols = [
+  ['andar 0', { moving: true, phase: 0 }], ['andar 1', { moving: true, phase: Math.PI * 0.5 }], ['andar 2', { moving: true, phase: Math.PI }],
+  ['andar 3', { moving: true, phase: Math.PI * 1.5 }], ['reposo', {}], ['prepara', { windup: 0.6 }], ['carga', { windup: 1 }],
+  ['golpe', { strike: 1 }], ['daño', { flash: 1 }], ['helado', { frozen: true }],
+];
+keys.forEach((k, r) => {
+  const y = 10 + rowH * (r + 1) - 18;
+  ctx.fillStyle = 'rgba(0,0,0,0.12)'; ctx.fillRect(0, y, cv.width, 4);
+  cols.forEach(([name, pose], i) => {
+    const x = 90 + i * 150;
+    ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.beginPath(); ctx.ellipse(x, y, 34, 7, 0, 0, Math.PI * 2); ctx.fill();
+    BB.rig.draw(ctx, k, x, y, rowH * 0.78, 1, Object.assign({ t: 0.4 }, pose));
+    if (r === 0) { ctx.fillStyle = '#1e1527'; ctx.font = '15px sans-serif'; ctx.fillText(name, x - 28, 16); }
+  });
+  ctx.fillStyle = '#1e1527'; ctx.font = 'bold 14px sans-serif'; ctx.fillText(k, 6, y + 16);
+});
+document.title = 'done';
+</script></body></html>
