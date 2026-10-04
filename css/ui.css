@@ -756,6 +756,26 @@
 #ui .menu-grid .bb-btn { justify-content: flex-start; font-size: 1.15em; padding-left: 0.6em; }
 #ui .menu-grid .bb-btn .ico { width: 1.6em; height: 1.6em; }
 #ui .scr-menu .bg-shade { background: linear-gradient(90deg, rgba(0, 0, 0, 0) 35%, rgba(20, 8, 0, 0.35) 100%); }
+#ui .menu-progress { display: inline-flex; align-items: center; gap: 0.35em; margin-top: 0.3em; padding: 0.2em 0.8em 0.25em 0.5em; border-radius: 1em; background: #fff6df; border: 0.14em solid #3b2a1e; color: #3b2a1e; font-family: var(--font-title); font-size: 1.05em; box-shadow: 0 0.15em 0 #3b2a1e; transform: rotate(-2deg); }
+#ui .menu-progress .ico { width: 1.2em; height: 1.2em; }
+
+/* menú con escena viva (batalla de demostración en el lienzo de detrás) */
+#ui .scr-menu.is-live { background: transparent; }
+#ui .scr-menu.is-live .menu-vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 50% 70% at 20% 48%, rgba(255, 248, 225, 0.32) 0%, rgba(255, 248, 225, 0.12) 55%, rgba(255, 248, 225, 0) 80%); }
+#ui .scr-menu.is-live .menu-main { flex-direction: column; align-items: flex-start; justify-content: center; gap: 0.8em; width: 56%; max-width: 34em; padding: 0 0 0 calc(var(--safe-l, 0px) + 1.4em); }
+#ui .scr-menu.is-live .menu-hero { flex: 0 0 auto; height: auto; align-items: center; width: 100%; }
+#ui .scr-menu.is-live .menu-hero .logo { font-size: 0.56em; animation: menu-logo-bob 3.2s ease-in-out infinite; transform-origin: 50% 80%; }
+#ui .scr-menu.is-live .menu-btns { flex: 0 0 auto; width: 100%; }
+#ui .scr-menu.is-live .btn-play { animation: menu-play-glow 1.6s ease-in-out infinite; }
+#ui .scr-menu .menu-btns > *, #ui .scr-menu .menu-grid > * { animation: menu-pop 0.45s cubic-bezier(.2, 1.6, .4, 1) both; }
+#ui .scr-menu .menu-grid > :nth-child(1) { animation-delay: 0.08s; }
+#ui .scr-menu .menu-grid > :nth-child(2) { animation-delay: 0.14s; }
+#ui .scr-menu .menu-grid > :nth-child(3) { animation-delay: 0.2s; }
+#ui .scr-menu .menu-grid > :nth-child(4) { animation-delay: 0.26s; }
+@keyframes menu-logo-bob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-0.25em) rotate(1.5deg); } }
+@keyframes menu-play-glow { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255, 220, 90, 0)); } 50% { transform: scale(1.04); filter: drop-shadow(0 0 0.5em rgba(255, 220, 90, 0.9)); } }
+@keyframes menu-pop { from { transform: scale(0.6) translateY(0.6em); opacity: 0; } to { transform: none; opacity: 1; } }
+#ui .scr-menu.is-live .menu-grid > * { animation-fill-mode: backwards; }
 
 /* ------------------------------------------------------------------ tienda */
 #ui .shop-wrap { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
@@ -978,6 +998,9 @@
 #ui .slot .sl-x { position: absolute; top: -0.65em; right: -0.65em; width: 1.6em; height: 1.6em; border-radius: 50%; background: #d5342a; border: 0.12em solid #fff; display: flex; align-items: center; justify-content: center; }
 #ui .slot .sl-x .ico { width: 70%; height: 70%; }
 #ui .af-label { position: absolute; font-family: var(--font-title); font-size: 0.9em; color: #fff; text-shadow: 0 0.08em 0 rgba(0, 0, 0, 0.6); transform: translateX(-50%); white-space: nowrap; pointer-events: none; }
+#ui .af-castle { position: absolute; transform: translate(-50%, -100%); width: auto; pointer-events: none; }
+#ui .army-field.is-plaza .slot:not(.trap-slot) { font-size: 0.68em; }
+#ui .army-field.is-plaza .af-label { color: #fff8e2; text-shadow: 0 0.08em 0 #3b2a1e, 0 0 0.3em rgba(59, 42, 30, 0.6); }
 #ui .army-tools { display: flex; gap: 0.4em; }
 
 /* ------------------------------------------------------------------ resultado */
@@ -1392,6 +1415,56 @@
   #ui .ui-topbar .tb-title { max-width: 30vw; }
   #ui .menu-main { gap: 1em; }
 }
+
+/* ================================================================== ESTILO GARABATO
+   Igual que los dibujos de la IA local: trazo marrón oscuro grueso, colores planos y suaves,
+   bordes algo irregulares (a mano alzada) y sombras duras. Sobrescribe el estilo brillante anterior. */
+#ui { --doodle: #3b2a1e; --paper: #fff6df; --paper-2: #fbecc8; --outline: #3b2a1e; }
+#ui .bb-btn {
+  border: 0.17em solid var(--doodle);
+  border-radius: 0.85em 0.6em 0.9em 0.55em / 0.6em 0.9em 0.6em 0.85em;
+  background: linear-gradient(180deg, var(--c1) 0 64%, var(--c2) 64% 100%);
+  box-shadow: inset 0 0.12em 0 rgba(255, 255, 255, 0.35), 0 0.22em 0 var(--doodle);
+  text-shadow: 0.05em 0.07em 0 var(--doodle), -0.03em 0.07em 0 var(--doodle);
+}
+#ui .bb-btn::after { left: 0.55em; right: auto; width: 0.9em; top: 0.22em; height: 0.28em; border-radius: 1em; background: rgba(255, 255, 255, 0.55); }
+#ui .bb-btn:active, #ui .bb-btn.is-pressed { transform: translateY(0.18em); box-shadow: inset 0 0.12em 0 rgba(255, 255, 255, 0.3), 0 0.04em 0 var(--doodle); }
+#ui .bb-btn.btn-gold { text-shadow: none; color: var(--doodle); }
+#ui .bb-btn.btn-round { border-radius: 50% 46% 52% 48% / 48% 52% 46% 50%; }
+#ui .bb-btn .ico { filter: none; }
+#ui .bb-panel {
+  background: var(--paper);
+  border: 0.2em solid var(--doodle);
+  border-radius: 1.1em 0.8em 1.2em 0.9em / 0.9em 1.2em 0.8em 1.1em;
+  box-shadow: inset 0 -0.35em 0 rgba(160, 110, 50, 0.12), 0.18em 0.28em 0 var(--doodle);
+}
+#ui .bb-panel.panel-wood { background: #c98d52; box-shadow: inset 0 -0.35em 0 rgba(0, 0, 0, 0.12), 0.18em 0.28em 0 var(--doodle); }
+#ui .bb-panel.panel-dark { background: rgba(59, 42, 30, 0.9); border-color: var(--doodle); box-shadow: 0.18em 0.28em 0 rgba(0, 0, 0, 0.5); }
+#ui .card { border-color: var(--doodle) !important; }
+/* fondo de las pantallas de gestión: paisaje garabato (cielo, colinas con trazo, camino) */
+#ui .bg-wood, #ui .bg-sky {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 720' preserveAspectRatio='none'%3E%3Cg stroke='%233b2a1e' stroke-width='6' stroke-linejoin='round'%3E%3Cpath d='M0 430 C140 380 260 400 380 360 C520 315 640 380 760 350 C900 315 1040 370 1180 340 C1330 310 1460 360 1600 330 V720 H0Z' fill='%23b5dd84'/%3E%3Cpath d='M0 520 C220 470 420 520 640 490 C860 460 1080 515 1300 480 C1430 460 1520 480 1600 470 V720 H0Z' fill='%2398cf62'/%3E%3Cpath d='M-20 640 C300 600 520 650 820 620 C1100 592 1350 640 1620 610 V740 H-20Z' fill='%23e8cc93'/%3E%3C/g%3E%3Cg fill='%2381c04f' stroke='%233b2a1e' stroke-width='5'%3E%3Ccircle cx='120' cy='400' r='38'/%3E%3Ccircle cx='170' cy='392' r='30'/%3E%3Ccircle cx='1380' cy='350' r='36'/%3E%3Ccircle cx='1428' cy='360' r='28'/%3E%3Ccircle cx='760' cy='360' r='26'/%3E%3C/g%3E%3C/svg%3E") center bottom / 100% 100% no-repeat,
+    linear-gradient(180deg, #a9dcf2 0%, #d6f0f7 55%);
+}
+#ui .bg-wood::before, #ui .bg-sky::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 7% 4% at 0% 50%, #fff 60%, rgba(255,255,255,0) 62%) 0 0 / 22em 8em repeat-x,
+    radial-gradient(ellipse 5% 3.4% at 0% 50%, #fff 60%, rgba(255,255,255,0) 62%) 6em 3em / 30em 12em repeat-x;
+  opacity: 0.75;
+  animation: doodle-clouds 90s linear infinite;
+}
+@keyframes doodle-clouds { from { background-position: 0 0, 6em 3em; } to { background-position: 220em 0, 306em 3em; } }
+#ui .bg-wood, #ui .bg-sky { isolation: isolate; }
+#ui .bg-wood::before, #ui .bg-sky::before { z-index: -1; }
+#ui .ribbon { filter: none; }
+#ui .logo .lg-back { color: var(--doodle); -webkit-text-stroke: 0.2em var(--doodle); text-shadow: 0.04em 0.12em 0 var(--doodle); }
+#ui .logo .lg-front, #ui .logo .lg-front .lg-l2 { background: none; -webkit-background-clip: border-box; background-clip: border-box; -webkit-text-stroke: 0; }
+#ui .logo .lg-front .lg-l1 { color: #ffd84a; }
+#ui .logo .lg-front .lg-l2 { color: #ff7a52; }
+#ui .badge-dot { border: 0.14em solid var(--doodle); animation: doodle-badge 1.2s ease-in-out infinite; }
+@keyframes doodle-badge { 0%, 100% { transform: scale(1) rotate(-6deg); } 50% { transform: scale(1.15) rotate(6deg); } }
 
 /* Sin animaciones (accesibilidad y capturas de prueba) */
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,5 @@
 /* Generado por build/make_precache.py */
-self.PRECACHE_VERSION = "d369be2dd8";
+self.PRECACHE_VERSION = "8c49ebefd7";
 self.PRECACHE_LIST = [
 "./",
 "css/base.css",
@@ -10,6 +10,7 @@ self.PRECACHE_LIST = [
 "js/audio.js",
 "js/core/assets.js",
 "js/core/battle.js",
+"js/core/doodle.js",
 "js/core/fx.js",
 "js/core/render.js",
 "js/core/rig.js",
@@ -60,6 +61,16 @@ self.PRECACHE_LIST = [
 "sprites/castle/castle_3.webp",
 "sprites/castle/castle_4.webp",
 "sprites/castle/castle_5.webp",
+"sprites/deco/arbol.webp",
+"sprites/deco/arbusto.webp",
+"sprites/deco/atalaya.webp",
+"sprites/deco/barriles.webp",
+"sprites/deco/carro.webp",
+"sprites/deco/empalizada.webp",
+"sprites/deco/estandarte.webp",
+"sprites/deco/hoguera.webp",
+"sprites/deco/roca.webp",
+"sprites/deco/tienda.webp",
 "sprites/enemies/chaman.webp",
 "sprites/enemies/goblin_arquero.webp",
 "sprites/enemies/goblin_bombardero.webp",
@@ -131,5 +142,9 @@ self.PRECACHE_LIST = [
 "sprites/towers/flechas.webp",
 "sprites/towers/pinchos.webp",
 "sprites/towers/rayos.webp",
+"sprites/troops/aprendiz.webp",
+"sprites/troops/arquero.webp",
+"sprites/troops/ballestero.webp",
+"sprites/troops/lanzapiedras.webp",
 "sprites/ui/title_art.webp"
 ];

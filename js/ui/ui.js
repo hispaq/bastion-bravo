@@ -175,11 +175,11 @@
     } catch (err) { return null; }
   }
 
-  // Icono: primero icon_<nombre> del manifiesto; si no existe o falla, SVG propio.
+  // Icono: el SVG propio (trazo grueso, se lee bien en pequeño); si no hay, icon_<nombre> de la IA.
   function icon(name, cls) {
     const wrap = el('span', { class: 'ico' + (cls ? ' ' + cls : ''), 'data-ico': name });
     const key = ICON_ALIAS[name] && !ICONS[name] ? ICON_ALIAS[name] : name;
-    const url = assetUrl('icon_' + name) || (key !== name ? assetUrl('icon_' + key) : null);
+    const url = (ICONS[name] || ICONS[key]) ? null : (assetUrl('icon_' + name) || (key !== name ? assetUrl('icon_' + key) : null));
     if (url) {
       const img = el('img', { src: url, alt: '', draggable: 'false' });
       img.style.width = '100%'; img.style.height = '100%'; img.style.objectFit = 'contain';

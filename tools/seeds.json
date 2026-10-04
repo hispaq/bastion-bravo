@@ -9,7 +9,7 @@
  },
  "bg_desierto": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 365023
+  "seed": 644462241
  },
  "bg_dragon": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -21,7 +21,7 @@
  },
  "bg_hielo": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 383562
+  "seed": 1598807301
  },
  "bg_montanas": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -41,7 +41,7 @@
  },
  "bg_volcan": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 88331
+  "seed": 512804029
  },
  "boss_chaman_gigante": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -53,7 +53,7 @@
  },
  "boss_escorpion": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 278381180
+  "seed": 278389099
  },
  "boss_gigante_escarcha": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -85,7 +85,7 @@
  },
  "castle_1": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 487124348
+  "seed": 487116428
  },
  "castle_2": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -102,6 +102,46 @@
  "castle_5": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
   "seed": 817911173
+ },
+ "deco_arbol": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 305374
+ },
+ "deco_arbusto": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 804644
+ },
+ "deco_atalaya": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 755816
+ },
+ "deco_barriles": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 993578
+ },
+ "deco_carro": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 114009
+ },
+ "deco_empalizada": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 239942747
+ },
+ "deco_estandarte": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 576621
+ },
+ "deco_hoguera": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 912065
+ },
+ "deco_roca": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 405268
+ },
+ "deco_tienda": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 531711432
  },
  "enemy_chaman": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -129,7 +169,7 @@
  },
  "enemy_jinete_lobo": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 248950
+  "seed": 1190160603
  },
  "enemy_orco_ariete": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -153,11 +193,11 @@
  },
  "hero_alquimista": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 463677
+  "seed": 427401805
  },
  "hero_arcano": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 550197
+  "seed": 26036569
  },
  "hero_arquera": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -201,7 +241,7 @@
  },
  "hero_ingeniero": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 720994
+  "seed": 1174380924
  },
  "hero_maga_hielo": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -229,7 +269,7 @@
  },
  "hero_sacerdotisa_sol": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 118225412
+  "seed": 118233332
  },
  "icon_castle": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -357,11 +397,11 @@
  },
  "tower_barricada": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 446574088
+  "seed": 529057
  },
  "tower_brea": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
-  "seed": 191136
+  "seed": 851150152
  },
  "tower_catapulta": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
@@ -378,5 +418,21 @@
  "tower_rayos": {
   "model": "stabilityai/stable-diffusion-xl-base-1.0",
   "seed": 220923
+ },
+ "troop_aprendiz": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1824287477
+ },
+ "troop_arquero": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 1330290187
+ },
+ "troop_ballestero": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 612560
+ },
+ "troop_lanzapiedras": {
+  "model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "seed": 257703
  }
 }

@@ -5,12 +5,11 @@
   const BB = window.BB = window.BB || {};
   BB.data = BB.data || {};
 
-  // Huecos para tropas en el mundo de combate (adarve de la muralla, galería y almenas del torreón)
+  // Huecos para tropas: en el suelo, detrás de la torre (filas del fondo de la plaza)
   BB.TROOP_SLOTS = [
-    { x: 1250, y: 393 }, { x: 1276, y: 393 },
-    { x: 1478, y: 318 }, { x: 1520, y: 318 }, { x: 1562, y: 318 },
-    { x: 1466, y: 132 }, { x: 1500, y: 132 }, { x: 1534, y: 132 }, { x: 1568, y: 132 },
-    { x: 1450, y: 318 }, { x: 1592, y: 318 }, { x: 1590, y: 132 },
+    { x: 1330, y: 548 }, { x: 1374, y: 548 }, { x: 1418, y: 548 }, { x: 1462, y: 548 },
+    { x: 1352, y: 572 }, { x: 1396, y: 572 }, { x: 1440, y: 572 }, { x: 1484, y: 572 },
+    { x: 1506, y: 548 }, { x: 1528, y: 572 }, { x: 1550, y: 548 }, { x: 1572, y: 572 },
   ];
 
   BB.data.troops = {

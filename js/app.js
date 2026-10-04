@@ -31,7 +31,44 @@
     if (dt > 0.1) dt = 0.1;
     tick(dt);
   }
+  // ------------------------------------------------------------------ escena viva del menú
+  // Una batalla de demostración (sin sonido, castillo invulnerable, sin guardar nada) detrás del menú
+  let demo = null;
+  function startDemo() {
+    if (demo || battle || !BB.Battle) return;
+    try {
+      const save = JSON.parse(JSON.stringify(BB.save.data));
+      save.settings.autoSkills = true;
+      const top = Math.max(1, Math.min(100, save.maxLevel || 1));
+      // un nivel normal de la zona actual (no jefe) con bastantes enemigos
+      let n = Math.max(1, top - 1); if (n % 10 === 0) n--;
+      n = Math.max(1, n);
+      demo = new BB.Battle({ level: n, save, autoSkills: true, seed: (Math.random() * 1e9) | 0 });
+      demo.sound = () => {};
+      demo.isDemo = true;
+      if (demo.fx) { demo.fx.banner = () => {}; demo.fx.text = () => {}; demo.fx.flash = () => {}; }
+      BB.render.invalidate();
+      setCanvasVisible(true);
+    } catch (err) { console.error('[demo]', err); demo = null; }
+  }
+  function stopDemo() {
+    if (!demo) return;
+    demo = null;
+    if (!battle) setCanvasVisible(false);
+  }
+  function tickDemo(dt) {
+    if (!demo) return;
+    try {
+      demo.update(dt);
+      const c = demo.castle;
+      if (c) { c.hp = c.maxHp; if (c.wallMax) c.wallHp = Math.max(c.wallHp, c.wallMax * 0.5); }
+      if (demo.over || demo.t > 150) { demo = null; startDemo(); return; }
+      BB.render.draw(demo, dt);
+    } catch (err) { console.error('[demo]', err); demo = null; }
+  }
+
   function tick(dt) {
+    if (!battle) tickDemo(dt);
     if (battle) {
       battle.update(dt);
       BB.render.draw(battle, battle.paused ? 0 : dt);
@@ -67,6 +104,7 @@
   }
 
   function beginBattle(n, def, replay) {
+    stopDemo();
     endBattle(true);
     battle = new BB.Battle({ level: n, levelDef: def, save: BB.save.data });
     battleLevel = n; battleReplay = replay; ended = false;
@@ -150,12 +188,14 @@
   }
 
   function goMap(params) {
+    stopDemo();
     endBattle();
     if (!show('map', params || {})) show('menu');
     music('mapa');
   }
   function goMenu() {
     endBattle();
+    startDemo();
     show('menu');
     music('menu');
     if (!menuSeenThisSession) {
@@ -235,7 +275,8 @@
   }
 
   BB.app = {
-    boot, startLevel, goMap, goMenu, pause, tick,
+    boot, startLevel, goMap, goMenu, pause, tick, startDemo, stopDemo,
+    get demo() { return demo; },
     get battle() { return battle; },
     endBattle,
   };

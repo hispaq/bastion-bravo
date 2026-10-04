@@ -396,9 +396,11 @@
     }
     // nivel
     ctx.save();
-    ctx.font = '15px "Lilita One", "Arial Black", sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillStyle = 'rgba(30,21,39,0.85)'; ctx.beginPath(); ctx.arc(x + 24, y - 8, 11, 0, TAU); ctx.fill();
-    ctx.fillStyle = '#ffe58a'; ctx.fillText(String(h.level), x + 24, y - 7);
+    if (B.isDemo) { ctx.restore(); return; }
+    ctx.font = '12px "Lilita One", "Arial Black", sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#fff6df'; ctx.strokeStyle = '#3b2a1e'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(x + 20, y - 4, 9, 0, TAU); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#3b2a1e'; ctx.fillText(String(h.level), x + 20, y - 3);
     ctx.restore();
   }
   function drawTower(B, tw) {
@@ -775,9 +777,13 @@
     for (const tw of B.towers) if (tw.kind === 'trap') drawTower(B, tw);
     drawCastle(B);
     drawWall(B);
-    drawBalconies(B);
-    for (const h of B.heroes) drawHero(B, h);
-    if (B.troops) for (const u of B.troops) drawTroop(B, u);
+    if (!W.PLAZA) drawBalconies(B);
+    // héroes y tropas en la plaza: los de delante tapan a los de detrás
+    const crew = [];
+    for (const h of B.heroes) crew.push([h.y, 0, h]);
+    if (B.troops) for (const u of B.troops) crew.push([u.y, 1, u]);
+    crew.sort((a, b) => a[0] - b[0]);
+    for (const [, k, u] of crew) { if (k) drawTroop(B, u); else drawHero(B, u); }
     for (const tw of B.towers) if (tw.kind !== 'trap') drawTower(B, tw);
     const ground = [], air = [];
     for (const e of B.corpses) (e.air ? air : ground).push(e);

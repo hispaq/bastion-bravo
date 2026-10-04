@@ -369,7 +369,7 @@
     weakness: 'Débil contra: veneno (cura la mitad), arcano y daño rápido para romper sus tótems. ¡Golpéalo fuerte mientras se cura para interrumpirlo!',
     weakTo: ['poison', 'arcane', 'focus'], tags: ['Jefe', 'Se cura', 'Tótems'],
     size: 260, anim: 'walk', radius: 62,
-    hp: 2100, speed: 26, damage: 14, atkInterval: 2.0, range: 380, stopX: 860, armor: 0.1,
+    hp: 2100, speed: 26, damage: 14, atkInterval: 2.0, range: 380, stopX: 660, armor: 0.1,
     projectile: { kind: 'magic', speed: 400, arc: 60, color: '#7dff8a' },
     resist: { poison: 0.3, arcane: -0.2 }, gold: 100, xp: 70,
     phases: [
@@ -782,7 +782,7 @@
     weakness: 'Débil contra: luz sagrada (Sacerdotisa del Sol) y, en forma espectral, los héroes que disparan al aire.',
     weakTo: ['holy', 'antiair'], tags: ['Jefe', 'Revive enemigos', 'Vuela'],
     size: 240, anim: 'walk', radius: 55,
-    hp: 4200, speed: 30, damage: 18, atkInterval: 1.9, range: 420, stopX: 820, armor: 0.1,
+    hp: 4200, speed: 30, damage: 18, atkInterval: 1.9, range: 420, stopX: 620, armor: 0.1,
     projectile: { kind: 'magic', speed: 460, arc: 50, color: '#b57bff' },
     resist: { holy: -0.6, poison: 0.5, arcane: 0.2 }, gold: 220, xp: 130,
     onSpawn(B, b) {
@@ -829,9 +829,9 @@
       } },
       { id: 'teletransporte', name: 'Teletransporte', every: [10, 13], phases: [0, 1], cast(B, b) {
         const old = { x: b.x, y: midY(b) };
-        let nx = rand(B, 300, 820);
-        if (Math.abs(nx - b.x) < 160) nx = b.x > 560 ? nx - 260 : nx + 260;
-        b.x = Math.max(120, Math.min(820, nx));
+        let nx = rand(B, 240, 640);
+        if (Math.abs(nx - b.x) < 160) nx = b.x > 440 ? nx - 240 : nx + 240;
+        b.x = Math.max(120, Math.min(640, nx));
         if (!B.headless) {
           fx(B, 'particles', old.x, old.y, { n: 24, color: ['#b57bff', '#5a2a8a', '#e8d0ff'], speed: 200, life: 0.7, size: 7, gravity: -40, add: true });
           fx(B, 'smoke', old.x, old.y, 8);

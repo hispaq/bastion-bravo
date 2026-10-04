@@ -13,3 +13,7 @@ Thumbs.db
 tools/sprites_full/
 tools/raw/
 *.log
+
+tools/style_ref.png
+tools/style_test/
+tools/style_test2/

@@ -39,18 +39,21 @@
       });
     },
     progress() { return total ? done / total : 1; },
-    // Personajes: siempre el dibujo vectorial animable (estilo unificado), no la imagen de IA
-    isRig(key) { return !!(BB.rig && BB.rig.has(key)); },
+    // Imagen dibujada por la IA local (o null si no existe / no ha cargado)
+    raw(key) { const img = images[key]; return img && img.naturalWidth > 0 ? img : null; },
+    // Personajes sin imagen de IA: dibujo vectorial animable como reserva
+    isRig(key) { return !BB.assets.raw(key) && !!(BB.rig && BB.rig.has(key)); },
     get(key) {
-      if (BB.rig && BB.rig.has(key)) { try { return BB.rig.image(key, 256); } catch (err) { /* sigue con la imagen */ } }
+      const img = BB.assets.raw(key);
+      if (img) return img;
+      if (BB.rig && BB.rig.has(key)) { try { return BB.rig.image(key, 256); } catch (err) { /* sin reserva */ } }
       const cm = /^castle_([1-5])$/.exec(key);
       if (cm && BB.scenery && BB.scenery.castleImage) { try { return BB.scenery.castleImage(+cm[1]); } catch (err) { /* sigue */ } }
-      const img = images[key];
-      return img && img.naturalWidth > 0 ? img : null;
+      return null;
     },
     has(key) { return !!BB.assets.get(key); },
     meta(key) {
-      if (BB.rig && BB.rig.has(key)) { const c = BB.rig.image(key, 256); return { src: BB.assets.url(key), w: c.width, h: c.height, facing: 'right' }; }
+      if (BB.assets.isRig(key)) { const c = BB.rig.image(key, 256); return { src: BB.assets.url(key), w: c.width, h: c.height, facing: 'right' }; }
       return (BB.SPRITES || {})[key] || null;
     },
     // Silueta blanca de un sprite para el parpadeo al recibir daño
@@ -74,11 +77,11 @@
     },
     // URL de la imagen (para <img> en la interfaz) o null
     url(key) {
-      if (BB.rig && BB.rig.has(key)) {
+      if (BB.assets.isRig(key)) {
         if (!urlCache[key]) { try { urlCache[key] = BB.rig.image(key, 256).toDataURL('image/png'); } catch (err) { urlCache[key] = null; } }
         if (urlCache[key]) return urlCache[key];
       }
-      if (/^castle_[1-5]$/.test(key) && BB.scenery) {
+      if (/^castle_[1-5]$/.test(key) && BB.scenery && !BB.assets.raw(key)) {
         if (!urlCache[key]) { try { urlCache[key] = BB.assets.get(key).toDataURL('image/png'); } catch (err) { urlCache[key] = null; } }
         if (urlCache[key]) return urlCache[key];
       }

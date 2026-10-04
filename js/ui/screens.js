@@ -330,10 +330,19 @@
       id: 'menu', el: root, music: 'menu',
       show() {
         root.innerHTML = '';
-        root.appendChild(background({ clouds: true, key: 'bg_bosque', noCastle: true }));
+        // escena viva: batalla de demostración dibujada en el lienzo, detrás del menú
+        if (BB.app && fn(BB.app, 'startDemo')) BB.app.startDemo();
+        const live = !!(BB.app && BB.app.demo);
+        root.classList.toggle('is-live', live);
+        if (live) root.appendChild(el('div', { class: 'menu-vignette' }));
+        else root.appendChild(background({ clouds: true, key: 'bg_bosque', noCastle: true }));
         const gear = BB.ui.button(null, () => BB.ui.show('settings'), { kind: 'wood', round: true, icon: 'gear', title: 'Ajustes' });
         root.appendChild(BB.ui.topBar({ back: false, currencies: ['gold', 'gems', 'stars'], right: gear }));
-        const hero = el('div', { class: 'menu-hero' }, [logo(), el('div', { class: 'menu-castle' }, BB.ui.sprite('castle_' + castleTier()))]);
+        const lvl = (S().maxLevel || 1);
+        const zn = zoneName(lvl);
+        const hero = el('div', { class: 'menu-hero' }, [logo(),
+          el('div', { class: 'menu-progress' }, [icon('flag'), el('span', { text: 'Nivel ' + lvl + (zn ? ' · ' + zn : '') })]),
+          live ? null : el('div', { class: 'menu-castle' }, BB.ui.sprite('castle_' + castleTier()))]);
         const nAch = achClaimable();
         const daily = dailyCanClaim();
         const mk = (label, ic, kind, go, badge) => {
@@ -761,13 +770,14 @@
     function field() {
       const f = el('div', { class: 'army-field' });
       const w = W();
+      const wx = (w.WALL_X || 1235), cx = (w.CASTLE_X || 1300);
+      if (w.PLAZA) return plazaField(f, w, wx, cx);
       // vista del mundo: x 700..1560, y 130..640
       const X0 = 700, X1 = 1560, Y0 = 95, Y1 = 640;
       const fx = x => ((x - X0) / (X1 - X0) * 100) + '%';
       const fy = y => ((y - Y0) / (Y1 - Y0) * 100) + '%';
       const gy = ((BB.WORLD ? BB.WORLD.GROUND : 560) - Y0) / (Y1 - Y0) * 100;
       f.style.background = 'linear-gradient(180deg,#74c3ee 0%,#b9e6f6 ' + (gy - 2) + '%,#8fcf5e ' + gy + '%,#6aa843 ' + (gy + 6) + '%,#7a5634 ' + (gy + 6.2) + '%,#5d3e22 100%)';
-      const wx = (w.WALL_X || 1235), cx = (w.CASTLE_X || 1300);
       const toX = x => (x - X0) / (X1 - X0) * 1000, toY = y => (y - Y0) / (Y1 - Y0) * 1000;
       const g = toY(w.GROUND || 560);
       // castillo esquemático: cuerpo con almenas, ventanas y puerta; muralla delante
@@ -818,6 +828,51 @@
         f.appendChild(b);
       });
       f.appendChild(el('div', { class: 'af-label', style: { left: fx(985), top: fy((w.GROUND || 560) + 22) }, text: 'Torres y trampas' }));
+      return f;
+    }
+    // Vista del campo con la torre y la plaza de detrás (disposición de la referencia)
+    function plazaField(f, w, wx, cx) {
+      const X0 = 540, X1 = 1610, Y0 = 60, Y1 = 700;
+      const fx = x => ((x - X0) / (X1 - X0) * 100) + '%';
+      const fy = y => ((y - Y0) / (Y1 - Y0) * 100) + '%';
+      const G = w.GROUND || 560;
+      const gy = (G - Y0) / (Y1 - Y0) * 100;
+      f.classList.add('is-plaza');
+      f.style.background = 'linear-gradient(180deg,#a9dcf2 0%,#d4f0f7 ' + (gy - 14) + '%,#9fd36a ' + (gy - 13) + '%,#86c255 ' + (gy - 2) + '%,#e2c48a ' + (gy - 1.5) + '%,#d9b77a 100%)';
+      const tier = (BB.castleStats && BB.castleStats(BB.save.data).tier) || 1;
+      const src = BB.assets.url('castle_' + tier);
+      if (src) f.appendChild(el('img', { class: 'af-castle', src, alt: '', style: { left: fx(cx + 60), top: fy(G + 34), height: ((440) / (Y1 - Y0) * 100) + '%' } }));
+      const pal = BB.assets.url('deco_empalizada');
+      if (pal) f.appendChild(el('img', { class: 'af-castle', src: pal, alt: '', style: { left: fx(wx + 6), top: fy(G + 22), height: (78 / (Y1 - Y0) * 100) + '%' } }));
+      f.appendChild(el('div', { class: 'af-label', style: { left: fx(1450), top: fy(G - 30) }, text: 'Plaza de héroes' }));
+      const n = slotsCount();
+      const lu = lineup();
+      (w.HERO_SLOTS || []).forEach((p, i) => {
+        const locked = i >= n;
+        const hid = lu[i];
+        const sel = selSlot && selSlot.type === 'hero' && selSlot.i === i;
+        const b = el('button', { class: 'slot' + (locked ? ' is-locked' : hid ? ' is-full' : '') + (sel ? ' is-sel' : ''), type: 'button', style: { left: fx(p.x), top: fy(p.y - 40) } });
+        if (locked) b.appendChild(icon('lock'));
+        else if (hid && A.hero(hid)) b.appendChild(BB.ui.portrait(A.hero(hid).sprite || 'hero_' + hid));
+        else b.appendChild(el('span', { class: 'sl-plus', text: '+' }));
+        b.appendChild(el('span', { class: 'sl-num', text: String(i + 1) }));
+        if (sel && hid) { const x = el('span', { class: 'sl-x' }, icon('close')); x.addEventListener('click', e => { e.stopPropagation(); removeAt('hero', i); }); b.appendChild(x); }
+        b.addEventListener('click', () => tapSlot('hero', i, locked));
+        f.appendChild(b);
+      });
+      const tr = traps();
+      (w.TRAP_SLOTS || []).forEach((p, i) => {
+        const tid = tr[i];
+        const sel = selSlot && selSlot.type === 'trap' && selSlot.i === i;
+        const b = el('button', { class: 'slot trap-slot' + (tid ? ' is-full' : '') + (sel ? ' is-sel' : ''), type: 'button', style: { left: fx(p.x), top: fy(G - 20) } });
+        if (tid && A.tower(tid)) b.appendChild(BB.ui.sprite(A.tower(tid).sprite || 'tower_' + tid));
+        else b.appendChild(el('span', { class: 'sl-plus', text: '+' }));
+        b.appendChild(el('span', { class: 'sl-num', text: String(i + 1) }));
+        if (sel && tid) { const x = el('span', { class: 'sl-x' }, icon('close')); x.addEventListener('click', e => { e.stopPropagation(); removeAt('trap', i); }); b.appendChild(x); }
+        b.addEventListener('click', () => tapSlot('trap', i, false));
+        f.appendChild(b);
+      });
+      f.appendChild(el('div', { class: 'af-label', style: { left: fx(785), top: fy(G + 60) }, text: 'Torres y trampas' }));
       return f;
     }
     function roster() {

@@ -7,16 +7,18 @@
   BB.WORLD = {
     W: 1600, H: 720, GROUND: 560,
     SPAWN_X: -60,
-    WALL_X: 1235,
-    CASTLE_X: 1300,
+    WALL_X: 1035,
+    CASTLE_X: 1100,
     AIR_MIN: 280, AIR_MAX: 400,
+    // Plaza detrás de la torre (como en la referencia): héroes en el suelo, en filas con profundidad
+    PLAZA: true,
     HERO_SLOTS: [
-      { x: 1328, y: 500 }, { x: 1402, y: 500 }, { x: 1328, y: 425 }, { x: 1402, y: 425 },
-      { x: 1328, y: 350 }, { x: 1402, y: 350 }, { x: 1328, y: 275 }, { x: 1402, y: 275 },
-      { x: 1328, y: 200 }, { x: 1402, y: 200 },
+      { x: 1340, y: 598 }, { x: 1405, y: 598 }, { x: 1470, y: 598 }, { x: 1535, y: 598 },
+      { x: 1372, y: 645 }, { x: 1437, y: 645 }, { x: 1502, y: 645 }, { x: 1562, y: 645 },
+      { x: 1307, y: 645 }, { x: 1568, y: 598 },
     ],
-    TRAP_SLOTS: [{ x: 1150 }, { x: 1040 }, { x: 930 }, { x: 820 }],
-    TAP_ORIGIN: { x: 1470, y: 175 },
+    TRAP_SLOTS: [{ x: 950 }, { x: 840 }, { x: 730 }, { x: 620 }],
+    TAP_ORIGIN: { x: 1165, y: 150 },
   };
 
   const TAU = Math.PI * 2;

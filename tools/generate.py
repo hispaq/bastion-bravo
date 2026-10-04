@@ -26,6 +26,7 @@ import datetime as dt
 import hashlib
 import io
 import json
+import os
 import random
 import shutil
 import sys
@@ -46,6 +47,12 @@ LOCAL_MODEL = "stabilityai/stable-diffusion-xl-base-1.0"
 LOCAL_VAE = "madebyollin/sdxl-vae-fp16-fix"     # el VAE original de SDXL da NaN en fp16
 LOCAL_STEPS = 30
 LOCAL_CFG = 7.0
+# Imagen de referencia de estilo (no se publica; solo guía el trazo y los colores)
+# (tools/style_ref.png = recorte sin cielo de la captura; está en .gitignore)
+STYLE_REF = os.environ.get("BB_STYLE_REF", str(TOOLS / "style_ref.png"))
+if not Path(STYLE_REF).exists():
+    STYLE_REF = ""
+STYLE_SCALE = float(os.environ.get("BB_STYLE_SCALE", "0.8"))
 LOCAL_SIZES = {"square": (1024, 1024), "wide": (1216, 832), "tall": (832, 1216),
                "bg": (1536, 640), "map": (1344, 768), "title": (1344, 768)}
 
@@ -112,7 +119,19 @@ class LocalBackend:
             self.model, vae=vae, torch_dtype=torch.float16, variant="fp16", use_safetensors=True)
         pipe.scheduler = DPMSolverMultistepScheduler.from_config(
             pipe.scheduler.config, use_karras_sigmas=True, algorithm_type="dpmsolver++")
-        pipe.to("cuda")
+        if STYLE_REF:
+            # Estilo copiado de una imagen de referencia (IP-Adapter, solo bloque de estilo = InstantStyle)
+            from transformers import CLIPVisionModelWithProjection
+            from PIL import Image
+            pipe.image_encoder = CLIPVisionModelWithProjection.from_pretrained(
+                "h94/IP-Adapter", subfolder="sdxl_models/image_encoder", torch_dtype=torch.float16)
+            pipe.load_ip_adapter("h94/IP-Adapter", subfolder="sdxl_models", weight_name="ip-adapter_sdxl.safetensors")
+            pipe.set_ip_adapter_scale({"up": {"block_0": [0.0, STYLE_SCALE, 0.0]}})
+            self.ref = Image.open(STYLE_REF).convert("RGB")
+            # SDXL + codificador de imagen no caben juntos en 12 GB: descarga por módulos (≈30 s/imagen)
+            pipe.enable_model_cpu_offload()
+        else:
+            pipe.to("cuda")
         try:
             pipe.vae.enable_tiling()
         except Exception:
@@ -129,11 +148,12 @@ class LocalBackend:
         if self.pipe is None:
             self.load()
         w, h = self.size(asset)
-        g = torch.Generator("cuda").manual_seed(int(seed))
+        g = torch.Generator("cpu" if STYLE_REF else "cuda").manual_seed(int(seed))
+        extra = {"ip_adapter_image": self.ref} if STYLE_REF else {}
         try:
             img = self.pipe(prompt=asset["sd_prompt"], negative_prompt=asset["negative"],
                             width=w, height=h, num_inference_steps=self.steps,
-                            guidance_scale=self.cfg, generator=g).images[0]
+                            guidance_scale=self.cfg, generator=g, **extra).images[0]
         except torch.cuda.OutOfMemoryError:
             torch.cuda.empty_cache()
             raise AssetError("sin memoria de GPU")

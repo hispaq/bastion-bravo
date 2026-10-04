@@ -29,7 +29,7 @@ REVIEW_DIR = TOOLS / "review"
 SPRITES_DIR = ROOT / "sprites"
 
 # Orden de prioridad de generacion
-CATEGORY_ORDER = ["enemies", "heroes", "bosses", "castle", "towers",
+CATEGORY_ORDER = ["enemies", "heroes", "troops", "bosses", "castle", "deco", "towers",
                   "bg", "map", "icons", "ui", "app"]
 
 # ---------------------------------------------------------------------------
@@ -85,7 +85,7 @@ ENEMIES = [
     ("orco_escudo", f"a green orc warrior ({ORC}) holding a huge round wooden shield with an iron rim in front of him and a short sword, leather armor", {}),
     ("goblin_bombardero", f"a huge round black cannonball bomb with a lit sparkling fuse strapped on the back of a small crazy running goblin ({GOBLIN}), wild grin", {}),
     ("goblin_planeador", f"a goblin ({GOBLIN}) flying in the air with big brown leather bat-like glider wings strapped to his arms, aviator goggles", {}),
-    ("jinete_lobo", f"a goblin rider ({GOBLIN}) riding a big grey wolf, the wolf charging forward with open jaws", {"aspect": "wide", "group": True}),
+    ("jinete_lobo", f"a small goblin ({GOBLIN}) sitting on the back of a big grey wolf, the wolf running", {"aspect": "wide", "group": True}),
     ("chaman", f"an old orc shaman ({ORC}) wearing a feathered skull mask, hunched, holding a wooden staff with a glowing green healing light", {}),
     ("goblin_arquero", f"full body small goblin archer ({GOBLIN}) standing and aiming a crude short wooden bow, quiver of arrows, legs and feet visible", {}),
     ("orco_berserker", "a muscular red-skinned orc berserker with big tusks and wild black hair, holding two axes, furious", {}),
@@ -98,27 +98,50 @@ ENEMIES = [
 # ---------------------------------------------------------------------------
 # HEROES (miran a la IZQUIERDA)
 # ---------------------------------------------------------------------------
+STICK = "a cute doodle stickman with a big round white head and black dot eyes, thin black stick arms and legs"
 HEROES = [
-    ("arquera", "a young female archer in a green hooded cloak and leather armor, drawing a wooden longbow and aiming", {}),
-    ("mago_fuego", "a bearded fire wizard in red and orange robes holding a wooden staff topped with a flaming orb", {}),
-    ("maga_hielo", "full body young ice sorceress standing, long light blue robes and boots, holding a tall ice crystal staff, small snowflakes", {}),
-    ("ballestero", "a stocky crossbowman in steel plate armor aiming a heavy crossbow", {}),
-    ("sacerdote", "a kind old priest healer with a white beard in white and gold robes holding an open glowing holy book", {}),
-    ("ingeniero", "a dwarf engineer with brass goggles and a big beard standing behind a small brass cannon on wooden wheels, the cannon pointing forward", {"group": True}),
-    ("hechicera_rayo", "full body storm sorceress woman standing, long purple robes, white hair, blue lightning sparks between her hands", {}),
-    ("druida", "full body old druid man standing, small deer antlers, brown beard, leafy green cloak, wooden staff with vines", {}),
-    ("alquimista", "a cheerful alchemist with goggles and a leather apron throwing a bubbling green potion flask", {}),
-    ("martillo", "a muscular dwarf warrior with a braided red beard holding a big throwing war hammer", {}),
-    ("bardo", "a bard with a feathered hat and a colorful outfit playing a lute", {}),
-    ("brujo", "a warlock in dark purple hooded robes holding a staff topped with a glowing green skull", {}),
-    ("halconera", "a female falconer with a thick leather glove and a brown hawk perched on her raised arm", {"group": True}),
-    ("arcano", "an arcane mage in dark blue robes decorated with stars, with three glowing magic orbs floating around his hands", {}),
-    ("granadero", "full body medieval fantasy dwarf bomber with leather vest and bandolier of round black cartoon bombs, holding a bomb with lit fuse", {}),
-    ("cazadora", "a female monster hunter with a fur cloak holding a big harpoon gun", {}),
-    ("monje_viento", "full body bald wind monk man standing, orange and teal monk robes, sandals, white wind swirls around his hands", {}),
-    ("envenenadora", "a female poison mistress in dark green clothes and hood holding a blowpipe, poison vials on her belt", {}),
-    ("sacerdotisa_sol", "full body sun priestess woman standing, white and golden armor, holding a golden staff topped with a small sun", {}),
-    ("mosquetera", "a female musketeer with a feathered hat and a red coat holding a long musket", {}),
+    ("arquera", f"{STICK}, green hood and little cape, holding a wooden longbow", {}),
+    ("mago_fuego", f"{STICK}, tall red pointy wizard hat, red robe, staff with a fire ball on top", {}),
+    ("maga_hielo", f"{STICK}, light blue pointy hat, blue robe, ice crystal staff", {}),
+    ("ballestero", f"{STICK}, round steel helmet, grey tunic, holding a big crossbow", {}),
+    ("sacerdote", f"{STICK}, white hood with a golden cross, white robe, holding a glowing book", {}),
+    ("ingeniero", f"{STICK}, brass goggles on the head, brown apron, holding a big wrench", {}),
+    ("hechicera_rayo", f"{STICK}, purple pointy hat, purple robe, blue lightning sparks in the hands", {}),
+    ("druida", f"{STICK}, little deer antlers, leafy green cloak, wooden staff with leaves", {}),
+    ("alquimista", f"{STICK}, goggles, leather apron, holding a bubbling green potion bottle", {}),
+    ("martillo", f"{STICK}, viking helmet with horns, red beard, holding a big war hammer", {}),
+    ("bardo", f"{STICK}, green hat with a red feather, playing a lute", {}),
+    ("brujo", f"{STICK}, dark purple hood, staff with a green glowing skull", {}),
+    ("halconera", f"{STICK} standing, brown leather cap, raising one arm with a small brown bird on the hand", {}),
+    ("arcano", f"{STICK}, dark blue star hat, three glowing blue magic orbs around the hands", {}),
+    ("granadero", f"{STICK}, leather cap, bandolier of black bombs, holding a bomb with a lit fuse", {}),
+    ("cazadora", f"{STICK}, fur hood, holding a big harpoon gun", {}),
+    ("monje_viento", f"{STICK}, orange monk robe, white wind swirls around the hands", {}),
+    ("envenenadora", f"{STICK}, dark green hood and mask, holding a blowpipe, green poison bottles", {}),
+    ("sacerdotisa_sol", f"{STICK}, golden helmet, white and gold robe, golden staff with a star on top", {}),
+    ("mosquetera", f"{STICK}, big hat with a feather, red coat, holding a long musket", {}),
+]
+
+# Tropas reclutables (miran a la IZQUIERDA)
+TROOPS = [
+    ("arquero", f"{STICK}, brown hood, holding a small wooden bow", {}),
+    ("ballestero", f"{STICK}, iron helmet, blue tunic, holding a crossbow", {}),
+    ("aprendiz", f"{STICK}, small blue pointy hat, holding a short magic wand with a star", {}),
+    ("lanzapiedras", f"{STICK}, straw hat, holding a sling and a stone", {}),
+]
+
+# Estructuras del campamento (decoración y muralla)
+DECO = [
+    ("empalizada", "a solid wooden palisade wall made of thick sharpened vertical logs side by side, tied with rope", "wide"),
+    ("tienda", "one small red and white striped medieval tent, triangle shape, front view, closed", "square"),
+    ("atalaya", "a tall thin wooden watchtower on four legs with a small hut and a red roof on top, ladder", "tall"),
+    ("barriles", "a pile of wooden barrels and crates", "square"),
+    ("estandarte", "a tall wooden pole with a long blue waving banner flag", "tall"),
+    ("hoguera", "a small campfire with logs and stones around it, little flame", "square"),
+    ("carro", "a wooden hay cart with two wheels", "wide"),
+    ("arbol", "one round bushy green cartoon tree with a short brown trunk", "square"),
+    ("arbusto", "one round green bush", "square"),
+    ("roca", "a grey boulder with a crack", "square"),
 ]
 
 # ---------------------------------------------------------------------------
@@ -129,7 +152,7 @@ BOSSES = [
     ("rey_goblin", f"a fat goblin king ({GOBLIN}) with a golden crown and a red cape sitting on a big wooden throne with wheels", {"group": True}),
     ("chaman_gigante", f"a giant orc shaman ({ORC}) with glowing green eyes, bone necklaces and a huge staff topped with a skull, feathers and tribal paint", {}),
     ("troll_piedra", "a gigantic troll made of grey rock and boulders with glowing orange lava cracks, huge stone fists", {}),
-    ("escorpion", "giant scorpion monster with two big claws and curved stinger tail raised over its back, golden armored shell, a green goblin warrior riding on its back", {"aspect": "wide", "group": True}),
+    ("escorpion", "one single giant golden scorpion with two big claws and a curved stinger tail, side view", {"aspect": "wide"}),
     ("senor_fuego", f"an orc fire lord ({ORC}) wearing molten black and orange lava armor, wielding a huge flaming greatsword", {}),
     ("senor_guerra", f"a massive orc warlord ({ORC}) in black spiked plate armor with a horned helmet and a giant battle axe", {}),
     ("gigante_escarcha", "a huge frost ogre with icy blue skin, ice crystals growing on his shoulders, white beard, holding a big ice club", {}),
@@ -145,11 +168,11 @@ CASTLE_TXT = ("flat side elevation view, the main gate on the left side of the b
               "the whole building visible with white space around it, nothing cut off, "
               "no ground, no people, no shadow")
 CASTLES = [
-    (1, "a small wooden fort with a wooden palisade wall and a tall wooden watchtower"),
-    (2, "a stone keep with wooden roofs and a small stone tower"),
-    (3, "a stone castle with two towers, blue banners and battlements"),
-    (4, "a large stone fortress with tall towers, gold trims and many blue banners"),
-    (5, "one big white stone royal castle with golden roofs, blue flags and a glowing blue crystal on top"),
+    (1, "one tall round wooden tower made of logs with a red cone roof, small window, wooden stairs"),
+    (2, "one tall round grey stone tower with cracks and a red cone roof, wooden door"),
+    (3, "one very tall round grey stone tower with cracks, battlements, a wooden balcony and a red cone roof, a red flag"),
+    (4, "one very tall round stone tower with two wooden balconies, battlements, a big red cone roof and red flags, stone stairs"),
+    (5, "one gigantic tall round white stone tower with golden trims, wooden balconies, a big red cone roof with a golden tip and many flags"),
 ]
 
 # ---------------------------------------------------------------------------
@@ -224,6 +247,13 @@ def _build():
         out.append(_sprite("enemies", "enemy", "enemies", name, subject, "right", **opt))
     for name, subject, opt in HEROES:
         out.append(_sprite("heroes", "hero", "heroes", name, subject, "left", **opt))
+    for name, subject, opt in TROOPS:
+        out.append(_sprite("troops", "troop", "troops", name, subject, "left", maxside=320, **opt))
+    for name, subject, aspect in DECO:
+        key = f"deco_{name}"
+        out.append(dict(key=key, cat="deco", name=name, out=f"sprites/deco/{name}.png",
+                        prompt=f"{subject}, {STYLE_BUILDING}, {TOWER_TXT}", aspect=aspect, facing=None,
+                        transparent=True, fit=("max", 512), group=True, seed=_seed(key), subject=subject))
     for name, subject, opt in BOSSES:
         opt = dict(opt)
         out.append(_sprite("bosses", "boss", "bosses", name, f"{subject}, {BOSS_TXT}", "right",
@@ -283,13 +313,17 @@ def _build():
 # Prompts compactos para Stable Diffusion local (CLIP corta a 77 tokens: sujeto primero,
 # estilo despues; lo que se quiere evitar va en el prompt negativo).
 # ---------------------------------------------------------------------------
-SD_STYLE = ("2d cartoon mobile game art, bold clean black outlines, flat vibrant saturated colors, "
-            "soft cel shading, heroic fantasy, isolated on plain white background")
+# Estilo "garabato" de la captura de referencia: trazo marrón oscuro grueso e irregular, colores
+# planos suaves. El IP-Adapter (tools/generate.py, BB_STYLE_REF) aporta el resto del estilo.
+SD_STYLE = ("hand drawn cartoon doodle, thick wobbly dark brown outlines, flat soft colors, "
+            "mobile game art, isolated on plain white background")
 SD_CHAR = "full body, side view, single character, on a plain pure white background"
+DOODLE_MONSTER = "goofy comic doodle monster"
 SD_NEG_SPRITE = ("text, watermark, signature, logo, blurry, multiple characters, two characters, crowd, "
                  "character sheet, multiple views, cropped, cut off, deformed, bad anatomy, extra limbs, "
                  "photo, realistic, 3d render, frame, border, ground, floor, shadow, scenery, grey background, "
-                 "gradient background, circle, vignette, sticker, black bar")
+                 "gradient background, colored background, blue background, sky, grass, "
+                 "circle, halo, aura, round background, map, vignette, sticker, black bar")
 SD_NEG_SCENE = ("text, watermark, signature, logo, letters, words, blurry, people, characters, person, "
                 "frame, border, photo, realistic, 3d render, deformed, ui")
 SD_FACING = {"left": "facing left", "right": "facing right"}
@@ -301,36 +335,39 @@ def _sd(a):
     s = s.replace(f", {BOSS_TXT}", ", huge imposing boss monster")
     f = SD_FACING.get(a.get("facing"), "")
     cat = a["cat"]
-    if cat in ("enemies", "heroes", "bosses"):
+    if cat in ("enemies", "heroes", "bosses", "troops"):
+        if cat in ("enemies", "bosses"):
+            s = f"{DOODLE_MONSTER}, {s}"
         p = f"{s}, {f}, {SD_CHAR}, {SD_STYLE}"
         n = SD_NEG_SPRITE
         if a.get("group"):
             p = p.replace("single character", "single group")
             n = n.replace("multiple characters, two characters, ", "")
-    elif cat in ("castle", "towers"):
-        p = (f"{s}, {f + ', ' if f else ''}game asset cut out on white, no sky, no mountains, "
-             f"colorful full color 2d cartoon game building, side view, entire building visible, "
-             f"isolated on plain pure white background, bold black outlines, vibrant saturated colors, cel shading")
+    elif cat in ("castle", "towers", "deco"):
+        p = (f"{s}, {f + ', ' if f else ''}game asset cut out on white, no sky, no ground, "
+             f"side view, entire object visible, isolated on plain pure white background, "
+             f"hand drawn cartoon doodle, thick wobbly dark brown outlines, flat soft colors")
         n = SD_NEG_SPRITE.replace("bad anatomy, extra limbs, ", "") + ", people, sky, clouds, landscape, sketch, line art, monochrome"
     elif cat == "icons":
         p = f"{s}, game icon, centered, single object, on a plain pure white background, {SD_STYLE}"
         n = SD_NEG_SPRITE.replace("bad anatomy, extra limbs, ", "") + ", multiple objects"
     elif cat == "bg":
-        p = (f"{s}, 2d cartoon side-scrolling game background, wide landscape panorama, horizon in the middle, "
-             f"flat empty ground at the bottom, vibrant colors, bold outlines, painterly cel shading")
-        n = SD_NEG_SCENE
+        p = (f"wide side view landscape, {s}, a sandy dirt road along the bottom from left to right, "
+             f"rolling hills, horizon in the middle, empty scenery, hand drawn cartoon doodle, "
+             f"thick wobbly dark brown outlines, flat soft colors")
+        n = SD_NEG_SCENE + ", castle, tower, house, buildings"
     elif cat == "map":
-        p = (f"{s}, top-down view, illustrated fantasy game world map, 2d cartoon, vibrant colors, "
-             f"bold outlines, terrain fills the whole image")
+        p = (f"{s}, top-down view, illustrated fantasy game world map, hand drawn cartoon doodle, "
+             f"thick wobbly dark brown outlines, flat soft colors, terrain fills the whole image")
         n = SD_NEG_SCENE + ", compass, legend, labels, roads"
     elif cat == "ui":
-        p = ("epic 2d cartoon game key art, heroic stone castle with blue banners on the right, fantasy heroes "
-             "on the walls, horde of green orcs and goblins charging from the left, battlefield, dramatic sunset "
-             "sky, vibrant colors, bold black outlines, cel shading")
+        p = ("hand drawn cartoon doodle game poster, a tall round stone tower with a red cone roof on a hill on the right, "
+             "doodle stickmen with round white heads shooting arrows from it, goofy green orcs and big monsters "
+             "charging from the left on a winding dirt road, round trees, sunny sky, thick wobbly dark brown outlines, flat soft colors")
         n = SD_NEG_SCENE.replace("people, characters, person, ", "") + ", title"
     else:  # app
-        p = ("mobile game app icon, heroic stone castle tower with a blue and gold heraldic shield, centered, "
-             "solid rich blue background, 2d cartoon, bold black outlines, vibrant glossy colors, cel shading")
+        p = ("mobile game app icon, a tall round stone tower with a red cone roof and a little stickman archer with a "
+             "round white head on top, centered, solid sky blue background, hand drawn cartoon doodle, thick dark brown outlines")
         n = SD_NEG_SCENE + ", rounded corners, white background"
     return p, n
 

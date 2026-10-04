@@ -8,9 +8,9 @@
    512
   ],
   "raw": "app_icon.png",
-  "raw_sha": "807dd862cb85c81e8dd69c61e1363d66ebe0b621",
-  "secs": 0.4,
-  "sig": "79d6b567ef1dd13685907ccf02f2a1472c2b8450"
+  "raw_sha": "153b83818afb84ea9a99053bf2a62c0ed2f3ca1e",
+  "secs": 0.2,
+  "sig": "b67390637d6a6bcb65207eed13985ed6e8fc0d13"
  },
  "bg_bosque": {
   "facing_reviewed": false,
@@ -21,9 +21,9 @@
    720
   ],
   "raw": "bg_bosque.png",
-  "raw_sha": "3e97524b05fc62494d0a32ff8896db561c15e3d7",
-  "secs": 0.3,
-  "sig": "42f3204346366b86ab86a8cee3507173259bfd64"
+  "raw_sha": "e108b588d73e6aff035c2626f6d2545b981660c6",
+  "secs": 0.1,
+  "sig": "93d0e09b36c6d31895815dce7991ac0ad23d4e90"
  },
  "bg_desierto": {
   "facing_reviewed": false,
@@ -34,9 +34,9 @@
    720
   ],
   "raw": "bg_desierto.png",
-  "raw_sha": "1e94bf7f9633552fb7a8b723859b4f11eb5b50dc",
-  "secs": 0.3,
-  "sig": "023a07f3ff8263bc7cc7ca6dd30457e5603a21cc"
+  "raw_sha": "7aad6ae1301ce3f2916d6c2be3876fa848627737",
+  "secs": 0.1,
+  "sig": "2de18d8e59007cf5f400937b2c4e2e8609737847"
  },
  "bg_dragon": {
   "facing_reviewed": false,
@@ -47,9 +47,9 @@
    720
   ],
   "raw": "bg_dragon.png",
-  "raw_sha": "99a419c3a296dae5833e95a3677947d3d06cc42f",
-  "secs": 0.2,
-  "sig": "8493a68a2a438fef50f9033ec0a31ce98ae1865e"
+  "raw_sha": "b40b7d147dd1dc6d570ee7b3179cbb9d92fcf14e",
+  "secs": 0.0,
+  "sig": "fb04d532d556b8463a24c041b2cfe97b3c070977"
  },
  "bg_forja": {
   "facing_reviewed": false,
@@ -60,9 +60,9 @@
    720
   ],
   "raw": "bg_forja.png",
-  "raw_sha": "8fb98ec3caffaee0d1d344c79aada2f5d12dbc3d",
-  "secs": 0.2,
-  "sig": "4a9b1622bfbb72844f3465d5f6e95cf7d5413150"
+  "raw_sha": "4450c7ba9872005476aa15cb81b315c98aa50f32",
+  "secs": 0.1,
+  "sig": "c357d904fc01e78cc37d6e47622f9a546b76e580"
  },
  "bg_hielo": {
   "facing_reviewed": false,
@@ -73,9 +73,9 @@
    720
   ],
   "raw": "bg_hielo.png",
-  "raw_sha": "1653cbfd6622cb1dfd7965bfe40c7850a1ad5bae",
-  "secs": 0.2,
-  "sig": "ef7f06b3551efcb32b59bf560f7355f1c7334745"
+  "raw_sha": "c1c2f6ff0a6e768a0049bc07adab68fe38fa0c00",
+  "secs": 0.1,
+  "sig": "2138c9344a2f64f534ef6078bb564aede22ff879"
  },
  "bg_montanas": {
   "facing_reviewed": false,
@@ -86,9 +86,9 @@
    720
   ],
   "raw": "bg_montanas.png",
-  "raw_sha": "32133acad67ca269efa868c54ecfe2715eafde0f",
-  "secs": 0.1,
-  "sig": "f304b26e0298b23d766ce431ccb6dfd14fd5611f"
+  "raw_sha": "b54cd44aab9d4689ad706aba97f2d2e80dd8a21f",
+  "secs": 0.0,
+  "sig": "b9671925927bad8f4549935968a7b2a007d106eb"
  },
  "bg_oscuras": {
   "facing_reviewed": false,
@@ -99,9 +99,9 @@
    720
   ],
   "raw": "bg_oscuras.png",
-  "raw_sha": "7c16ec031935ca91cb99dad2eb18fc3831fdbd6e",
-  "secs": 0.1,
-  "sig": "57923a358966e985a7c199c7c837fe91ce84e28f"
+  "raw_sha": "04b57947e87c509f90789656754ccdf770d80ff8",
+  "secs": 0.0,
+  "sig": "7c45687f306620a3fc1d0180ceb4c8aae45679d3"
  },
  "bg_pantano": {
   "facing_reviewed": false,
@@ -112,9 +112,9 @@
    720
   ],
   "raw": "bg_pantano.png",
-  "raw_sha": "dc401773fbd7c5ab02d40820ced7889c31464ab4",
-  "secs": 0.2,
-  "sig": "b8034d6cdac6a89cc96e670f5c67a3d6ac40ecfe"
+  "raw_sha": "ab5a15951c303e95bd7fd5830d6573ec0e6eb1d4",
+  "secs": 0.0,
+  "sig": "909a7637fa4c4018488c0204d43483c6f93a6b9d"
  },
  "bg_ruinas": {
   "facing_reviewed": false,
@@ -125,9 +125,9 @@
    720
   ],
   "raw": "bg_ruinas.png",
-  "raw_sha": "4d10fa86078cc1b622655f2bf633ec5554b615a4",
-  "secs": 0.2,
-  "sig": "11e5495a7afb6515adb0b14d52497ee41789d800"
+  "raw_sha": "5c4c46b44ab61c5716e10c53c56b9b97030487eb",
+  "secs": 0.0,
+  "sig": "b36ad8252d300f27e124c48477279a19cd90faf6"
  },
  "bg_volcan": {
   "facing_reviewed": false,
@@ -138,1072 +138,1339 @@
    720
   ],
   "raw": "bg_volcan.png",
-  "raw_sha": "7d1f28fc4e3d899c60299128970804003c1ad1f7",
+  "raw_sha": "79c36dbc0af42876a226c20ff6d4bf62d423c280",
   "secs": 0.1,
-  "sig": "933b96bbcb415c9218e365536569779ae6cb97b8"
+  "sig": "d4fc921e8a32ce02d39ad301d33fd5c85ebeee5e"
  },
  "boss_chaman_gigante": {
   "bg_color": [
-   222,
-   219,
-   217
+   203,
+   229,
+   205
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.409,
+  "fg_frac": 0.48,
   "flip": false,
-  "holes_px": 43224,
-  "islands_removed": 41,
+  "holes_px": 48313,
+  "islands_removed": 38,
   "method": "combo",
   "out_size": [
-   603,
+   621,
    640
   ],
   "raw": "boss_chaman_gigante.png",
-  "raw_sha": "835625bc9adc01142a295304268b9b275017ce91",
-  "rembg_disagree": 0.029,
+  "raw_sha": "7e5193be050f32b4cd927b61c07bc502b36b7441",
+  "rembg_disagree": 0.088,
   "rembg_model": "u2net",
-  "secs": 2.4,
-  "shadow_px": 921,
-  "sig": "cba636f7369a5719b6997f6317f08cbca698fe2e",
+  "secs": 1.1,
+  "shadow_px": 3302,
+  "sig": "46c271c801d8ec2408ed336c968319ed51f34a39",
   "touches": []
  },
  "boss_dragon": {
   "bg_color": [
-   236,
-   229,
-   216
+   132,
+   200,
+   119
   ],
-  "bg_uniform": 0.999,
+  "bg_uniform": 1.0,
   "big_parts": 1,
-  "facing_reviewed": true,
-  "fg_frac": 0.439,
-  "flip": true,
-  "holes_px": 5738,
-  "islands_removed": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.339,
+  "flip": false,
+  "holes_px": 11303,
+  "islands_removed": 8,
   "method": "combo",
   "out_size": [
    640,
    431
   ],
   "raw": "boss_dragon.png",
-  "raw_sha": "a4cdab4fa74b39c492b59715d7c8441b5b2af9ab",
-  "rembg_disagree": 0.19,
+  "raw_sha": "eb8012aea5d3c812545e6ef80aa20251e8aa1501",
+  "rembg_disagree": 0.601,
   "rembg_model": "u2net",
-  "secs": 0.6,
-  "shadow_px": 127,
-  "sig": "b5fe42d3436867cb07db79483ba9115b51119814",
+  "secs": 2.0,
+  "shadow_px": 52519,
+  "sig": "ee6b9106c9eb55252576147b090e0f3b17681538",
   "touches": []
  },
  "boss_escorpion": {
   "bg_color": [
+   249,
    250,
-   250,
-   250
+   249
   ],
-  "bg_uniform": 0.998,
+  "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.548,
+  "fg_frac": 0.397,
   "flip": false,
-  "holes_px": 67436,
-  "islands_removed": 1,
+  "holes_px": 99512,
+  "islands_removed": 25,
   "method": "combo",
   "out_size": [
    640,
-   418
+   448
   ],
   "raw": "boss_escorpion.png",
-  "raw_sha": "80836c611906fbd1928c57b6a7c9f338e417b6b6",
-  "rembg_disagree": 0.092,
+  "raw_sha": "0a13f7c74bfbfb64e67ef70f3e30b64132384c8c",
+  "rembg_disagree": 0.009,
   "rembg_model": "u2net",
-  "secs": 4.1,
-  "shadow_px": 2258,
-  "sig": "9026278320e27cbb1d563cda9b0fd316f81f42aa",
+  "secs": 1.3,
+  "shadow_px": 7655,
+  "sig": "e4498123eb51cd800b6b5099cb404e39d3350ea5",
   "touches": []
  },
  "boss_gigante_escarcha": {
   "bg_color": [
-   252,
-   252,
-   252
+   251,
+   251,
+   251
   ],
-  "bg_uniform": 0.96,
+  "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.708,
+  "fg_frac": 0.502,
   "flip": false,
-  "holes_px": 28646,
-  "islands_removed": 0,
+  "holes_px": 13169,
+  "islands_removed": 4,
   "method": "combo",
   "out_size": [
-   639,
+   603,
    640
   ],
   "raw": "boss_gigante_escarcha.png",
-  "raw_sha": "c4181aeec7a10b126280f2846a3aab0b76d9fd3d",
-  "rembg_disagree": 0.044,
+  "raw_sha": "13d5ac549312abfa2922d2f4ffd8e36e04247551",
+  "rembg_disagree": 0.037,
   "rembg_model": "u2net",
-  "secs": 2.8,
-  "shadow_px": 137,
-  "sig": "87d73bc6a245bb702172cea33afe3f5aa03f4fc3",
-  "touches": [
-   "top",
-   "bottom",
-   "right"
-  ]
+  "secs": 1.5,
+  "shadow_px": 1580,
+  "sig": "6fa546123b0a080ec18282c5aecc8020949097ac",
+  "touches": []
  },
  "boss_golem": {
   "bg_color": [
+   162,
    210,
-   209,
-   205
+   160
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.457,
+  "fg_frac": 0.49,
   "flip": false,
-  "holes_px": 78447,
-  "islands_removed": 39,
-  "method": "combo",
-  "out_size": [
-   640,
-   635
-  ],
-  "raw": "boss_golem.png",
-  "raw_sha": "e2960ada6c57f4940cce74bee418e54059ab3400",
-  "rembg_disagree": 0.014,
-  "rembg_model": "u2net",
-  "secs": 1.0,
-  "shadow_px": 5425,
-  "sig": "6ecdd23072f4a9e3ec3245d3763e8df8244e2413",
-  "touches": []
- },
- "boss_nigromante": {
-  "bg_color": [
-   250,
-   251,
-   251
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.413,
-  "flip": false,
-  "holes_px": 39169,
-  "islands_removed": 102,
-  "method": "combo",
-  "out_size": [
-   622,
-   640
-  ],
-  "raw": "boss_nigromante.png",
-  "raw_sha": "2c8949caeef90502d096fdc3869a5fc7a215bdc9",
-  "rembg_disagree": 0.569,
-  "rembg_model": "u2net",
-  "secs": 1.0,
-  "shadow_px": 31048,
-  "sig": "0482fcc93cbee8ebffc8eccf0230cc759ae0a18e",
-  "touches": []
- },
- "boss_rey_goblin": {
-  "bg_color": [
-   250,
-   248,
-   248
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.484,
-  "flip": false,
-  "holes_px": 0,
-  "islands_removed": 0,
-  "method": "combo",
-  "out_size": [
-   574,
-   640
-  ],
-  "raw": "boss_rey_goblin.png",
-  "raw_sha": "7f054e20a3cb2b677fbf6f2ac275f713aedfad10",
-  "rembg_disagree": 0.011,
-  "rembg_model": "u2net",
-  "secs": 2.8,
-  "shadow_px": 745,
-  "sig": "309968c15b065c21cfe2c1f8a3b03b132f14f7b2",
-  "touches": []
- },
- "boss_senor_fuego": {
-  "bg_color": [
-   251,
-   251,
-   250
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.548,
-  "flip": false,
-  "holes_px": 35319,
-  "islands_removed": 7,
-  "method": "combo",
-  "out_size": [
-   609,
-   640
-  ],
-  "raw": "boss_senor_fuego.png",
-  "raw_sha": "47be715696f2b150a02f444fb89f83779970a963",
-  "rembg_disagree": 0.013,
-  "rembg_model": "u2net",
-  "secs": 2.7,
-  "shadow_px": 17094,
-  "sig": "f9fd694cc615863e943034b3e77eef648142c186",
-  "touches": []
- },
- "boss_senor_guerra": {
-  "bg_color": [
-   213,
-   206,
-   195
-  ],
-  "bg_uniform": 0.809,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.429,
-  "flip": false,
-  "holes_px": 32351,
-  "islands_removed": 30,
-  "method": "combo",
-  "out_size": [
-   581,
-   640
-  ],
-  "raw": "boss_senor_guerra.png",
-  "raw_sha": "e9bb824bf5568d30521d8b7f9a6dafd57f69a5de",
-  "rembg_disagree": 0.001,
-  "rembg_model": "u2net",
-  "secs": 2.7,
-  "shadow_px": 889,
-  "sig": "3d433ecdd2bfd78792b06ddbea7ebd81751979ea",
-  "touches": []
- },
- "boss_troll_piedra": {
-  "bg_color": [
-   251,
-   251,
-   251
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.579,
-  "flip": false,
-  "holes_px": 61149,
-  "islands_removed": 0,
+  "holes_px": 49280,
+  "islands_removed": 8,
   "method": "combo",
   "out_size": [
    640,
    639
   ],
-  "raw": "boss_troll_piedra.png",
-  "raw_sha": "099b29aa014dffecc306b7c92fa1df9116cd4cf9",
-  "rembg_disagree": 0.109,
+  "raw": "boss_golem.png",
+  "raw_sha": "5381cd247df7b1922cf7e42bcf2f8c31c4899d22",
+  "rembg_disagree": 0.062,
   "rembg_model": "u2net",
-  "secs": 2.6,
-  "shadow_px": 86,
-  "sig": "3d945dfedfd673dcd955bdaa5820cc3b227436dd",
+  "secs": 1.4,
+  "shadow_px": 6663,
+  "sig": "aed9b3774c90ff5b05823afd5a268d28ce954d62",
+  "touches": []
+ },
+ "boss_nigromante": {
+  "bg_color": [
+   158,
+   214,
+   134
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.5,
+  "flip": false,
+  "holes_px": 8859,
+  "islands_removed": 128,
+  "method": "combo",
+  "out_size": [
+   633,
+   640
+  ],
+  "raw": "boss_nigromante.png",
+  "raw_sha": "4747b06fc0fdca8c8d00c9ee0a074962019262fe",
+  "rembg_disagree": 0.084,
+  "rembg_model": "u2net",
+  "secs": 1.4,
+  "shadow_px": 132493,
+  "sig": "6d5684c61ca337e7f964143f7d39859b5169cd35",
+  "touches": []
+ },
+ "boss_rey_goblin": {
+  "bg_color": [
+   175,
+   208,
+   169
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.442,
+  "flip": false,
+  "holes_px": 421,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   533,
+   640
+  ],
+  "raw": "boss_rey_goblin.png",
+  "raw_sha": "2736657becdf6b798c9cc4ab2a7df98711e552a7",
+  "rembg_disagree": 0.016,
+  "rembg_model": "u2net",
+  "secs": 1.1,
+  "shadow_px": 77,
+  "sig": "f8157536d5437860eba1f8970b0635d3d8b3b518",
+  "touches": []
+ },
+ "boss_senor_fuego": {
+  "bg_color": [
+   192,
+   193,
+   190
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.26,
+  "flip": false,
+  "holes_px": 206154,
+  "islands_removed": 28,
+  "method": "combo",
+  "out_size": [
+   640,
+   611
+  ],
+  "raw": "boss_senor_fuego.png",
+  "raw_sha": "ec59f92216e2fd175a9103800d8db80d26ebed33",
+  "rembg_disagree": 0.392,
+  "rembg_model": "u2net",
+  "secs": 1.1,
+  "shadow_px": 127631,
+  "sig": "4504c975c24925def47f061b4db12ebbd8d518b2",
+  "touches": []
+ },
+ "boss_senor_guerra": {
+  "bg_color": [
+   194,
+   224,
+   193
+  ],
+  "bg_uniform": 0.999,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.526,
+  "flip": false,
+  "holes_px": 35906,
+  "islands_removed": 224,
+  "method": "combo",
+  "out_size": [
+   640,
+   600
+  ],
+  "raw": "boss_senor_guerra.png",
+  "raw_sha": "b1057f91c4c2ad260467adc888669f7eb5e70624",
+  "rembg_disagree": 0.023,
+  "rembg_model": "u2net",
+  "secs": 1.1,
+  "shadow_px": 71,
+  "sig": "d9d99f6d25f3c0b3f12ba3aacde6249b50948254",
+  "touches": []
+ },
+ "boss_troll_piedra": {
+  "bg_color": [
+   189,
+   210,
+   191
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.429,
+  "flip": false,
+  "holes_px": 2207,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   580,
+   640
+  ],
+  "raw": "boss_troll_piedra.png",
+  "raw_sha": "705a1e6927fe0846d2e9f5b60170abfc174d91cf",
+  "rembg_disagree": 0.002,
+  "rembg_model": "u2net",
+  "secs": 1.1,
+  "shadow_px": 20001,
+  "sig": "2e207a4ac5ccc653621699ddfb515976183cf271",
   "touches": []
  },
  "castle_1": {
+  "bg_color": [
+   169,
+   196,
+   148
+  ],
+  "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.472,
+  "fg_frac": 0.168,
   "flip": false,
-  "islands_removed": 3,
-  "method": "rembg",
+  "holes_px": 0,
+  "islands_removed": 0,
+  "method": "combo",
   "out_size": [
-   690,
+   412,
    768
   ],
   "raw": "castle_1.png",
-  "raw_sha": "6c37602633fdb194ec51f38361df67851e8e29e7",
+  "raw_sha": "9f95855c906bcc58027ab53b1bc0b016cca32c3a",
+  "rembg_disagree": 0.023,
   "rembg_model": "u2net",
-  "secs": 3.5,
-  "sig": "a47d0745dec0817c6cfacc11b73bb5462d96dbdc",
+  "secs": 1.1,
+  "shadow_px": 1,
+  "sig": "ae8161b0bfc293c95142aa943892213fbd9bd560",
   "touches": []
  },
  "castle_2": {
   "bg_color": [
-   250,
-   250,
-   250
+   180,
+   215,
+   195
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.523,
+  "fg_frac": 0.319,
   "flip": false,
   "holes_px": 0,
   "islands_removed": 0,
   "method": "combo",
   "out_size": [
-   768,
-   766
+   678,
+   768
   ],
   "raw": "castle_2.png",
-  "raw_sha": "12a2603ac7dab5ee98e7e874f1b96caa5c451f2c",
-  "rembg_disagree": 0.01,
+  "raw_sha": "b9783338684c9a36ad1086b1d5b3667811743d3d",
+  "rembg_disagree": 0.015,
   "rembg_model": "u2net",
-  "secs": 1.1,
-  "shadow_px": 9,
-  "sig": "27923f0a3a8bec3a3fb092a9671dd07d3696ba2a",
+  "secs": 1.6,
+  "shadow_px": 30,
+  "sig": "382891fcb3d5bdac36e2b02ba1a08261dda3b352",
   "touches": []
  },
  "castle_3": {
   "bg_color": [
-   250,
-   249,
-   250
+   164,
+   193,
+   162
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.402,
+  "fg_frac": 0.249,
   "flip": false,
   "holes_px": 0,
   "islands_removed": 0,
   "method": "combo",
   "out_size": [
-   725,
+   671,
    768
   ],
   "raw": "castle_3.png",
-  "raw_sha": "8702aced842f6df78929f42c73bc10c0b3335ef7",
-  "rembg_disagree": 0.014,
+  "raw_sha": "26df3683178d6c80673618351321320e7677dade",
+  "rembg_disagree": 0.012,
   "rembg_model": "u2net",
-  "secs": 1.0,
-  "shadow_px": 12,
-  "sig": "a3e404f4c5b620eab8b9f5c5326936fa60766aed",
+  "secs": 0.7,
+  "shadow_px": 16,
+  "sig": "7b46d09fda24b3b507e01c3ecf1aff0993687cfc",
   "touches": []
  },
  "castle_4": {
   "bg_color": [
-   250,
-   250,
-   250
-  ],
-  "bg_uniform": 0.997,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.602,
-  "flip": false,
-  "holes_px": 5963,
-  "islands_removed": 2,
-  "method": "combo",
-  "out_size": [
-   768,
-   761
-  ],
-  "raw": "castle_4.png",
-  "raw_sha": "3e7b1559bf36976743f66c507716f4374ee6318b",
-  "rembg_disagree": 0.014,
-  "rembg_model": "u2net",
-  "secs": 7.5,
-  "shadow_px": 216,
-  "sig": "f522d1103fb8f5d7ca8fc77ba59e8075d9c747d5",
-  "touches": []
- },
- "castle_5": {
-  "bg_color": [
-   230,
-   230,
-   229
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.486,
-  "flip": false,
-  "holes_px": 110,
-  "islands_removed": 1,
-  "method": "combo",
-  "out_size": [
-   742,
-   768
-  ],
-  "raw": "castle_5.png",
-  "raw_sha": "173571d368d1bf5f060263c09a5c305cb12d4333",
-  "rembg_disagree": 0.027,
-  "rembg_model": "u2net",
-  "secs": 1.1,
-  "shadow_px": 217,
-  "sig": "aedc5f04828a3a975f20216c5b3ced9988b2c788",
-  "touches": []
- },
- "enemy_chaman": {
-  "bg_color": [
+   187,
    216,
-   213,
-   209
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.27,
-  "flip": false,
-  "holes_px": 5717,
-  "islands_removed": 58,
-  "method": "combo",
-  "out_size": [
-   327,
-   384
-  ],
-  "raw": "enemy_chaman.png",
-  "raw_sha": "3fe9ff2b77452df1f3399b8bc0f00fa3f666c280",
-  "rembg_disagree": 0.033,
-  "rembg_model": "u2net",
-  "secs": 2.6,
-  "shadow_px": 290,
-  "sig": "7a88c705a8fd27d8815a2f7a1ac1a8c35722537a",
-  "touches": []
- },
- "enemy_goblin_arquero": {
-  "bg_color": [
-   250,
-   250,
-   250
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.292,
-  "flip": false,
-  "holes_px": 100162,
-  "islands_removed": 0,
-  "method": "combo",
-  "out_size": [
-   377,
-   384
-  ],
-  "raw": "enemy_goblin_arquero.png",
-  "raw_sha": "027bfb41c3e86511c837f3937286db528ccd1bf4",
-  "rembg_disagree": 0.044,
-  "rembg_model": "u2net",
-  "secs": 8.6,
-  "shadow_px": 39,
-  "sig": "0a9c26be4881ecafd1ad7a79b5e9b9ba6ea0738c",
-  "touches": []
- },
- "enemy_goblin_bombardero": {
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.333,
-  "flip": false,
-  "islands_removed": 0,
-  "method": "rembg",
-  "out_size": [
-   378,
-   384
-  ],
-  "raw": "enemy_goblin_bombardero.png",
-  "raw_sha": "bdfe16e6f5b40a533c6f7b11293467bf4664864e",
-  "rembg_model": "u2net",
-  "secs": 16.2,
-  "sig": "ef6779aef0996ee16b943f6b3dbc7417d63b7db0",
-  "touches": []
- },
- "enemy_goblin_planeador": {
-  "bg_color": [
-   252,
-   252,
-   252
-  ],
-  "bg_uniform": 0.997,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.557,
-  "flip": false,
-  "holes_px": 3716,
-  "islands_removed": 0,
-  "method": "combo",
-  "out_size": [
-   383,
-   384
-  ],
-  "raw": "enemy_goblin_planeador.png",
-  "raw_sha": "6f27b26cfba0e15cefaa5fc6db5c8b4993855ed5",
-  "rembg_disagree": 0.078,
-  "rembg_model": "u2net",
-  "secs": 2.5,
-  "shadow_px": 2049,
-  "sig": "41d22c3336211669ae2890ed2566eef362a4310a",
-  "touches": []
- },
- "enemy_goblin_topo": {
-  "bg_color": [
-   250,
-   250,
-   250
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.328,
-  "flip": false,
-  "holes_px": 41187,
-  "islands_removed": 11,
-  "method": "combo",
-  "out_size": [
-   352,
-   384
-  ],
-  "raw": "enemy_goblin_topo.png",
-  "raw_sha": "77b302f83609802c6f39ad1adf3748e590fa4d9f",
-  "rembg_disagree": 0.03,
-  "rembg_model": "u2net",
-  "secs": 2.2,
-  "shadow_px": 13420,
-  "sig": "e8bd970f267981f3fdca748899daba9147e75550",
-  "touches": []
- },
- "enemy_goblin_veloz": {
-  "bg_color": [
-   236,
-   232,
-   224
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.279,
-  "flip": false,
-  "holes_px": 13738,
-  "islands_removed": 1,
-  "method": "combo",
-  "out_size": [
-   384,
-   368
-  ],
-  "raw": "enemy_goblin_veloz.png",
-  "raw_sha": "b88b3c9129769d1f6bdd9737af6baaf1056e7148",
-  "rembg_disagree": 0.025,
-  "rembg_model": "u2net",
-  "secs": 1.6,
-  "shadow_px": 73,
-  "sig": "e15ea713aab82340def061ee31a36486a885ddfe",
-  "touches": []
- },
- "enemy_jinete_lobo": {
-  "bg_color": [
-   250,
-   251,
-   251
+   227
   ],
   "bg_uniform": 0.998,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.35,
+  "fg_frac": 0.605,
   "flip": false,
-  "holes_px": 22615,
-  "islands_removed": 34,
+  "holes_px": 5605,
+  "islands_removed": 54,
+  "method": "combo",
+  "out_size": [
+   763,
+   768
+  ],
+  "raw": "castle_4.png",
+  "raw_sha": "bed6c337488acb460cb668e8a171b4a83588643d",
+  "rembg_disagree": 0.009,
+  "rembg_model": "u2net",
+  "secs": 1.7,
+  "shadow_px": 4288,
+  "sig": "67fe07b64b6dfc72983e559f33723a7dbfe4fc44",
+  "touches": []
+ },
+ "castle_5": {
+  "bg_color": [
+   133,
+   189,
+   180
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.425,
+  "flip": false,
+  "holes_px": 23413,
+  "islands_removed": 28,
+  "method": "combo",
+  "out_size": [
+   768,
+   757
+  ],
+  "raw": "castle_5.png",
+  "raw_sha": "796872e57c924cda79a2dc8da4893805adb21a96",
+  "rembg_disagree": 0.081,
+  "rembg_model": "u2net",
+  "secs": 1.3,
+  "shadow_px": 10251,
+  "sig": "ec86aec9b753b1a20daf48ed8fb7dcf287f82512",
+  "touches": []
+ },
+ "deco_arbol": {
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.174,
+  "flip": false,
+  "islands_removed": 0,
+  "method": "rembg",
+  "out_size": [
+   411,
+   512
+  ],
+  "raw": "deco_arbol.png",
+  "raw_sha": "87f4d153e1f1f62c266435884c06d77e03e5e67a",
+  "rembg_model": "u2net",
+  "secs": 0.6,
+  "sig": "3e943270d5cb1200ff628d8cba351df21261dc21",
+  "touches": []
+ },
+ "deco_arbusto": {
+  "bg_color": [
+   202,
+   219,
+   208
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.532,
+  "flip": false,
+  "holes_px": 0,
+  "islands_removed": 1,
+  "method": "combo",
+  "out_size": [
+   499,
+   512
+  ],
+  "raw": "deco_arbusto.png",
+  "raw_sha": "7c7b198a08c4833ce1aa829150a7a4166030c217",
+  "rembg_disagree": 0.006,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 11147,
+  "sig": "1b8abe3c0a727b3fce9a024b1fc56f41c94e5b5e",
+  "touches": []
+ },
+ "deco_atalaya": {
+  "bg_color": [
+   139,
+   199,
+   208
+  ],
+  "bg_uniform": 0.701,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.408,
+  "flip": false,
+  "holes_px": 64868,
+  "islands_removed": 65,
+  "method": "combo",
+  "out_size": [
+   360,
+   512
+  ],
+  "raw": "deco_atalaya.png",
+  "raw_sha": "ba9d6dfbd3faebf3983c55a121f581ac42d1e21e",
+  "rembg_disagree": 0.25,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 5887,
+  "sig": "3343663d8528b94085b021efab1dab453c228fc0",
+  "touches": [
+   "bottom",
+   "left",
+   "right"
+  ]
+ },
+ "deco_barriles": {
+  "bg_color": [
+   129,
+   182,
+   101
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.633,
+  "flip": false,
+  "holes_px": 0,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   504,
+   512
+  ],
+  "raw": "deco_barriles.png",
+  "raw_sha": "59058379d87676e8dce7ddb01fed47afdf6a21cb",
+  "rembg_disagree": 0.006,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 4,
+  "sig": "12f9f12712c93c4af61351c7a299e941de9fe30e",
+  "touches": []
+ },
+ "deco_carro": {
+  "bg_color": [
+   164,
+   207,
+   161
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.424,
+  "flip": false,
+  "holes_px": 3501,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   512,
+   377
+  ],
+  "raw": "deco_carro.png",
+  "raw_sha": "b0c6926f1e66efc73feb51d78709cb1a693151b6",
+  "rembg_disagree": 0.0,
+  "rembg_model": "u2net",
+  "secs": 0.9,
+  "shadow_px": 41082,
+  "sig": "574c626906f1c52d0e3dae37a2418c47df1c5b62",
+  "touches": []
+ },
+ "deco_empalizada": {
+  "bg_color": [
+   160,
+   199,
+   119
+  ],
+  "bg_uniform": 0.985,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.732,
+  "flip": false,
+  "holes_px": 0,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   512,
+   292
+  ],
+  "raw": "deco_empalizada.png",
+  "raw_sha": "24da65090e56db0f7f599fa7990af1460d007ce7",
+  "rembg_disagree": 0.001,
+  "rembg_model": "u2net",
+  "secs": 4.8,
+  "shadow_px": 5,
+  "sig": "08c1d961d41ae253ad984939620ce673279c0f1e",
+  "touches": [
+   "right"
+  ]
+ },
+ "deco_estandarte": {
+  "bg_color": [
+   181,
+   188,
+   129
+  ],
+  "bg_uniform": 0.911,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.095,
+  "flip": false,
+  "holes_px": 17011,
+  "islands_removed": 2,
+  "method": "combo",
+  "out_size": [
+   225,
+   512
+  ],
+  "raw": "deco_estandarte.png",
+  "raw_sha": "cfc478ba0867438af75bde11e927126032bf52a7",
+  "rembg_disagree": 0.059,
+  "rembg_model": "u2net",
+  "secs": 0.9,
+  "shadow_px": 1476,
+  "sig": "9767b0f7e70ea719850126ef794443b022ba5e19",
+  "touches": []
+ },
+ "deco_hoguera": {
+  "bg_color": [
+   186,
+   202,
+   198
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.503,
+  "flip": false,
+  "holes_px": 0,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   512,
+   501
+  ],
+  "raw": "deco_hoguera.png",
+  "raw_sha": "8f585f1010c34f184270fd5cb68f02fe112ddb8e",
+  "rembg_disagree": 0.006,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 35,
+  "sig": "b03de24393b141e274b4f1dca670ab8d89e488f3",
+  "touches": []
+ },
+ "deco_roca": {
+  "bg_color": [
+   181,
+   201,
+   169
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.505,
+  "flip": false,
+  "holes_px": 246,
+  "islands_removed": 5,
+  "method": "combo",
+  "out_size": [
+   463,
+   512
+  ],
+  "raw": "deco_roca.png",
+  "raw_sha": "7e45728b44be29be6a3bbdbbaaf69c9c7a9bc5f0",
+  "rembg_disagree": 0.018,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 43,
+  "sig": "e76401217a7a980fa5f8f51790443578aabbf0a7",
+  "touches": []
+ },
+ "deco_tienda": {
+  "bg_color": [
+   157,
+   194,
+   144
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.296,
+  "flip": false,
+  "holes_px": 32938,
+  "islands_removed": 17,
+  "method": "combo",
+  "out_size": [
+   512,
+   511
+  ],
+  "raw": "deco_tienda.png",
+  "raw_sha": "0769dbc22a307e49a63978c928e9639ab4afe301",
+  "rembg_disagree": 0.067,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 87,
+  "sig": "07d923eeeb6b7df16c9ebcf9fb695707a9d3afb1",
+  "touches": []
+ },
+ "enemy_chaman": {
+  "bg_color": [
+   157,
+   204,
+   148
+  ],
+  "bg_uniform": 0.995,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.282,
+  "flip": false,
+  "holes_px": 62239,
+  "islands_removed": 13,
+  "method": "combo",
+  "out_size": [
+   328,
+   384
+  ],
+  "raw": "enemy_chaman.png",
+  "raw_sha": "d18f4ab5222b15105b389f38744a4bb14bfee1e1",
+  "rembg_disagree": 0.511,
+  "rembg_model": "u2net",
+  "secs": 1.4,
+  "shadow_px": 12295,
+  "sig": "908c461da35f0b16ae751a6291fcd689bbc5771b",
+  "touches": []
+ },
+ "enemy_goblin_arquero": {
+  "bg_color": [
+   211,
+   225,
+   214
+  ],
+  "bg_uniform": 0.936,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.354,
+  "flip": false,
+  "holes_px": 74192,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   384,
+   364
+  ],
+  "raw": "enemy_goblin_arquero.png",
+  "raw_sha": "a3264cab29b2f3dcb11dae459c13887c69819877",
+  "rembg_disagree": 0.018,
+  "rembg_model": "u2net",
+  "secs": 1.3,
+  "shadow_px": 18433,
+  "sig": "df51241b76ba42987e7e5906893a490c0b6a8746",
+  "touches": []
+ },
+ "enemy_goblin_bombardero": {
+  "bg_color": [
+   197,
+   198,
+   195
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.379,
+  "flip": false,
+  "holes_px": 17842,
+  "islands_removed": 14,
+  "method": "combo",
+  "out_size": [
+   384,
+   381
+  ],
+  "raw": "enemy_goblin_bombardero.png",
+  "raw_sha": "158fa423fa3dcf3fa1a00bd25b21f6fe7bc67b87",
+  "rembg_disagree": 0.031,
+  "rembg_model": "u2net",
+  "secs": 4.8,
+  "shadow_px": 24155,
+  "sig": "1ae8858b94a5e4b540da77c6dd7b1b1624c1fc97",
+  "touches": []
+ },
+ "enemy_goblin_planeador": {
+  "bg_color": [
+   160,
+   206,
+   162
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.394,
+  "flip": false,
+  "holes_px": 3832,
+  "islands_removed": 9,
+  "method": "combo",
+  "out_size": [
+   384,
+   382
+  ],
+  "raw": "enemy_goblin_planeador.png",
+  "raw_sha": "2eb41186d6412813409fed67c2784d61c750afd2",
+  "rembg_disagree": 0.044,
+  "rembg_model": "u2net",
+  "secs": 1.7,
+  "shadow_px": 179,
+  "sig": "8f7773300fe684c92707cdc572eef057f5f45f8a",
+  "touches": []
+ },
+ "enemy_goblin_topo": {
+  "bg_color": [
+   164,
+   206,
+   153
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.263,
+  "flip": false,
+  "holes_px": 28263,
+  "islands_removed": 6,
+  "method": "combo",
+  "out_size": [
+   384,
+   356
+  ],
+  "raw": "enemy_goblin_topo.png",
+  "raw_sha": "f29fc3340fec89e73214865df9a0fc7bcf6b8649",
+  "rembg_disagree": 0.011,
+  "rembg_model": "u2net",
+  "secs": 1.2,
+  "shadow_px": 13099,
+  "sig": "c0d5d0737cd000baecdf4c3a9862c46c4a7c616c",
+  "touches": []
+ },
+ "enemy_goblin_veloz": {
+  "bg_color": [
+   207,
+   219,
+   213
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.347,
+  "flip": false,
+  "holes_px": 12547,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   384,
+   363
+  ],
+  "raw": "enemy_goblin_veloz.png",
+  "raw_sha": "589d63a315450fa66e2d9fc3a1efd28665230f23",
+  "rembg_disagree": 0.009,
+  "rembg_model": "u2net",
+  "secs": 0.6,
+  "shadow_px": 9818,
+  "sig": "77bcaa752bff7266f34587b90bfab958e93c0975",
+  "touches": []
+ },
+ "enemy_jinete_lobo": {
+  "bg_color": [
+   195,
+   215,
+   192
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.432,
+  "flip": false,
+  "holes_px": 44920,
+  "islands_removed": 229,
   "method": "combo",
   "out_size": [
    384,
    253
   ],
   "raw": "enemy_jinete_lobo.png",
-  "raw_sha": "f4ce838ceac9a6a8c2e35b74e5bc2d59f5d0cf1f",
-  "rembg_disagree": 0.013,
+  "raw_sha": "80b4ff839356040651015eb6ca51c6250c40752e",
+  "rembg_disagree": 0.053,
   "rembg_model": "u2net",
-  "secs": 2.2,
-  "shadow_px": 1988,
-  "sig": "e702ff4afb7c2f4327fc8c4b42c5a0ffcdcb8b07",
+  "secs": 4.2,
+  "shadow_px": 2558,
+  "sig": "bd0b0c285ccb48b2c5d9e1ea89f76085d7f97a15",
   "touches": []
  },
  "enemy_orco_ariete": {
   "bg_color": [
-   250,
-   250,
-   251
+   189,
+   219,
+   210
   ],
-  "bg_uniform": 0.998,
+  "bg_uniform": 0.988,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.467,
+  "fg_frac": 0.517,
   "flip": false,
-  "holes_px": 9201,
-  "islands_removed": 1,
+  "holes_px": 44266,
+  "islands_removed": 0,
   "method": "combo",
   "out_size": [
    384,
-   231
+   249
   ],
   "raw": "enemy_orco_ariete.png",
-  "raw_sha": "6c77e50d0fa42787527ca3520dae33250111d780",
-  "rembg_disagree": 0.002,
+  "raw_sha": "19220f671beb2856516399a04803384fca3e993d",
+  "rembg_disagree": 0.129,
   "rembg_model": "u2net",
-  "secs": 7.4,
-  "shadow_px": 770,
-  "sig": "1bf3e1b5b37fbec66c6837b36d1d823a7a312945",
+  "secs": 1.1,
+  "shadow_px": 2307,
+  "sig": "e2076d7c7c00149670ac7abfc243802a6e161837",
   "touches": [
    "right"
   ]
  },
  "enemy_orco_berserker": {
   "bg_color": [
-   229,
-   224,
-   222
+   215,
+   215,
+   213
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.484,
+  "fg_frac": 0.459,
   "flip": false,
-  "holes_px": 30286,
-  "islands_removed": 43,
+  "holes_px": 32649,
+  "islands_removed": 17,
   "method": "combo",
   "out_size": [
-   363,
-   384
+   384,
+   380
   ],
   "raw": "enemy_orco_berserker.png",
-  "raw_sha": "8431acefe88c9c230e7a668c49173dc5e4874660",
-  "rembg_disagree": 0.003,
+  "raw_sha": "46b406bc0b0e69dc112e734bbbeedec51473a287",
+  "rembg_disagree": 0.018,
   "rembg_model": "u2net",
-  "secs": 2.5,
-  "shadow_px": 1954,
-  "sig": "5a1ce13c4815e84867adfc808b86c24c09b521aa",
+  "secs": 1.3,
+  "shadow_px": 50996,
+  "sig": "fa3b0288ca07f615c1c90a843f77ee5a64b9ed98",
   "touches": []
  },
  "enemy_orco_escudo": {
   "bg_color": [
-   250,
-   250,
-   250
+   209,
+   210,
+   205
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.398,
+  "fg_frac": 0.51,
   "flip": false,
-  "holes_px": 37115,
-  "islands_removed": 11,
-  "method": "combo",
-  "out_size": [
-   366,
-   384
-  ],
-  "raw": "enemy_orco_escudo.png",
-  "raw_sha": "0bc93dff2ce167abfa75084701ce1560875173f3",
-  "rembg_disagree": 0.021,
-  "rembg_model": "u2net",
-  "secs": 2.2,
-  "shadow_px": 1454,
-  "sig": "bb76a5bdab6483034ddaab89584a7cb72c378c4c",
-  "touches": []
- },
- "enemy_orco_tambor": {
-  "bg_color": [
-   250,
-   250,
-   250
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.472,
-  "flip": false,
-  "holes_px": 30289,
+  "holes_px": 30290,
   "islands_removed": 0,
-  "method": "combo",
-  "out_size": [
-   377,
-   384
-  ],
-  "raw": "enemy_orco_tambor.png",
-  "raw_sha": "84f70cb2e307cbf71a51e0a58785b8cfa5f1c45c",
-  "rembg_disagree": 0.002,
-  "rembg_model": "u2net",
-  "secs": 2.4,
-  "shadow_px": 1487,
-  "sig": "843c9ab0a31332cd304c1a69f98ddd42940daa8b",
-  "touches": []
- },
- "enemy_troll": {
-  "bg_color": [
-   251,
-   251,
-   251
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.483,
-  "flip": false,
-  "holes_px": 65475,
-  "islands_removed": 7,
-  "method": "combo",
-  "out_size": [
-   384,
-   376
-  ],
-  "raw": "enemy_troll.png",
-  "raw_sha": "15133e6cf320fedce8fafbacbf5554feb52a2e6e",
-  "rembg_disagree": 0.019,
-  "rembg_model": "u2net",
-  "secs": 7.4,
-  "shadow_px": 751,
-  "sig": "836397fbf62463be311c1ab9211626a94e23b828",
-  "touches": []
- },
- "hero_alquimista": {
-  "bg_color": [
-   250,
-   250,
-   250
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.391,
-  "flip": false,
-  "holes_px": 7819,
-  "islands_removed": 34,
-  "method": "combo",
-  "out_size": [
-   354,
-   384
-  ],
-  "raw": "hero_alquimista.png",
-  "raw_sha": "6ce1a68dc3b53c94de22a6ce9c60105d546ba16d",
-  "rembg_disagree": 0.15,
-  "rembg_model": "u2net",
-  "secs": 2.8,
-  "shadow_px": 3000,
-  "sig": "10e736509b1347af7530d453c3e6dca3f5cfb7fc",
-  "touches": []
- },
- "hero_arcano": {
-  "bg_color": [
-   22,
-   23,
-   52
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 4,
-  "facing_reviewed": false,
-  "fg_frac": 0.307,
-  "flip": false,
-  "holes_px": 3234,
-  "islands_removed": 452,
-  "method": "combo",
-  "out_size": [
-   337,
-   384
-  ],
-  "raw": "hero_arcano.png",
-  "raw_sha": "69a4e4fd065aff0112af24837cfac7c0289dae2d",
-  "rembg_disagree": 0.352,
-  "rembg_model": "u2net",
-  "secs": 2.5,
-  "shadow_px": 715,
-  "sig": "5e18e6a12cbfce5411f3c4f859e5a8c345c84f1b",
-  "touches": []
- },
- "hero_arquera": {
-  "bg_color": [
-   229,
-   228,
-   228
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.233,
-  "flip": false,
-  "holes_px": 104712,
-  "islands_removed": 1,
-  "method": "combo",
-  "out_size": [
-   298,
-   384
-  ],
-  "raw": "hero_arquera.png",
-  "raw_sha": "70375f23baddd00547b0bec906936d2ea99fa2f5",
-  "rembg_disagree": 0.53,
-  "rembg_model": "u2net",
-  "secs": 2.0,
-  "shadow_px": 9007,
-  "sig": "f04412b74212c114d1a5b475ce0a6b6c03ede008",
-  "touches": []
- },
- "hero_ballestero": {
-  "bg_color": [
-   237,
-   229,
-   214
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.313,
-  "flip": false,
-  "holes_px": 153753,
-  "islands_removed": 10,
-  "method": "combo",
-  "out_size": [
-   384,
-   375
-  ],
-  "raw": "hero_ballestero.png",
-  "raw_sha": "746025b517f53548c4a44359a533454f8827ec9e",
-  "rembg_disagree": 0.054,
-  "rembg_model": "u2net",
-  "secs": 2.2,
-  "shadow_px": 360,
-  "sig": "c7afe5d3700ebd6c5e83b2c1efdc586b26e2b454",
-  "touches": []
- },
- "hero_bardo": {
-  "bg_color": [
-   249,
-   248,
-   249
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 2,
-  "facing_reviewed": false,
-  "fg_frac": 0.341,
-  "flip": false,
-  "holes_px": 0,
-  "islands_removed": 1,
-  "method": "combo",
-  "out_size": [
-   366,
-   384
-  ],
-  "raw": "hero_bardo.png",
-  "raw_sha": "061f8f53cfe2054592ee5b704856defb586efd5e",
-  "rembg_disagree": 0.034,
-  "rembg_model": "u2net",
-  "secs": 2.3,
-  "shadow_px": 23,
-  "sig": "2841a0102a23b90433f092463ea7e588b2c85aab",
-  "touches": []
- },
- "hero_brujo": {
-  "bg_color": [
-   250,
-   249,
-   249
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.298,
-  "flip": false,
-  "holes_px": 41329,
-  "islands_removed": 35,
   "method": "combo",
   "out_size": [
    350,
    384
   ],
-  "raw": "hero_brujo.png",
-  "raw_sha": "056b076388acc6bd53b39aebe3493ee3a99d20c1",
-  "rembg_disagree": 0.023,
+  "raw": "enemy_orco_escudo.png",
+  "raw_sha": "b287b50ae59122c62808b04aea22c007cf83bc2d",
+  "rembg_disagree": 0.026,
   "rembg_model": "u2net",
-  "secs": 2.4,
-  "shadow_px": 6659,
-  "sig": "c877ef81623821268cdfeff6ec259d97f0245ca2",
+  "secs": 0.6,
+  "shadow_px": 14357,
+  "sig": "8f31d0a96ec081f45bc49407d0a2733cc58ffcad",
+  "touches": []
+ },
+ "enemy_orco_tambor": {
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.391,
+  "flip": false,
+  "islands_removed": 2,
+  "method": "rembg",
+  "out_size": [
+   365,
+   384
+  ],
+  "raw": "enemy_orco_tambor.png",
+  "raw_sha": "a910084dde5b56f09f0f5608c38a7f599b40845c",
+  "rembg_model": "u2net",
+  "secs": 0.8,
+  "sig": "e3756fa0b5a8e138e5a320473e39da661eb10f60",
+  "touches": []
+ },
+ "enemy_troll": {
+  "bg_color": [
+   198,
+   206,
+   197
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.449,
+  "flip": false,
+  "holes_px": 27294,
+  "islands_removed": 20,
+  "method": "combo",
+  "out_size": [
+   382,
+   384
+  ],
+  "raw": "enemy_troll.png",
+  "raw_sha": "fdcf4cff324f1f1bc7980374b0b89168511aab25",
+  "rembg_disagree": 0.162,
+  "rembg_model": "u2net",
+  "secs": 1.3,
+  "shadow_px": 1315,
+  "sig": "25d9faaa8a4dee2b18970762b5c2739d3ac99199",
+  "touches": []
+ },
+ "hero_alquimista": {
+  "bg_color": [
+   203,
+   197,
+   153
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.328,
+  "flip": false,
+  "holes_px": 8333,
+  "islands_removed": 74,
+  "method": "combo",
+  "out_size": [
+   302,
+   384
+  ],
+  "raw": "hero_alquimista.png",
+  "raw_sha": "3aad9e26d37f3fb1ef1207bff793b46ef5dd825c",
+  "rembg_disagree": 0.049,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 30790,
+  "sig": "8ab9cb332a0dd54f6f12b2701562069d34b89bf2",
+  "touches": []
+ },
+ "hero_arcano": {
+  "bg_color": [
+   204,
+   202,
+   160
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.202,
+  "flip": false,
+  "holes_px": 36580,
+  "islands_removed": 34,
+  "method": "combo",
+  "out_size": [
+   367,
+   384
+  ],
+  "raw": "hero_arcano.png",
+  "raw_sha": "3dde901cea3a0f9692c61e22ccafa7caa27044d8",
+  "rembg_disagree": 0.712,
+  "rembg_model": "u2net",
+  "secs": 1.1,
+  "shadow_px": 17668,
+  "sig": "0f61ec830da4854aa95a24cc316a9c8a43f4952f",
+  "touches": []
+ },
+ "hero_arquera": {
+  "bg_color": [
+   163,
+   204,
+   134
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.35,
+  "flip": false,
+  "holes_px": 66339,
+  "islands_removed": 6,
+  "method": "combo",
+  "out_size": [
+   384,
+   370
+  ],
+  "raw": "hero_arquera.png",
+  "raw_sha": "d6856b0513426cb0ceb5a698d1b4fabbe090476d",
+  "rembg_disagree": 0.189,
+  "rembg_model": "u2net",
+  "secs": 0.7,
+  "shadow_px": 965,
+  "sig": "fb30df386e17a554039bec86d1db57c6ec985733",
+  "touches": []
+ },
+ "hero_ballestero": {
+  "bg_color": [
+   179,
+   201,
+   154
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.215,
+  "flip": false,
+  "holes_px": 25866,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   330,
+   384
+  ],
+  "raw": "hero_ballestero.png",
+  "raw_sha": "a0a6424ffb264f36712969864c3d11b4364023f5",
+  "rembg_disagree": 0.005,
+  "rembg_model": "u2net",
+  "secs": 1.2,
+  "shadow_px": 722,
+  "sig": "5aaa20c63a6fc3f3907bc5e02d1d5d69effbede6",
+  "touches": []
+ },
+ "hero_bardo": {
+  "bg_color": [
+   187,
+   184,
+   165
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.346,
+  "flip": false,
+  "holes_px": 23980,
+  "islands_removed": 58,
+  "method": "combo",
+  "out_size": [
+   340,
+   384
+  ],
+  "raw": "hero_bardo.png",
+  "raw_sha": "ff4464158c4716da146559b2c86841113c826579",
+  "rembg_disagree": 0.153,
+  "rembg_model": "u2net",
+  "secs": 1.1,
+  "shadow_px": 78828,
+  "sig": "9ce8a2c98f1e6aa9986d17a8361e66ad6240e82c",
+  "touches": []
+ },
+ "hero_brujo": {
+  "bg_color": [
+   205,
+   205,
+   199
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.316,
+  "flip": false,
+  "holes_px": 23461,
+  "islands_removed": 9,
+  "method": "combo",
+  "out_size": [
+   363,
+   384
+  ],
+  "raw": "hero_brujo.png",
+  "raw_sha": "a04a43295adb0262fc0a4cee3d44051a81285932",
+  "rembg_disagree": 0.009,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 19258,
+  "sig": "ac322b2da2835c160be751a35c96df90f298b206",
   "touches": []
  },
  "hero_cazadora": {
   "bg_color": [
-   223,
-   201,
-   181
+   185,
+   185,
+   182
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.233,
+  "fg_frac": 0.355,
   "flip": false,
-  "holes_px": 48106,
-  "islands_removed": 53,
+  "holes_px": 8418,
+  "islands_removed": 0,
   "method": "combo",
   "out_size": [
-   369,
-   384
+   384,
+   342
   ],
   "raw": "hero_cazadora.png",
-  "raw_sha": "f2be829489eb8358f4846881ff244acbcd2b392b",
-  "rembg_disagree": 0.1,
+  "raw_sha": "72f96aced28ce88659fa4c28121b69df45ca8ce6",
+  "rembg_disagree": 0.216,
   "rembg_model": "u2net",
-  "secs": 2.2,
-  "shadow_px": 1494,
-  "sig": "9c4d873efbba94eb5d2a81b13e4b5fa4ed5da932",
+  "secs": 1.1,
+  "shadow_px": 4691,
+  "sig": "099ef4e2536a95c0c63ec2dc24f2e1d1a458b3ad",
   "touches": []
  },
  "hero_druida": {
-  "bg_color": [
-   252,
-   252,
-   252
-  ],
-  "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.407,
+  "fg_frac": 0.237,
   "flip": false,
-  "holes_px": 55535,
-  "islands_removed": 28,
-  "method": "combo",
+  "islands_removed": 3,
+  "method": "rembg",
   "out_size": [
-   348,
+   263,
    384
   ],
   "raw": "hero_druida.png",
-  "raw_sha": "6dfdddb814aa434374d171743381e9fdc227f07f",
-  "rembg_disagree": 0.379,
+  "raw_sha": "b488945ca7d2245b719f34e15c3e9895c1366fbc",
   "rembg_model": "u2net",
-  "secs": 0.9,
-  "shadow_px": 10672,
-  "sig": "3165c20609bd4e631f88616b598efba960e0a2ef",
+  "secs": 0.7,
+  "sig": "16de2da5e061d11012ed76b82ea60c3d8ae546cf",
   "touches": []
  },
  "hero_envenenadora": {
   "bg_color": [
-   140,
-   128,
-   124
+   202,
+   203,
+   201
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.3,
+  "fg_frac": 0.288,
   "flip": false,
-  "holes_px": 1313,
-  "islands_removed": 336,
+  "holes_px": 23715,
+  "islands_removed": 7,
   "method": "combo",
   "out_size": [
-   284,
+   366,
    384
   ],
   "raw": "hero_envenenadora.png",
-  "raw_sha": "120a43e6c879c63c83d4cd256298b7fe4aebc204",
-  "rembg_disagree": 0.329,
+  "raw_sha": "e3461a9ebbb689bbde0bb35e84d94e71798558e9",
+  "rembg_disagree": 0.007,
   "rembg_model": "u2net",
-  "secs": 2.3,
-  "shadow_px": 2028,
-  "sig": "b94595dddfa139021162bf5bc42ac35b0925fa1e",
+  "secs": 1.4,
+  "shadow_px": 2093,
+  "sig": "5edb1c25356b36b51594efa674c95150263b2cea",
   "touches": []
  },
  "hero_granadero": {
   "bg_color": [
-   249,
-   249,
-   249
+   218,
+   213,
+   180
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.521,
+  "fg_frac": 0.283,
   "flip": false,
-  "holes_px": 13131,
-  "islands_removed": 1,
+  "holes_px": 8377,
+  "islands_removed": 33,
   "method": "combo",
   "out_size": [
-   374,
+   351,
    384
   ],
   "raw": "hero_granadero.png",
-  "raw_sha": "255652e2e6c2e9cde19718b3743153f5430f72cf",
-  "rembg_disagree": 0.001,
+  "raw_sha": "1c08ca58d06125ef928792652b2d580a09fddc6a",
+  "rembg_disagree": 0.042,
   "rembg_model": "u2net",
-  "secs": 0.9,
-  "shadow_px": 33796,
-  "sig": "e973fb49a8e35cd553db859d9b13adbbf619c095",
+  "secs": 1.2,
+  "shadow_px": 741,
+  "sig": "48db8ec88156d7fbed5e1b7a3357768dd6561e75",
   "touches": []
  },
  "hero_halconera": {
+  "bg_color": [
+   206,
+   225,
+   217
+  ],
+  "bg_uniform": 0.781,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.589,
+  "fg_frac": 0.367,
   "flip": false,
-  "islands_removed": 25,
-  "method": "rembg",
+  "holes_px": 40366,
+  "islands_removed": 27,
+  "method": "combo",
   "out_size": [
-   384,
+   375,
    384
   ],
   "raw": "hero_halconera.png",
-  "raw_sha": "d19b2860f6bf40156a9801f25e01bd96e48cffe2",
+  "raw_sha": "b92db76148f4d06cf9e535c518881ac1f04330df",
+  "rembg_disagree": 0.238,
   "rembg_model": "u2net",
-  "secs": 0.9,
-  "sig": "dc7b622f885d99cbc3e937f1fa57ac54cf1476ce",
-  "touches": [
-   "top",
-   "bottom",
-   "left",
-   "right"
-  ]
+  "secs": 4.9,
+  "shadow_px": 63845,
+  "sig": "6773904c8b7a7630b7d9317e7b7cbda0b52bfcad",
+  "touches": []
  },
  "hero_hechicera_rayo": {
   "bg_color": [
-   251,
-   250,
-   251
+   158,
+   185,
+   103
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.313,
+  "fg_frac": 0.29,
   "flip": false,
-  "holes_px": 595,
-  "islands_removed": 34,
+  "holes_px": 22272,
+  "islands_removed": 55,
   "method": "combo",
   "out_size": [
-   369,
+   354,
    384
   ],
   "raw": "hero_hechicera_rayo.png",
-  "raw_sha": "c89e73a41d083ef2c019728827162b9f1c7e5035",
-  "rembg_disagree": 0.361,
+  "raw_sha": "6b0d3cb7a8a913336d67d16278e830bd716201d9",
+  "rembg_disagree": 0.1,
   "rembg_model": "u2net",
-  "secs": 0.9,
-  "shadow_px": 497,
-  "sig": "0a256ce3746ad977bd1ea95571bf98596d291440",
+  "secs": 1.2,
+  "shadow_px": 245502,
+  "sig": "e6793ac39c1cd32ba0f3888b90fb0d403805082b",
   "touches": []
  },
  "hero_ingeniero": {
   "bg_color": [
-   251,
-   251,
-   251
+   184,
+   184,
+   182
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.654,
+  "fg_frac": 0.292,
   "flip": false,
-  "holes_px": 53099,
-  "islands_removed": 0,
+  "holes_px": 104502,
+  "islands_removed": 110,
   "method": "combo",
   "out_size": [
-   377,
+   230,
    384
   ],
   "raw": "hero_ingeniero.png",
-  "raw_sha": "23edb48b6780c60c095b7270f381598da96c3d60",
-  "rembg_disagree": 0.074,
+  "raw_sha": "8668b594a83f168ac34a82b19ecebf17b5f3ca19",
+  "rembg_disagree": 0.017,
   "rembg_model": "u2net",
-  "secs": 2.5,
-  "shadow_px": 910,
-  "sig": "584e03f8e782dd95b600fdd31b0887bdf543927a",
+  "secs": 1.0,
+  "shadow_px": 64402,
+  "sig": "34ab2ac6c0e54459ea1d8d96c1dc09846b600306",
   "touches": []
  },
  "hero_maga_hielo": {
@@ -1228,281 +1495,174 @@
   "raw_sha": "1b57bfd3d30e1f92fa9dac82babefa818fa32b90",
   "rembg_disagree": 0.056,
   "rembg_model": "u2net",
-  "secs": 4.0,
+  "secs": 1.1,
   "shadow_px": 3,
   "sig": "ddd9ee011842819aa646fd8005c5367daef56066",
   "touches": []
  },
  "hero_mago_fuego": {
   "bg_color": [
-   195,
-   191,
-   191
+   184,
+   210,
+   195
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.384,
+  "fg_frac": 0.317,
   "flip": false,
-  "holes_px": 6089,
-  "islands_removed": 265,
+  "holes_px": 30231,
+  "islands_removed": 415,
   "method": "combo",
   "out_size": [
-   323,
+   305,
    384
   ],
   "raw": "hero_mago_fuego.png",
-  "raw_sha": "2884ecc36137a9f3a514ac67a64026ab2c01ee10",
-  "rembg_disagree": 0.324,
+  "raw_sha": "936a51ed8683c938bf9b23d750ee5348ca7863d6",
+  "rembg_disagree": 0.086,
   "rembg_model": "u2net",
-  "secs": 2.4,
-  "shadow_px": 439,
-  "sig": "19fb23286daf6c7dbeff161492ef12b3c9ee20ed",
+  "secs": 1.1,
+  "shadow_px": 118,
+  "sig": "9af6aae5c75ceda1e5cd2fc6aefa0a73860e6179",
   "touches": []
  },
  "hero_martillo": {
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.39,
+  "fg_frac": 0.242,
   "flip": false,
-  "islands_removed": 0,
+  "islands_removed": 12,
   "method": "rembg",
   "out_size": [
-   372,
+   312,
    384
   ],
   "raw": "hero_martillo.png",
-  "raw_sha": "7b5bdc16689565d757501c714d8996b27599594d",
+  "raw_sha": "0914d3b1095f254a137b262bb3b7b0a1db5789fa",
   "rembg_model": "u2net",
-  "secs": 0.8,
-  "sig": "fd96e508fc0b9e7e6fe884dd132b082891946a36",
+  "secs": 0.7,
+  "sig": "f9f3d18766a58ecca907b65e02a677ab9d2e8c0a",
   "touches": []
  },
  "hero_monje_viento": {
   "bg_color": [
-   237,
-   234,
-   232
+   174,
+   193,
+   169
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.422,
+  "fg_frac": 0.342,
   "flip": false,
-  "holes_px": 12864,
-  "islands_removed": 61,
+  "holes_px": 1377,
+  "islands_removed": 0,
   "method": "combo",
   "out_size": [
-   324,
+   341,
    384
   ],
   "raw": "hero_monje_viento.png",
-  "raw_sha": "e2441f7ec6f436dc9cd7140b8b5bad6cf81b0af0",
-  "rembg_disagree": 0.058,
+  "raw_sha": "f17c4ba822030ce2a116ece9b820a57e145afe04",
+  "rembg_disagree": 0.001,
   "rembg_model": "u2net",
-  "secs": 0.9,
-  "shadow_px": 26,
-  "sig": "d141b2cd5546487f59e48fca8e8b05ec9d3b5324",
+  "secs": 1.0,
+  "shadow_px": 17590,
+  "sig": "1a6811dd0574d45f5294b5542b17f23446a4793e",
   "touches": []
  },
  "hero_mosquetera": {
   "bg_color": [
-   79,
-   23,
-   35
+   146,
+   183,
+   122
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.237,
+  "fg_frac": 0.265,
   "flip": false,
-  "holes_px": 1582,
-  "islands_removed": 339,
+  "holes_px": 10773,
+  "islands_removed": 2,
   "method": "combo",
   "out_size": [
-   352,
+   302,
    384
   ],
   "raw": "hero_mosquetera.png",
-  "raw_sha": "217970ef8cfe41dccf5ac47da4f4743350fab862",
-  "rembg_disagree": 0.058,
+  "raw_sha": "6a18b25fcade6d548f15a43518c5c154ae678207",
+  "rembg_disagree": 0.007,
   "rembg_model": "u2net",
-  "secs": 2.7,
-  "shadow_px": 697348,
-  "sig": "55b98167a5039b1350b9683fdd929cbc652fde92",
+  "secs": 1.0,
+  "shadow_px": 2837,
+  "sig": "950b6d31dfd74636c0933e84122bddf2c95888b2",
   "touches": []
  },
  "hero_sacerdote": {
   "bg_color": [
-   251,
-   251,
-   251
+   190,
+   192,
+   159
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.325,
+  "fg_frac": 0.31,
   "flip": false,
-  "holes_px": 5609,
-  "islands_removed": 12,
+  "holes_px": 7687,
+  "islands_removed": 18,
   "method": "combo",
   "out_size": [
-   314,
+   326,
    384
   ],
   "raw": "hero_sacerdote.png",
-  "raw_sha": "06fb67c59fe0ce37b174b8a2549c94b0b5792f54",
-  "rembg_disagree": 0.021,
+  "raw_sha": "8ac48bdf48db72bd042b44973cd1784e08080875",
+  "rembg_disagree": 0.035,
   "rembg_model": "u2net",
-  "secs": 2.3,
-  "shadow_px": 1838,
-  "sig": "17d959e7c73349c1a8195df6f36719063c7b0198",
+  "secs": 1.5,
+  "shadow_px": 8644,
+  "sig": "ebb4ec45fb0f18a77ef9e3cae78db5396cfd91df",
   "touches": []
  },
  "hero_sacerdotisa_sol": {
   "bg_color": [
-   251,
-   251,
-   251
+   216,
+   205,
+   162
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.321,
+  "fg_frac": 0.465,
   "flip": false,
-  "holes_px": 72713,
-  "islands_removed": 32,
+  "holes_px": 68589,
+  "islands_removed": 17,
   "method": "combo",
   "out_size": [
-   346,
+   347,
    384
   ],
   "raw": "hero_sacerdotisa_sol.png",
-  "raw_sha": "df095906f0643dc1c5b2bdf2c331352787168b66",
-  "rembg_disagree": 0.14,
+  "raw_sha": "ad78e90f5f435d23b296d63a2717ffb1607053f6",
+  "rembg_disagree": 0.098,
   "rembg_model": "u2net",
-  "secs": 0.9,
-  "shadow_px": 3334,
-  "sig": "b9d51a4435c283d6e03e0e2c09845f24bc9e68b9",
+  "secs": 1.3,
+  "shadow_px": 3275,
+  "sig": "705b66495e7ae9dc1d232a24340f1059a89222b2",
   "touches": []
  },
  "icon_castle": {
   "bg_color": [
-   250,
-   250,
-   251
+   196,
+   215,
+   206
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.411,
-  "flip": false,
-  "holes_px": 0,
-  "islands_removed": 0,
-  "method": "combo",
-  "out_size": [
-   226,
-   256
-  ],
-  "raw": "icon_castle.png",
-  "raw_sha": "5522639989356a1150e2c24ebe227bb2589b5513",
-  "rembg_disagree": 0.004,
-  "rembg_model": "u2net",
-  "secs": 7.2,
-  "shadow_px": 8,
-  "sig": "d2f6baaa6e42f673a8b3be39a8b97bf7f587f300",
-  "touches": []
- },
- "icon_fire": {
-  "bg_color": [
-   208,
-   201,
-   197
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.174,
-  "flip": false,
-  "holes_px": 1,
-  "islands_removed": 17,
-  "method": "combo",
-  "out_size": [
-   142,
-   256
-  ],
-  "raw": "icon_fire.png",
-  "raw_sha": "faa70b8cb4333f9ff855b13f886973f5a9d3edd7",
-  "rembg_disagree": 0.031,
-  "rembg_model": "u2net",
-  "secs": 7.3,
-  "shadow_px": 12,
-  "sig": "196f56b71f4a1e83ce8ee6508a10f9651e46d7a3",
-  "touches": []
- },
- "icon_gem": {
-  "bg_color": [
-   216,
-   203,
-   211
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.118,
-  "flip": false,
-  "holes_px": 0,
-  "islands_removed": 0,
-  "method": "combo",
-  "out_size": [
-   256,
-   241
-  ],
-  "raw": "icon_gem.png",
-  "raw_sha": "45559f3a874eaa66437f2bbaea5dd6ad14ca1c01",
-  "rembg_disagree": 0.013,
-  "rembg_model": "u2net",
-  "secs": 6.1,
-  "sig": "8f6de7b5b77d442974655cd45b3326fdf69e024f",
-  "touches": []
- },
- "icon_gift": {
-  "bg_color": [
-   234,
-   226,
-   221
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.324,
-  "flip": false,
-  "holes_px": 44460,
-  "islands_removed": 13,
-  "method": "combo",
-  "out_size": [
-   251,
-   256
-  ],
-  "raw": "icon_gift.png",
-  "raw_sha": "0f8128258a69de7ec4f2b34b4eb703b0dab07448",
-  "rembg_disagree": 0.022,
-  "rembg_model": "u2net",
-  "secs": 13.8,
-  "shadow_px": 1128,
-  "sig": "22816eaabdea6dde5a4789674156e4e2c5c34187",
-  "touches": []
- },
- "icon_gold": {
-  "bg_color": [
-   251,
-   249,
-   248
-  ],
-  "bg_uniform": 1.0,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.596,
+  "fg_frac": 0.299,
   "flip": false,
   "holes_px": 0,
   "islands_removed": 0,
@@ -1511,107 +1671,220 @@
    244,
    256
   ],
-  "raw": "icon_gold.png",
-  "raw_sha": "e769ec89eb33487bcabc0feeb5d26b86f3f073a2",
-  "rembg_disagree": 0.002,
+  "raw": "icon_castle.png",
+  "raw_sha": "96de8f38544dfe7937752a19707039cd3668ac3e",
+  "rembg_disagree": 0.017,
   "rembg_model": "u2net",
-  "secs": 2.1,
-  "shadow_px": 155,
-  "sig": "aaf1e3bcef3132304851eb68e04978fed1d5f056",
+  "secs": 1.0,
+  "shadow_px": 447,
+  "sig": "34f2d28ee2a6816d2b1255c61495cb4f08b561a0",
   "touches": []
  },
- "icon_hammer": {
+ "icon_fire": {
   "bg_color": [
-   251,
-   251,
-   250
+   146,
+   182,
+   106
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.285,
+  "fg_frac": 0.363,
+  "flip": false,
+  "holes_px": 26801,
+  "islands_removed": 4,
+  "method": "combo",
+  "out_size": [
+   199,
+   256
+  ],
+  "raw": "icon_fire.png",
+  "raw_sha": "d90da5871e1ff2291cfaf513c378221a34b2ad28",
+  "rembg_disagree": 0.065,
+  "rembg_model": "u2net",
+  "secs": 1.1,
+  "shadow_px": 0,
+  "sig": "1000e6c8128eecc2da3ac82e136d1f91f5f266e3",
+  "touches": []
+ },
+ "icon_gem": {
+  "bg_color": [
+   172,
+   193,
+   119
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 2,
+  "facing_reviewed": false,
+  "fg_frac": 0.377,
+  "flip": false,
+  "holes_px": 3810,
+  "islands_removed": 177,
+  "method": "combo",
+  "out_size": [
+   256,
+   250
+  ],
+  "raw": "icon_gem.png",
+  "raw_sha": "45a82a7417d8c1b98430f2731185cb78de911ed4",
+  "rembg_disagree": 0.436,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 112683,
+  "sig": "a5c786f0045671fa1db35f0ab34023b930cd9723",
+  "touches": []
+ },
+ "icon_gift": {
+  "bg_color": [
+   166,
+   203,
+   138
+  ],
+  "bg_uniform": 0.798,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.333,
+  "flip": false,
+  "holes_px": 2668,
+  "islands_removed": 28,
+  "method": "combo",
+  "out_size": [
+   248,
+   256
+  ],
+  "raw": "icon_gift.png",
+  "raw_sha": "4750091705bc843e00ed1f755e7cff743aba8e56",
+  "rembg_disagree": 0.015,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 97,
+  "sig": "41b363b1a7304ed7b8b8028d39af35e4b4cfcb59",
+  "touches": []
+ },
+ "icon_gold": {
+  "bg_color": [
+   225,
+   224,
+   223
+  ],
+  "bg_uniform": 0.908,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.773,
   "flip": false,
   "holes_px": 0,
   "islands_removed": 0,
   "method": "combo",
   "out_size": [
-   256,
-   251
+   255,
+   256
+  ],
+  "raw": "icon_gold.png",
+  "raw_sha": "73c64bff2d09ba4afea11fc32f5fc673731641a5",
+  "rembg_disagree": 0.002,
+  "rembg_model": "u2net",
+  "secs": 0.9,
+  "shadow_px": 46,
+  "sig": "716d00de500d444c14ac26dd277e17d70224f6df",
+  "touches": [
+   "top",
+   "bottom",
+   "right"
+  ]
+ },
+ "icon_hammer": {
+  "bg_color": [
+   187,
+   213,
+   179
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.298,
+  "flip": false,
+  "holes_px": 0,
+  "islands_removed": 0,
+  "method": "combo",
+  "out_size": [
+   244,
+   256
   ],
   "raw": "icon_hammer.png",
-  "raw_sha": "57866e1e0b694129453049c1637142bf61196985",
-  "rembg_disagree": 0.004,
+  "raw_sha": "55131fd0d3971fac1a7b2944327e71b3a70b34e7",
+  "rembg_disagree": 0.098,
   "rembg_model": "u2net",
-  "secs": 6.6,
-  "shadow_px": 119,
-  "sig": "61b802086fed8f5a2e2f7dac116f93eef5e64aef",
+  "secs": 1.1,
+  "shadow_px": 938,
+  "sig": "8257204994c52087ba398429e23804bf5b1ab434",
   "touches": []
  },
  "icon_heart": {
   "bg_color": [
-   228,
-   224,
-   226
+   151,
+   167,
+   88
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.4,
+  "fg_frac": 0.332,
   "flip": false,
-  "holes_px": 0,
-  "islands_removed": 20,
+  "holes_px": 1084,
+  "islands_removed": 249,
   "method": "combo",
   "out_size": [
    256,
-   250
+   253
   ],
   "raw": "icon_heart.png",
-  "raw_sha": "50d4179381d3200064aa459856c40a2af7881e29",
-  "rembg_disagree": 0.028,
+  "raw_sha": "53d31c5c7a188ab68e7632f550b222b8bcd7a209",
+  "rembg_disagree": 0.118,
   "rembg_model": "u2net",
-  "secs": 6.7,
-  "sig": "569a98865a21aeb435d1cc6191c8cee80be1cc63",
+  "secs": 1.0,
+  "shadow_px": 77676,
+  "sig": "dfc3415ae5897e66cef49ed68ff3c7c7f16e2855",
   "touches": []
  },
  "icon_lightning": {
   "bg_color": [
-   168,
-   165,
-   161
-  ],
-  "bg_uniform": 0.859,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.146,
-  "flip": false,
-  "holes_px": 140089,
-  "islands_removed": 5,
-  "method": "combo",
-  "out_size": [
-   186,
-   256
-  ],
-  "raw": "icon_lightning.png",
-  "raw_sha": "c9dbaa3f4e723103d8620dfe449aeaa49e05372e",
-  "rembg_disagree": 0.142,
-  "rembg_model": "u2net",
-  "secs": 7.2,
-  "shadow_px": 240061,
-  "sig": "589c5775b78d797f35cb6259f918320bdbd10ff6",
-  "touches": []
- },
- "icon_lock": {
-  "bg_color": [
-   231,
-   223,
-   205
+   160,
+   170,
+   140
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.187,
+  "fg_frac": 0.181,
   "flip": false,
-  "holes_px": 23561,
+  "holes_px": 0,
+  "islands_removed": 3,
+  "method": "combo",
+  "out_size": [
+   125,
+   256
+  ],
+  "raw": "icon_lightning.png",
+  "raw_sha": "0d7b1da36784b162864f1104b391748f599561ad",
+  "rembg_disagree": 0.044,
+  "rembg_model": "u2net",
+  "secs": 1.1,
+  "shadow_px": 2,
+  "sig": "42e60e48bfaef90466cdf2c5e4e7768e1d7942a7",
+  "touches": []
+ },
+ "icon_lock": {
+  "bg_color": [
+   177,
+   206,
+   157
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.417,
+  "flip": false,
+  "holes_px": 28272,
   "islands_removed": 0,
   "method": "combo",
   "out_size": [
@@ -1619,308 +1892,308 @@
    256
   ],
   "raw": "icon_lock.png",
-  "raw_sha": "8b63c5f61d22dc0a8c98e2cd3acc0321f547b93c",
-  "rembg_disagree": 0.128,
+  "raw_sha": "c5bb3d125d7d1a548a311f42d2eacb81cbffbc12",
+  "rembg_disagree": 0.002,
   "rembg_model": "u2net",
-  "secs": 6.5,
-  "sig": "811d1ae39e431341bd2f81838c5db675f58db9ec",
+  "secs": 1.0,
+  "shadow_px": 593,
+  "sig": "9a85a2ee40cfc1c844cd465700457d4e0485aab5",
   "touches": []
  },
  "icon_map": {
   "bg_color": [
-   251,
-   252,
-   251
+   170,
+   145,
+   67
   ],
-  "bg_uniform": 1.0,
+  "bg_uniform": 0.996,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.772,
+  "fg_frac": 0.594,
   "flip": false,
-  "holes_px": 0,
-  "islands_removed": 0,
+  "holes_px": 318585,
+  "islands_removed": 11,
   "method": "combo",
   "out_size": [
    256,
-   249
+   255
   ],
   "raw": "icon_map.png",
-  "raw_sha": "ec45f3cf35772f7eef6108c4007074c83cf71c1f",
-  "rembg_disagree": 0.004,
+  "raw_sha": "a60add2d64dcd43790425ccd017800927a978089",
+  "rembg_disagree": 0.067,
   "rembg_model": "u2net",
-  "secs": 7.4,
-  "shadow_px": 1155,
-  "sig": "24eacdf663e26af6b59dffee36281b4436164d34",
+  "secs": 1.0,
+  "shadow_px": 6419,
+  "sig": "fd259786e2b52f1cefdfc1ebb9989d0f60acaa1c",
   "touches": []
  },
  "icon_play": {
   "bg_color": [
-   216,
-   210,
-   206
+   202,
+   193,
+   133
   ],
-  "bg_uniform": 1.0,
+  "bg_uniform": 0.958,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.205,
+  "fg_frac": 0.464,
   "flip": false,
-  "holes_px": 3,
-  "islands_removed": 27,
+  "holes_px": 59535,
+  "islands_removed": 28,
   "method": "combo",
   "out_size": [
    256,
-   215
+   244
   ],
   "raw": "icon_play.png",
-  "raw_sha": "e2767b3a26285784875c6727050dea7be9f384b1",
-  "rembg_disagree": 0.017,
+  "raw_sha": "4b735ba8c37071a33e2138d9175880fefb35b79f",
+  "rembg_disagree": 0.126,
   "rembg_model": "u2net",
-  "secs": 6.6,
-  "shadow_px": 223,
-  "sig": "db4fd47bee6624576615822c476bd653bdef4c4f",
+  "secs": 0.9,
+  "sig": "749d5e672e54d2d1da8f08e9709950011347fe51",
   "touches": []
  },
  "icon_potion": {
   "bg_color": [
-   250,
-   250,
-   250
+   199,
+   200,
+   199
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.427,
+  "fg_frac": 0.237,
   "flip": false,
-  "holes_px": 14015,
-  "islands_removed": 5,
+  "holes_px": 0,
+  "islands_removed": 0,
   "method": "combo",
   "out_size": [
-   256,
-   248
+   145,
+   256
   ],
   "raw": "icon_potion.png",
-  "raw_sha": "052837d9964766107f26ce7a2e052fdd72d452f4",
-  "rembg_disagree": 0.002,
+  "raw_sha": "36b5c8033c636dc8382a4f2374c470dcd2784cbc",
+  "rembg_disagree": 0.009,
   "rembg_model": "u2net",
-  "secs": 7.9,
-  "shadow_px": 806,
-  "sig": "b3f0485b88d3df71bc5651b20d62a03bd9d19afa",
+  "secs": 1.2,
+  "shadow_px": 85,
+  "sig": "102eab9cacdf07ce6e111086f212ee2409bd20ea",
   "touches": []
  },
  "icon_scroll": {
   "bg_color": [
-   228,
-   191,
-   145
+   181,
+   184,
+   126
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.342,
+  "fg_frac": 0.185,
   "flip": false,
-  "holes_px": 195398,
-  "islands_removed": 329,
+  "holes_px": 0,
+  "islands_removed": 0,
   "method": "combo",
   "out_size": [
    256,
-   254
+   167
   ],
   "raw": "icon_scroll.png",
-  "raw_sha": "8398f9ef6517d2238ab0c26d37d2ae8141d13f5e",
-  "rembg_disagree": 0.165,
+  "raw_sha": "f094bc2794c79a03533926871a1fd435e3aa08f7",
+  "rembg_disagree": 0.006,
   "rembg_model": "u2net",
-  "secs": 5.6,
-  "shadow_px": 342291,
-  "sig": "ae654c1ebe368d73a7f4dda7a68b5bd28918ba56",
+  "secs": 1.0,
+  "shadow_px": 2,
+  "sig": "b401d42058b7a7b5d9d3bdaadee446e4f7a880b9",
   "touches": []
  },
  "icon_settings": {
   "bg_color": [
-   173,
-   167,
-   164
+   193,
+   208,
+   187
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.588,
+  "fg_frac": 0.315,
   "flip": false,
-  "holes_px": 75587,
-  "islands_removed": 7,
+  "holes_px": 432,
+  "islands_removed": 2,
   "method": "combo",
   "out_size": [
    256,
-   250
+   252
   ],
   "raw": "icon_settings.png",
-  "raw_sha": "1ae5b9428242eebcc1db61d0aad37f21ceddb355",
-  "rembg_disagree": 0.003,
+  "raw_sha": "4d3ad0e54f01eae44c823497dccefb9916cc969a",
+  "rembg_disagree": 0.005,
   "rembg_model": "u2net",
-  "secs": 7.3,
-  "shadow_px": 107559,
-  "sig": "d050b04654f42ed699473cf309cb001ff23934c2",
+  "secs": 1.0,
+  "shadow_px": 31,
+  "sig": "98cf8c4f1bcc31b99299356a5f734b424d99d862",
   "touches": []
  },
  "icon_shield": {
   "bg_color": [
-   246,
-   245,
-   243
+   157,
+   179,
+   127
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.445,
+  "fg_frac": 0.406,
   "flip": false,
   "holes_px": 0,
   "islands_removed": 0,
   "method": "combo",
   "out_size": [
-   193,
+   230,
    256
   ],
   "raw": "icon_shield.png",
-  "raw_sha": "14695179cc11afaf28e534f2d8043fcbf53c1bfb",
-  "rembg_disagree": 0.005,
+  "raw_sha": "a7b908df8b5b91f860e757cbf98ce1a81a0848e4",
+  "rembg_disagree": 0.003,
   "rembg_model": "u2net",
-  "secs": 6.7,
-  "shadow_px": 54,
-  "sig": "626d8cd1591cc71c4ad1e2aaa9487b53f4164e3f",
+  "secs": 1.0,
+  "shadow_px": 56,
+  "sig": "fba5dbec195d28c4389331e24a6a1c3dcbd7f8f4",
   "touches": []
  },
  "icon_skull": {
   "bg_color": [
-   251,
-   251,
-   250
+   159,
+   195,
+   142
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.561,
+  "fg_frac": 0.355,
   "flip": false,
-  "holes_px": 0,
-  "islands_removed": 0,
+  "holes_px": 4739,
+  "islands_removed": 3,
   "method": "combo",
   "out_size": [
-   241,
+   242,
    256
   ],
   "raw": "icon_skull.png",
-  "raw_sha": "0ed263c12c17d42a1b6e8eba47d83312e00170ed",
-  "rembg_disagree": 0.01,
+  "raw_sha": "8361639277b813386ec778aa1c9f78d515825975",
+  "rembg_disagree": 0.013,
   "rembg_model": "u2net",
-  "secs": 5.9,
-  "shadow_px": 14,
-  "sig": "3950c0103261c98450b0c9219b563f279bbfec73",
+  "secs": 1.1,
+  "shadow_px": 166,
+  "sig": "49bb6b3caaa40948c777e699826e08d18e874997",
   "touches": []
  },
  "icon_snow": {
   "bg_color": [
-   250,
-   250,
-   249
+   159,
+   194,
+   175
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.3,
+  "fg_frac": 0.171,
   "flip": false,
-  "holes_px": 58726,
+  "holes_px": 626,
   "islands_removed": 1,
   "method": "combo",
   "out_size": [
-   253,
+   255,
    256
   ],
   "raw": "icon_snow.png",
-  "raw_sha": "cffcb2d3c19dfba2318f694204711752543bad2c",
-  "rembg_disagree": 0.329,
+  "raw_sha": "959f60eb4cf8262b1faa8328a164a7f11c6dc5d4",
+  "rembg_disagree": 0.009,
   "rembg_model": "u2net",
-  "secs": 6.2,
-  "shadow_px": 1,
-  "sig": "2ef399879062a31bde26c7032acac4d0fd141015",
+  "secs": 1.1,
+  "shadow_px": 23,
+  "sig": "cb39543dab85f41f81c1360b67569a7e93b66351",
   "touches": []
  },
  "icon_star": {
   "bg_color": [
-   235,
-   228,
-   219
+   182,
+   193,
+   191
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.224,
+  "fg_frac": 0.244,
   "flip": false,
-  "holes_px": 146,
-  "islands_removed": 11,
+  "holes_px": 4061,
+  "islands_removed": 7,
   "method": "combo",
   "out_size": [
-   232,
+   242,
    256
   ],
   "raw": "icon_star.png",
-  "raw_sha": "57e3f0e4f24902f181f915cd9dfc78909bd16c4d",
-  "rembg_disagree": 0.141,
+  "raw_sha": "081890b7d17c519e9c10c8fbabe24fe8212b9a0d",
+  "rembg_disagree": 0.029,
   "rembg_model": "u2net",
-  "secs": 6.3,
-  "shadow_px": 712,
-  "sig": "62a9c1312ace89e70091b3a19baf9edfc138dbc4",
+  "secs": 1.0,
+  "shadow_px": 23472,
+  "sig": "3a8414e705bf40c0029561c21b62fa0d5509cedd",
   "touches": []
  },
  "icon_sword": {
   "bg_color": [
-   251,
-   250,
-   250
+   184,
+   186,
+   148
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.262,
+  "fg_frac": 0.066,
   "flip": false,
-  "holes_px": 5105,
-  "islands_removed": 5,
+  "holes_px": 381,
+  "islands_removed": 0,
   "method": "combo",
   "out_size": [
-   251,
+   77,
    256
   ],
   "raw": "icon_sword.png",
-  "raw_sha": "a0c6bc0f1a8832f96dbdb0ef7c8aeff040e78d51",
-  "rembg_disagree": 0.197,
+  "raw_sha": "90a3d9fb04f4ee9c5d9163ab91b77db0ced36765",
+  "rembg_disagree": 0.045,
   "rembg_model": "u2net",
-  "secs": 6.0,
-  "shadow_px": 5962,
-  "sig": "2d4932b74ae789f9e963049b05042bdfd19cd958",
+  "secs": 1.0,
+  "shadow_px": 1,
+  "sig": "9e2e65bca8d8e4d1ee2b4aa5c4a6a4222d3822bd",
   "touches": []
  },
  "icon_trophy": {
   "bg_color": [
-   244,
-   227,
-   201
+   133,
+   187,
+   132
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.224,
+  "fg_frac": 0.295,
   "flip": false,
-  "holes_px": 15783,
-  "islands_removed": 38,
+  "holes_px": 3868,
+  "islands_removed": 0,
   "method": "combo",
   "out_size": [
-   209,
+   230,
    256
   ],
   "raw": "icon_trophy.png",
-  "raw_sha": "4b6b3d02ecd9104773dc536f3c422d4fdfe031ca",
-  "rembg_disagree": 0.116,
+  "raw_sha": "40342a46a446d9a1263997be1fd458cad6bf1cbd",
+  "rembg_disagree": 0.053,
   "rembg_model": "u2net",
-  "secs": 7.4,
-  "shadow_px": 441,
-  "sig": "7e5aa781588995a34b9ac2749de4320a7dd09700",
+  "secs": 1.0,
+  "shadow_px": 158,
+  "sig": "0895f256a1c05c2ea111e609b94b2d8e1a69eb9d",
   "touches": []
  },
  "map_bosque": {
@@ -1932,9 +2205,9 @@
    720
   ],
   "raw": "map_bosque.png",
-  "raw_sha": "619d555e381dbe76ce3b44a8430f5366da344c24",
-  "secs": 0.2,
-  "sig": "525157d047a877da2178895cab3a0304b1cdc116"
+  "raw_sha": "1fcfa839b10fe208d56999c055017d295ca2606a",
+  "secs": 0.0,
+  "sig": "37f07f8f81efc5fc6300d80dc1411ed2d80c777c"
  },
  "map_desierto": {
   "facing_reviewed": false,
@@ -1945,9 +2218,9 @@
    720
   ],
   "raw": "map_desierto.png",
-  "raw_sha": "ac4ecafbaa0834e6eebfbc0acc700eecbb63751c",
-  "secs": 0.2,
-  "sig": "a8bc4d13e7482239e946dac81843f9aced8209d3"
+  "raw_sha": "0023ada71cc113249a2821da39171d16c1f6f403",
+  "secs": 0.0,
+  "sig": "55b2d54880ea7b5a5ab40c1f0fc62e76b346b630"
  },
  "map_dragon": {
   "facing_reviewed": false,
@@ -1958,9 +2231,9 @@
    720
   ],
   "raw": "map_dragon.png",
-  "raw_sha": "739e376b3d4142ac2ed48a2b453457533be10ce7",
+  "raw_sha": "c901d2cb39223050692231cb92f91c91638757cd",
   "secs": 0.1,
-  "sig": "4434d15689429b0caabf0c9ef7662980bf3a770f"
+  "sig": "60de376bb712e3ffe3255c316e51a43f02a7de07"
  },
  "map_forja": {
   "facing_reviewed": false,
@@ -1971,9 +2244,9 @@
    720
   ],
   "raw": "map_forja.png",
-  "raw_sha": "e49e6669ad5ad206632e2ee5fe7702a729ccee44",
-  "secs": 0.2,
-  "sig": "fa5eb1d985d86880b82f3a0cbc183041404b3913"
+  "raw_sha": "fc5cfa8afbb24284abf029e7c415bcf8d01fae80",
+  "secs": 0.0,
+  "sig": "a324b22d599194e1b48f2ef12729afbf966564a9"
  },
  "map_hielo": {
   "facing_reviewed": false,
@@ -1984,9 +2257,9 @@
    720
   ],
   "raw": "map_hielo.png",
-  "raw_sha": "dda88385e6b6adc5feb3acd0be14f7c604ad13d6",
-  "secs": 0.3,
-  "sig": "89649bb148a5a580718a5e168d0481e207391b19"
+  "raw_sha": "0eaa015c4f414f3aa71d7a83231ffab0ae2cdece",
+  "secs": 0.0,
+  "sig": "209773b5945d11d3b1595a9a33abc8b79eaf2907"
  },
  "map_montanas": {
   "facing_reviewed": false,
@@ -1997,9 +2270,9 @@
    720
   ],
   "raw": "map_montanas.png",
-  "raw_sha": "69cd56b0f30e38ef6aac2a457489034d342e241a",
-  "secs": 0.2,
-  "sig": "b89f3b363fe1be92e1fc8771dd945b5fbeac0f62"
+  "raw_sha": "7044496e47e93f72730f677168694b4f328331da",
+  "secs": 0.0,
+  "sig": "b9d87e0b7c34622a310d402499aff800af9ea4f8"
  },
  "map_oscuras": {
   "facing_reviewed": false,
@@ -2010,9 +2283,9 @@
    720
   ],
   "raw": "map_oscuras.png",
-  "raw_sha": "d5edba7f6486f14b2e12b4870d2734e288c6bd6a",
-  "secs": 0.2,
-  "sig": "50ee5d8aedb4517f1c02e84e2417bd478197fdd9"
+  "raw_sha": "0723c279d7eb8e540833530fbdb8420594665131",
+  "secs": 0.0,
+  "sig": "c9b6aa39f12af2318d7e3f7c4d967b18af016c29"
  },
  "map_pantano": {
   "facing_reviewed": false,
@@ -2023,9 +2296,9 @@
    720
   ],
   "raw": "map_pantano.png",
-  "raw_sha": "b9e546b63b37400d19c0be65f47c34f7a93d8e3b",
-  "secs": 0.1,
-  "sig": "5739a13cc26719fe25954dfe5739cd3457e508ea"
+  "raw_sha": "a8df410c1f55bd89c1b9504914665606d51c90d3",
+  "secs": 0.0,
+  "sig": "27c0620c78c992510aec5ae8170b03b17eb5a30f"
  },
  "map_ruinas": {
   "facing_reviewed": false,
@@ -2036,9 +2309,9 @@
    720
   ],
   "raw": "map_ruinas.png",
-  "raw_sha": "28f6e13406b1a54b294e8fb2f2d3cf6afc6aeb52",
-  "secs": 0.1,
-  "sig": "90c4f97a940dc9cf59f352895db862f879ee8b40"
+  "raw_sha": "c913d9c2079f278a69617441b9bc657bf60e8538",
+  "secs": 0.0,
+  "sig": "587a5f056ca5082c3d5ddb19cc9e412fe1c4a8dd"
  },
  "map_volcan": {
   "facing_reviewed": false,
@@ -2049,177 +2322,286 @@
    720
   ],
   "raw": "map_volcan.png",
-  "raw_sha": "6fecec2bb53bbf788dcd7e0a03b079075feaa8c8",
-  "secs": 0.1,
-  "sig": "81ad1a1771419a48527286326fe84687ed1fc7e6"
+  "raw_sha": "c46a2a93a19d61767bd9632cad6c1eb2526b98b2",
+  "secs": 0.0,
+  "sig": "d4ca97d5a6f8095393b46261da53b20b84b6d04b"
  },
  "title_art": {
-  "facing_reviewed": true,
-  "flip": true,
+  "facing_reviewed": false,
+  "flip": false,
   "method": "cover",
   "out_size": [
    1600,
    900
   ],
   "raw": "title_art.png",
-  "raw_sha": "a92e1f2061ec451d589eac500a90b7074f38b909",
+  "raw_sha": "51afcee82ca8541e8692e34e6f1c65ae910e4bec",
   "secs": 0.1,
-  "sig": "ad730aa61dccd472df72571cc57e1fc72a961514"
+  "sig": "ec438eb1b7dc8ee0292cad845ecc627ca5ee0c68"
  },
  "tower_barricada": {
   "bg_color": [
-   250,
-   250,
-   250
-  ],
-  "bg_uniform": 0.98,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.465,
-  "flip": false,
-  "holes_px": 40190,
-  "islands_removed": 7,
-  "method": "combo",
-  "out_size": [
-   384,
-   213
-  ],
-  "raw": "tower_barricada.png",
-  "raw_sha": "77177323bef2bdd9ac9e3798df1a54e90167d96a",
-  "rembg_disagree": 0.094,
-  "rembg_model": "u2net",
-  "secs": 0.9,
-  "shadow_px": 130,
-  "sig": "8809ee179dbbf36fdb21ddbe6ec72c443987ab55",
-  "touches": [
-   "left",
-   "right"
-  ]
- },
- "tower_brea": {
-  "bg_color": [
-   195,
-   174,
-   143
-  ],
-  "bg_uniform": 0.999,
-  "big_parts": 3,
-  "facing_reviewed": false,
-  "fg_frac": 0.36,
-  "flip": false,
-  "holes_px": 45698,
-  "islands_removed": 17,
-  "method": "combo",
-  "out_size": [
-   384,
-   264
-  ],
-  "raw": "tower_brea.png",
-  "raw_sha": "a2bbf3fa5fb8ecb6d1643fea249b4abffddf7f1f",
-  "rembg_disagree": 0.029,
-  "rembg_model": "u2net",
-  "secs": 6.6,
-  "shadow_px": 74,
-  "sig": "7bba826e743214dc9a594eb7a05c9a5bf7cba9ba",
-  "touches": []
- },
- "tower_catapulta": {
-  "bg_color": [
-   235,
-   229,
-   221
-  ],
-  "bg_uniform": 0.781,
-  "big_parts": 1,
-  "facing_reviewed": false,
-  "fg_frac": 0.249,
-  "flip": false,
-  "holes_px": 130,
-  "islands_removed": 0,
-  "method": "combo",
-  "out_size": [
-   384,
-   285
-  ],
-  "raw": "tower_catapulta.png",
-  "raw_sha": "c36f4640538ab87194e93817f07d328d8a573ddc",
-  "rembg_disagree": 0.017,
-  "rembg_model": "u2net",
-  "secs": 8.4,
-  "shadow_px": 11132,
-  "sig": "e814f283ad4a5d6405ddb4a576accce367e18ecd",
-  "touches": []
- },
- "tower_flechas": {
-  "bg_color": [
-   250,
-   250,
+   249,
+   249,
    249
   ],
   "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.464,
+  "fg_frac": 0.352,
   "flip": false,
-  "holes_px": 47582,
-  "islands_removed": 0,
+  "holes_px": 68205,
+  "islands_removed": 23,
   "method": "combo",
   "out_size": [
-   253,
+   384,
+   223
+  ],
+  "raw": "tower_barricada.png",
+  "raw_sha": "a9f2004b797b3cb36537a8f0af6eadd6cede3864",
+  "rembg_disagree": 0.176,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 2278,
+  "sig": "86f499396e2043d8a769ce16d3abb2e3ac80858e",
+  "touches": []
+ },
+ "tower_brea": {
+  "bg_color": [
+   250,
+   251,
+   251
+  ],
+  "bg_uniform": 0.93,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.706,
+  "flip": false,
+  "holes_px": 0,
+  "islands_removed": 3,
+  "method": "combo",
+  "out_size": [
+   384,
+   262
+  ],
+  "raw": "tower_brea.png",
+  "raw_sha": "197f98b6072f9077eec9b046550cbf62ed1278b2",
+  "rembg_disagree": 0.001,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 463,
+  "sig": "1fbbd3dc0af4bf7f94249fe841d460b4a69ba208",
+  "touches": [
+   "bottom",
+   "left",
+   "right"
+  ]
+ },
+ "tower_catapulta": {
+  "bg_color": [
+   193,
+   215,
+   199
+  ],
+  "bg_uniform": 0.91,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.345,
+  "flip": false,
+  "holes_px": 3411,
+  "islands_removed": 10,
+  "method": "combo",
+  "out_size": [
+   384,
+   338
+  ],
+  "raw": "tower_catapulta.png",
+  "raw_sha": "9b88bd3030dbeeeea1560832118c2033b22528f2",
+  "rembg_disagree": 0.053,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 20308,
+  "sig": "b4196cc37790f0bfd29f4ad8b84734e9deb834c0",
+  "touches": []
+ },
+ "tower_flechas": {
+  "bg_color": [
+   154,
+   202,
+   121
+  ],
+  "bg_uniform": 0.996,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.409,
+  "flip": false,
+  "holes_px": 15094,
+  "islands_removed": 2,
+  "method": "combo",
+  "out_size": [
+   261,
    384
   ],
   "raw": "tower_flechas.png",
-  "raw_sha": "3a9a16120813f3e7b458986f3cfb054da021a00e",
-  "rembg_disagree": 0.08,
+  "raw_sha": "38fec0b434c6ee1546a6ea1fe299560c423a3271",
+  "rembg_disagree": 0.013,
   "rembg_model": "u2net",
-  "secs": 7.2,
-  "shadow_px": 1652,
-  "sig": "6bf0fc1682b18b233f5a9cabbbb3822086a21f53",
+  "secs": 0.9,
+  "shadow_px": 36,
+  "sig": "2c0b29ac75fa47151466eee437d1bb9dc8ffe168",
   "touches": []
  },
  "tower_pinchos": {
   "bg_color": [
-   233,
-   217,
-   175
+   183,
+   214,
+   207
   ],
-  "bg_uniform": 0.999,
+  "bg_uniform": 1.0,
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.326,
+  "fg_frac": 0.324,
   "flip": false,
-  "holes_px": 60465,
-  "islands_removed": 178,
+  "holes_px": 0,
+  "islands_removed": 63,
   "method": "combo",
   "out_size": [
    384,
-   204
+   264
   ],
   "raw": "tower_pinchos.png",
-  "raw_sha": "59da811a2389cf6317ae505c5fc9d5fcb3e716dd",
-  "rembg_disagree": 0.094,
+  "raw_sha": "2b6040203fc7a1df278bed72a742c961550d8f9f",
+  "rembg_disagree": 0.022,
   "rembg_model": "u2net",
   "secs": 0.9,
-  "shadow_px": 149853,
-  "sig": "bebc227fbe8f946d64da15a4cdaeb7a8f2c5781b",
+  "shadow_px": 1004,
+  "sig": "453c03598e1adeca5b867f4f0aba1265833b644c",
   "touches": []
  },
  "tower_rayos": {
   "big_parts": 1,
   "facing_reviewed": false,
-  "fg_frac": 0.242,
+  "fg_frac": 0.252,
   "flip": false,
-  "islands_removed": 22,
+  "islands_removed": 12,
   "method": "rembg",
   "out_size": [
-   142,
+   218,
    384
   ],
   "raw": "tower_rayos.png",
-  "raw_sha": "5dd3e9916e7bf16b56d4f7dc17c17d72ffb18828",
+  "raw_sha": "7e1ada0d53b9143878ab2b181ad104fc3066bff2",
   "rembg_model": "u2net",
-  "secs": 5.0,
-  "sig": "179cbb51f0cac38d827801007e9687abc0b993fc",
+  "secs": 0.6,
+  "sig": "5211888c8f16f6218d679ec5dea873f3ee3b8397",
+  "touches": []
+ },
+ "troop_aprendiz": {
+  "bg_color": [
+   209,
+   212,
+   194
+  ],
+  "bg_uniform": 0.966,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.228,
+  "flip": false,
+  "holes_px": 9071,
+  "islands_removed": 103,
+  "method": "combo",
+  "out_size": [
+   255,
+   320
+  ],
+  "raw": "troop_aprendiz.png",
+  "raw_sha": "57d77e8a4e199b44093566cd77b639b84abb668b",
+  "rembg_disagree": 0.003,
+  "rembg_model": "u2net",
+  "secs": 1.1,
+  "shadow_px": 13216,
+  "sig": "727308701e6ca2d8f085477d4d31a5cd44b129e9",
+  "touches": []
+ },
+ "troop_arquero": {
+  "bg_color": [
+   210,
+   223,
+   196
+  ],
+  "bg_uniform": 0.997,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.297,
+  "flip": false,
+  "holes_px": 85465,
+  "islands_removed": 12,
+  "method": "combo",
+  "out_size": [
+   265,
+   320
+  ],
+  "raw": "troop_arquero.png",
+  "raw_sha": "6086f5545f3fca61a2390182e4809f2c7612c953",
+  "rembg_disagree": 0.018,
+  "rembg_model": "u2net",
+  "secs": 1.3,
+  "shadow_px": 14672,
+  "sig": "e15402daa1300732df4d7755df48a1a476ddafee",
+  "touches": []
+ },
+ "troop_ballestero": {
+  "bg_color": [
+   200,
+   190,
+   149
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.342,
+  "flip": false,
+  "holes_px": 13415,
+  "islands_removed": 4,
+  "method": "combo",
+  "out_size": [
+   305,
+   320
+  ],
+  "raw": "troop_ballestero.png",
+  "raw_sha": "62447aae1737e43cb963d6f5c127b0e75a6915d9",
+  "rembg_disagree": 0.114,
+  "rembg_model": "u2net",
+  "secs": 1.0,
+  "shadow_px": 1189,
+  "sig": "4ad21c904f79c64b894d0ae10784cf17a8a7aa52",
+  "touches": []
+ },
+ "troop_lanzapiedras": {
+  "bg_color": [
+   188,
+   187,
+   138
+  ],
+  "bg_uniform": 1.0,
+  "big_parts": 1,
+  "facing_reviewed": false,
+  "fg_frac": 0.183,
+  "flip": false,
+  "holes_px": 31682,
+  "islands_removed": 22,
+  "method": "combo",
+  "out_size": [
+   188,
+   320
+  ],
+  "raw": "troop_lanzapiedras.png",
+  "raw_sha": "9bad3553d14440b4dd9ed1945a89602d0a090afe",
+  "rembg_disagree": 0.155,
+  "rembg_model": "u2net",
+  "secs": 0.9,
+  "shadow_px": 1266,
+  "sig": "34383442074feb8ca6eef1e645f2c2c2ff466965",
   "touches": []
  }
 }
